@@ -1,0 +1,29 @@
+variable aiven_api_token {
+	type = string
+	default = "<YOUR API TOKEN>"	
+	description = "Aiven authentication token"
+}
+
+variable aiven_project_name {
+	type = string
+	default = "<YOUR AIVEN PROJECT>"	
+	description = "Aiven project for resource creation"
+}
+
+variable aiven_cloud { 
+	type = string
+	default = "google-asia-southeast1"
+	description = "Cloud region for Aiven resources"
+}
+
+variable service_prefix {
+	type = string
+	default = "cloud-expo-"
+	description = "String prefix for service names" 
+}
+variable aiven_plan {
+	type = string
+	default = "business-4"
+	description = "The Aiven plan that resources will be created as (excludes Clickhouse resource)"
+} 
+
