@@ -1,0 +1,113 @@
+
+=====
+Create database table 
+=====
+psql postgres://avnadmin:AVNS_5MiKJp5cIqYTTgeDzaa@dotc-service-pg-tsellers-demo.aivencloud.com:18943/defaultdb -f sql/create.sql
+
+=====
+Add data 
+=====
+psql postgres://avnadmin:AVNS_5MiKJp5cIqYTTgeDzaa@dotc-service-pg-tsellers-demo.aivencloud.com:18943/defaultdb -f sql/insert.sql
+
+===========
+KAFKA CONNECT CONFIG
+=============
+avn service connector create dotc-kafka-connect '{
+    "name": "kafka-pg-source-conn",
+    "transforms": "extractState",
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "tasks.max": "1",
+    "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "database.server.name": "dotc-service-pg",
+    "database.hostname": "dotc-service-pg-tsellers-demo.aivencloud.com",
+    "database.port": "18943",
+    "database.dbname": "defaultdb",
+    "database.user": "avnadmin",
+    "database.password": "AVNS_5MiKJp5cIqYTTgeDzaa",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "plugin.name": "pgoutput",
+    "slot.name": "debezium",
+    "publication.name": "debezium_publication",
+    "decimal.handling.mode": "string",
+    "database.sslmode": "require",
+    "include.schema.changes": "false",
+    "key.converter.schemas.enable": "false",
+    "value.converter.schemas.enable": "false",
+    "transforms.extractState.type": "io.debezium.transforms.ExtractNewRecordState"
+}'
+
+===========
+CLICKHOUSE INTEGRATION LIST
+=============
+avn service integration-list dotc-clickhouse
+
+
+===========
+CREATE CLICKHOUSE - KAFKA ENGINE
+===========
+avn service integration-update 291a92f3-6777-4688-99fa-a0db2a2bf151  \
+    --project tsellers-demo \
+    --user-config-json '{
+    "tables": [
+        {
+            "name": "orders_queue",
+            "columns": [
+                {"name": "id" , "type": "Int64"},
+                {"name": "first_name" , "type": "String"},
+                {"name": "last_name" , "type": "String"},
+                {"name": "email" , "type": "String"},
+                {"name": "gender" , "type": "String"},
+                {"name": "street" , "type": "String"},
+                {"name": "town" , "type": "String"},
+                {"name": "mobile" , "type": "String"},
+                {"name": "country" , "type": "String"},
+                {"name": "drink_type" , "type": "String"},
+                {"name": "cost" , "type": "String"},
+                {"name": "addons" , "type": "String"},
+                {"name": "comments" , "type": "String"}
+            ],
+            "topics": [{"name": "dotc-service-pg.public.orders"}],
+            "data_format": "JSONEachRow",
+            "group_name": " order_consumer"
+        }
+    ]
+}'
+
+=========
+CREATE CLICKHOUSE TABLE
+=========
+CREATE TABLE default.orders
+(
+    id String,
+    first_name String,
+    last_name String,
+    email String,
+    gender String,
+    street String,
+    town String,
+    mobile String,
+    country String,
+    drink_type String,
+    cost Float32,
+    addons String,
+    comments String
+) ENGINE = MergeTree ORDER BY (id);
+
+
+========
+CREATE MATERIALIZED VIEW
+========
+CREATE MATERIALIZED VIEW default.orders_mv TO default.orders AS 
+SELECT id, first_name, last_name, email, gender, 
+            street, town,  mobile, country, drink_type, 
+            toFloat64OrZero(cost) as cost, addons, comments
+FROM `service_dotc-service-kafka`.orders_queue;
+
+
+
+======
+CLICKHOUSE QUERY
+======
+select count(*) c, drink_type from default.orders group by drink_type order by c desc;
+
+
