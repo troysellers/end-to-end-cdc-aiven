@@ -31,7 +31,7 @@ resource "aiven_pg" "postgres-service" {
 
   project      = var.aiven_project_name
   cloud_name   = var.aiven_cloud
-  plan         = var.aiven_plan
+  plan         = var.pg_plan
   service_name = "${var.service_prefix}service-pg"
 }
 
@@ -46,11 +46,61 @@ provider "postgresql" {
   connect_timeout = 15
 }
 
+resource "aiven_connection_pool" "coffee_pool" {
+  project       = var.aiven_project_name
+  service_name  = aiven_pg.postgres-service.service_name
+  database_name = "defaultdb"
+  pool_mode     = "transaction"
+  pool_name     = "coffeePool"
+  pool_size     = 10
+  username      = aiven_pg.postgres-service.service_username
+  depends_on = [
+    aiven_pg.postgres-service
+  ]
+}
+
+resource "local_sensitive_file" "foo" {
+  content  = "DB_URI=${aiven_connection_pool.coffee_pool.connection_uri}\n"
+  filename = "${path.module}/../producer/.env"
+}
+
+# Create aiven_extras extension for debezium source connector to work
+resource "null_resource" "db_setup" {
+
+  depends_on = [
+    aiven_pg.postgres-service, aiven_connection_pool.coffee_pool
+  ]
+  provisioner "local-exec" {
+
+    command = "psql -h ${aiven_pg.postgres-service.service_host} -p ${aiven_pg.postgres-service.service_port} -U \"${aiven_pg.postgres-service.service_username}\" -d defaultdb -f \"aiven_extras.sql\""
+
+    environment = {
+      PGPASSWORD = "${aiven_pg.postgres-service.service_password}"
+    }
+  }
+}
+
+# Create and populate the tables required for the demo
+resource "null_resource" "populate_db" {
+
+  depends_on = [
+    aiven_pg.postgres-service, aiven_connection_pool.coffee_pool
+  ]
+  provisioner "local-exec" {
+
+    command = "psql -h ${aiven_pg.postgres-service.service_host} -p ${aiven_pg.postgres-service.service_port} -U \"${aiven_pg.postgres-service.service_username}\" -d defaultdb -f \"${path.module}/../producer/sql/create.sql\""
+
+    environment = {
+      PGPASSWORD = "${aiven_pg.postgres-service.service_password}"
+    }
+  }
+}
+
 # Kafka Service
 resource "aiven_kafka" "kafka-service" {
   project                 = var.aiven_project_name
   cloud_name              = var.aiven_cloud
-  plan                    = var.aiven_plan
+  plan                    = var.kafka_plan
   service_name            = "${var.service_prefix}service-kafka"
   maintenance_window_dow  = "monday"
   maintenance_window_time = "10:00:00"
@@ -69,7 +119,7 @@ resource "aiven_kafka" "kafka-service" {
 resource "aiven_kafka_connect" "kafka-connect-service" {
   project = var.aiven_project_name
   cloud_name = var.aiven_cloud
-  plan = var.aiven_plan
+  plan = var.kc_plan
   service_name = "${var.service_prefix}kafka-connect"
   maintenance_window_dow = "sunday"
   maintenance_window_time = "10:00:00"
@@ -98,7 +148,7 @@ resource "aiven_kafka_connector" "kafka-pg-source-conn" {
   project        = var.aiven_project_name
   service_name   = aiven_kafka_connect.kafka-connect-service.service_name
   connector_name = "kafka-pg-source-conn"
- depends_on = [aiven_service_integration.kafka-connect-integration]
+ depends_on = [aiven_service_integration.kafka-connect-integration, null_resource.db_setup]
   config = {
     "name" = "kafka-pg-source-conn",
     "connector.class" = "io.debezium.connector.postgresql.PostgresConnector",
@@ -111,7 +161,6 @@ resource "aiven_kafka_connector" "kafka-pg-source-conn" {
     "database.dbname" = "defaultdb",
     "database.sslmode" = "require",
     "plugin.name" = "pgoutput",
-    "include.schema.changes" = "false",
     "key.converter" = "org.apache.kafka.connect.json.JsonConverter",
     "value.converter" = "org.apache.kafka.connect.json.JsonConverter",
     "slot.name" = "debezium",
@@ -125,53 +174,15 @@ resource "aiven_kafka_connector" "kafka-pg-source-conn" {
   }
 }
 
-# M3 Service
-resource "aiven_m3db" "m3db-metrics" {
-  project      = var.aiven_project_name
-  cloud_name   = var.aiven_cloud
-  plan         = "startup-8"
-  service_name = "${var.service_prefix}metrics-m3db"
-}
-
-
-resource "aiven_grafana" "grafana" {
-  project      = var.aiven_project_name
-  cloud_name   = var.aiven_cloud
-  plan         = "startup-4"
-  service_name = "${var.service_prefix}metrics-grafana"
-}
 
 #Clickhouse service
 resource "aiven_clickhouse" "clickhouse" {
   project                 = var.aiven_project_name
   cloud_name              = var.aiven_cloud
-  plan                    = "startup-beta-8"
+  plan                    = var.ch_plan
   service_name            = "${var.service_prefix}clickhouse"
   maintenance_window_dow  = "monday"
   maintenance_window_time = "10:00:00"
 }
 
-#Service integration - PostgreSQL 
-resource "aiven_service_integration" "pg-metrics" {
-  project                  = var.aiven_project_name
-  integration_type         = "metrics"
-  source_service_name      = aiven_pg.postgres-service.service_name
-  destination_service_name = aiven_m3db.m3db-metrics.service_name
-}
-
-#Service integration - Kafka 
-resource "aiven_service_integration" "kafka-metrics" {
-  project                  = var.aiven_project_name
-  integration_type         = "metrics"
-  source_service_name      = aiven_kafka.kafka-service.service_name
-  destination_service_name = aiven_m3db.m3db-metrics.service_name
-}
-
-#Service integration - Grafana 
-resource "aiven_service_integration" "int-grafana-m3db" {
-  project                  = var.aiven_project_name
-  integration_type         = "dashboard"
-  source_service_name      = aiven_grafana.grafana.service_name
-  destination_service_name = aiven_m3db.m3db-metrics.service_name
-}
 

@@ -12,18 +12,42 @@ variable aiven_project_name {
 
 variable aiven_cloud { 
 	type = string
-	default = "google-asia-southeast1"
+	default = "aws-ap-southeast-2"
 	description = "Cloud region for Aiven resources"
 }
 
 variable service_prefix {
 	type = string
-	default = "cloud-expo-"
+	default = "e2e-cdc-"
 	description = "String prefix for service names" 
 }
-variable aiven_plan {
+variable pg_plan {
 	type = string
-	default = "business-4"
-	description = "The Aiven plan that resources will be created as (excludes Clickhouse resource)"
+	default = "startup-4"
+	description = "The Aiven postgres plan to create"
 } 
-
+variable kafka_plan {
+	type = string
+	default = "startup-2"
+	description = "The Aiven Kafka plan to create"
+} 
+variable kc_plan {
+	type = string
+	default = "startup-4"
+	description = "The Aiven Kafka Connect plan to create"
+} 
+variable ch_plan {
+	type = string
+	default = "hobbyist"
+	description = "The Aiven Clickhouse plan to create"
+} 
+variable m3_plan {
+	type = string
+	default = "startup-8"
+	description = "The Aiven Clickhouse plan to create"
+} 
+variable grafana_plan {
+	type = string
+	default = "startup-1"
+	description = "The Aiven Clickhouse plan to create"
+} 
