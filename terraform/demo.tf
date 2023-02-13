@@ -59,7 +59,7 @@ resource "aiven_connection_pool" "coffee_pool" {
   ]
 }
 
-resource "local_sensitive_file" "foo" {
+resource "local_sensitive_file" "create_env" {
   content  = "DB_URI=${aiven_connection_pool.coffee_pool.connection_uri}\n"
   filename = "${path.module}/../producer/.env"
 }
@@ -68,15 +68,14 @@ resource "local_sensitive_file" "foo" {
 resource "null_resource" "db_setup" {
 
   depends_on = [
-    aiven_pg.postgres-service, aiven_connection_pool.coffee_pool
+    aiven_connection_pool.coffee_pool
   ]
   provisioner "local-exec" {
+    command =  "psql  ${aiven_pg.postgres-service.service_uri} -f ${path.module}/aiven_extras.sql"
 
-    command = "psql -h ${aiven_pg.postgres-service.service_host} -p ${aiven_pg.postgres-service.service_port} -U \"${aiven_pg.postgres-service.service_username}\" -d defaultdb -f \"aiven_extras.sql\""
-
-    environment = {
-      PGPASSWORD = "${aiven_pg.postgres-service.service_password}"
-    }
+#    environment = {
+#      PGPASSWORD = "${aiven_pg.postgres-service.service_password}"
+#    }
   }
 }
 
@@ -84,15 +83,14 @@ resource "null_resource" "db_setup" {
 resource "null_resource" "populate_db" {
 
   depends_on = [
-    aiven_pg.postgres-service, aiven_connection_pool.coffee_pool
+    null_resource.db_setup
   ]
   provisioner "local-exec" {
 
-    command = "psql -h ${aiven_pg.postgres-service.service_host} -p ${aiven_pg.postgres-service.service_port} -U \"${aiven_pg.postgres-service.service_username}\" -d defaultdb -f \"${path.module}/../producer/sql/create.sql\""
-
-    environment = {
-      PGPASSWORD = "${aiven_pg.postgres-service.service_password}"
-    }
+    command = "psql ${aiven_pg.postgres-service.service_uri} -f ${path.module}/../producer/sql/create.sql"
+#    environment = {
+#      PGPASSWORD = "${aiven_pg.postgres-service.service_password}"
+#    }
   }
 }
 
@@ -173,7 +171,6 @@ resource "aiven_kafka_connector" "kafka-pg-source-conn" {
     "transforms.extractState.type" = "io.debezium.transforms.ExtractNewRecordState"
   }
 }
-
 
 #Clickhouse service
 resource "aiven_clickhouse" "clickhouse" {
