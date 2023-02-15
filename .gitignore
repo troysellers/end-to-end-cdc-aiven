@@ -8,3 +8,4 @@ terraform/*.backup
 video/
 creds/
 .env
+ch/create.sh

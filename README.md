@@ -1,35 +1,33 @@
 # Create CDC Pipeline with Aiven
 
-This is the code repository behind the DOTC Keynote Building an End to End Data Pipeline. 
-PRs / Issues are welcome if you find something here that isn't to your liking :) 
+This is an example of building a Change Data Capture pipeline using the Aiven platform. 
 
-## Pre-requisites 
+It intends to simulate the order flow from a national chain of coffee shops, there is over 1000 around Australia in this example. 
+The producer app is a simple golang client that reads and writes to our database once the build is complete. 
+
+## Pre-requisites  
 * An [Aiven Account](#create-your-aiven-account) 
 * The [Aiven CLI](https://docs.aiven.io/docs/tools/cli.html) installed
 * A text editor of your choice
 * This github repository cloned 
 * psql commandline (or maybe something like [pgadmin](https://www.pgadmin.org/download/) installed)
-* A curious mind.. 
+* golang 1.19 - required to run the data producer
+* [terraform](https://www.terraform.io/)
+* [jq](https://stedolan.github.io/jq/) - required by the terraform build
+* [Clickhouse client](https://clickhouse.com/docs/en/install#self-managed-install)  - required by the terraform build
 
 > Install the AVN CLI from the instructions [here](https://docs.aiven.io/docs/tools/cli.html).
 
-And this is what we are going to build... 
 
-![workshop](img/3-workshop.png)
+If you are more the "automated" type, jump to the [Build Using Terraform](#build-this-again-using-terraform) section at the bottom and launch away. 
 
-Sounds too good to be true? 
-Welcome to Aiven :) 
+However, if you like to click the buttons then follow along here.
 
 ## Create your Aiven Account
 If you haven't already done this, create a new Aiven trial at the [signup page](https://console.aiven.io/signup). 
 
 ![Signup](img/1%20-%20signup.png)
 
-Here's how easy it is to get started with a trial in Aiven.
-
-https://user-images.githubusercontent.com/768991/192938791-98effa95-d40f-4c32-b0a1-82752131f6f9.mp4
-
-Done? Awesome, let's start creating the databases we are going to need. 
 
 ## Create Postgres
 
@@ -44,7 +42,7 @@ Get your credentials from the Postgres service in Aiven
 
 ![pg creds](img/2%20-%20pgcreds.png)
 
-Note your connection string. 
+*Note your connection string.* 
 
 
 ### Setup The CDC Configuration
@@ -71,21 +69,14 @@ FROM aiven_extras.pg_create_publication_for_all_tables(
 ```
 
 ### Adding Data
+Now, lets add some data. 
 
-Now, let's create our data table and load some data.
-
-```console
-$> psql <'SERVICE_URI_FROM_CONSOLE'> -f sql/create.sql
-psql:sql/create.sql:1: NOTICE:  table "orders" does not exist, skipping
-DROP TABLE
-CREATE TABLE
-
-$> psql <'SERVICE_URI_FROM_CONSOLE'> -f sql/insert.sql
 ```
-
-Excellent, we know have our postgres database loaded with data. 
-
-Let's move to the next step.
+> cd producer
+> go run aiven-coffee.go
+```
+leave that running and watch the orders get created. 
+This will create at least 100 orders every minute, it's a bit random so you should get more than that.  
 
 ## Create Kafka
 
@@ -106,8 +97,7 @@ Go to your Kafka service overview page, `manage integrations`, and select `Kafka
 
 https://user-images.githubusercontent.com/92002375/193548233-7d6f6797-ab78-4e71-9037-65f00d50ae3f.mp4
 
-ƒ
-## Create Debezium Connector
+### Create Debezium Connector
 
 https://user-images.githubusercontent.com/92002375/193753962-7124b560-8cf6-4173-8afa-a49586a82434.mp4
 
@@ -145,33 +135,17 @@ For this you will need to use the AVN CLI
 ```
 Modify the JSON file with connection information from your `PostgreSQL service`. You can get your connection information by going to your PostgreSQL service overview tab.
 
-## Send Data From PostgreSQL to Kafka 
-
-https://user-images.githubusercontent.com/92002375/194475453-39cefaf3-2b25-4546-bdbe-c1f6f3f281ab.mp4
-
-Time to load a whole load of orders into your database. You can run this as many times as you want ! 
-```console
-psql <YOUR PG CONNECTION STRING> -f sql/insert.sql
-```
-
-Go to your Kafka topic, messages and select fetch messages. Decode the message and observe that the data that you inserted to PostgreSQL shows up on Kafka. 
-
-With that, you are done with your PostgreSQL and Kafka setup! Next, let's explore how to create a `Clickhouse` service. 
-
+When you see success here you should see a number of new Kafka topics have been created for you. 
+Click into the topics and `Fetch Messages` to see the data that is flowing.
 
 ## Create Clickhouse
-
 
 https://user-images.githubusercontent.com/92002375/194501434-6a2f743a-37cf-4502-81d3-a00e1574c336.mp4
 
 
-
 ## Configure Kafka -> Clickhouse
 
-
 https://user-images.githubusercontent.com/92002375/194501462-c12ae651-120f-4fc2-8c8f-e664c9ee1f75.mp4
-
-
 
 ## Consume The Data Stream
 
@@ -184,7 +158,7 @@ You will find the topic name in your Kafka configuration, under the topics tab.
 Firstly, lets make sure we know the name of the topic that has been created in Kafka as a result of the Kafka Connect configuration. We require this so we can tell Clickhouse what topic to read the data from. 
 
 ```console
-$> avn service integration-list dotc-clickhouse
+$> avn service integration-list <Your clickhouse service name>
 SERVICE_INTEGRATION_ID                SOURCE                    DEST                      INTEGRATION_TYPE       ENABLED  ACTIVE  DESCRIPTION                                                                     
 ====================================  ========================  ========================  =====================  =======  ======  ================================================================================
 (integration not enabled)             dotc-clickhouse     dotc-service-kafka  kafka_logs             false    false   Send service logs to Aiven Apache Kafka service or external Apache Kafka cluster
@@ -192,73 +166,63 @@ SERVICE_INTEGRATION_ID                SOURCE                    DEST            
 (integration not enabled)             dotc-service-pg     dotc-clickhouse     clickhouse_postgresql  false    false   Access a PostgreSQL database from ClickHouse
 ```
 
-Now we can take that integration id and insert into this command. 
+Now we can take that integration id and insert into this command. (this example below simply uses jq to pull that out of the above)
 Be sure to update the `topics` element and the end of this command with the topic from your service if you have modified any of the default settings.
 
 ```console
-avn service integration-update <YOUR CLICKHOUSE INTEGRATION ID>  \
-    --project <YOUR AIVEN PROJECT> \
-    --user-config-json '{
-    "tables": [
-        {
-            "name": "orders_queue",
-            "columns": [
-                {"name": "id" , "type": "Int64"},
-                {"name": "first_name" , "type": "String"},
-                {"name": "last_name" , "type": "String"},
-                {"name": "email" , "type": "String"},
-                {"name": "gender" , "type": "String"},
-                {"name": "street" , "type": "String"},
-                {"name": "town" , "type": "String"},
-                {"name": "mobile" , "type": "String"},
-                {"name": "country" , "type": "String"},
-                {"name": "drink_type" , "type": "String"},
-                {"name": "cost" , "type": "String"},
-                {"name": "addons" , "type": "String"},
-                {"name": "comments" , "type": "String"}
-            ],
-            "topics": [{"name": "dotc-service-pg.public.orders"}],
-            "data_format": "JSONEachRow",
-            "group_name": " order_consumer"
-        }
-    ]
-}'
+INTEGRATION_ID=$(avn service integration-list --project <your_project_name> <your_clickhouse_service_name> --json | jq -r '.[] | select(.integration_type == "clickhouse_kafka" and .source == "<your_kafka_service_name>").service_integration_id')
+
+    avn service integration-update $INTEGRATION_ID \
+      --project ${var.aiven_project_name} \
+      --user-config-json '{
+        "tables": [
+          {
+              "name": "purchases_queue",
+              "columns": [
+                  {"name": "id" , "type": "Int64"},
+                  {"name": "store_id" , "type": "Int64"},
+                  {"name": "customer_id" , "type": "Int64"},
+                  {"name": "total_quantity" , "type": "Int64"},
+                  {"name": "price" , "type": "Int64"},
+                  {"name": "order_placed" , "type": "DateTime('UTC')"},
+                  {"name": "order_collected" , "type": "type": "DateTime('UTC')}
+              ],
+              "topics": [{"name": "<your_kafka_service_name>.public.purchase"}],
+              "data_format": "JSONEachRow",
+              "group_name": "purchase_clickhouse_consumer"
+          }
+        ]
+      }'
 ```
 
-Now we can create the Clickhouse tables, the scripts for this are in the `sql/ch-create.sql` file 
+Now we can create the Clickhouse tables, the scripts for this are in the `ch/ch-create.sql` file 
 
 Open the Clickhouse service in the Aiven Console and look for the query editor. 
 
 Create the Table
 ```sql
-CREATE TABLE default.orders
+CREATE TABLE default.purchases
 (
-    id String,
-    first_name String,
-    last_name String,
-    email String,
-    gender String,
-    street String,
-    town String,
-    mobile String,
-    country String,
-    drink_type String,
-    cost Float32,
-    addons String,
-    comments String
+    id Int64,
+    store_id Int64,
+    item_id Int64,
+    customer_id Int64,
+    total_quantity Int64, 
+    price Float64,
+    order_placed DateTime('UTC'),
+    order_collected DateTime('UTC'),
 ) ENGINE = MergeTree ORDER BY (id);
 ```
 
-Create the Materialised View
+Create the Materialised View (the service name is the kafka service, this database is created as part of the Clickhouse integration)
 ```sql
-CREATE MATERIALIZED VIEW default.orders_mv TO default.orders AS 
-SELECT id, first_name, last_name, email, gender, 
-            street, town,  mobile, country, drink_type, 
-            toFloat64OrZero(cost) as cost, addons, comments
-FROM `service_dotc-service-kafka`.orders_queue;
+CREATE MATERIALIZED VIEW default.purchases_mv to default.purchases AS
+    SELECT id, store_id, item_id, customer_id, total_quantity, round(divide(price/100),2),
+        order_placed, order_collected
+    FROM `service_<your_kafka_service_name>`.purchases_queue;
 ```
 
-Now, you should be able to determine the most popular drink in Singapore!! 
+Now, you should be able to determine the most popular drink in Australia!! 
 ```sql
 select count(*) c, drink_type from default.orders group by drink_type order by c desc;
 ```
@@ -267,10 +231,7 @@ select count(*) c, drink_type from default.orders group by drink_type order by c
 # Bonus Marks!! 
 Did you make it to the end already? Still have time left in our workshop? Well done, I told you Aiven was simple and easy to use didn't I! :) 
 
-You can now have a go at 
-[Adding an Observability Stack](#create-observability-stack)
-OR 
-[Build This Again Using Terraform](#build-this-again-using-terraform)
+You can now have a go at adding observability
 
 
 ## Create Observability Stack
@@ -290,9 +251,91 @@ Spinning up an observability stack comes with pre-populated panels that you can 
 
 You can also interface with Aiven's platform through Infrastructure-As-Code such as [Terraform](https://registry.terraform.io/providers/aiven/aiven/latest/docs) or [Kubernetes](https://docs.aiven.io/docs/tools/kubernetes.html). We have provided example terraform scripts in the `./terraform` directory. 
 
+The terraform directory contains an example of variables you need to populate in order to run. 
+
 To execute simply
 ```console
 $> cd terraform
+$> cp variables.tf.example variables.tf
+```
+Now update your terraform variables.. these are listed below.
+
+This is the Aiven [authentication token](https://docs.aiven.io/docs/platform/concepts/authentication-tokens)
+```
+variable aiven_api_token {
+	type = string
+	default = "<YOUR API TOKEN>"	
+	description = "Aiven authentication token"
+}
+```
+
+This is the [project](https://docs.aiven.io/docs/platform/concepts/projects_accounts_access) name that services will be created in
+```
+variable aiven_project_name {
+	type = string
+	default = "<YOUR AIVEN PROJECT>"	
+	description = "Aiven project for resource creation"
+}
+```
+
+This is the [cloud and region](https://docs.aiven.io/docs/platform/reference/list_of_clouds) you would like to run your services in
+```
+variable aiven_cloud { 
+	type = string
+	default = "aws-ap-southeast-2"
+	description = "Cloud region for Aiven resources"
+}
+```
+
+Services will be created with a prefix to idenitfy them in the [console](https://docs.aiven.io/docs/tools/aiven-console)
+```
+variable service_prefix {
+	type = string
+	default = "e2e-cdc-"
+	description = "String prefix for service names" 
+}
+```
+
+The [Aiven for Postgres plan](https://aiven.io/pricing?tab=plan-comparison&product=pg) that will be created. 
+```
+variable pg_plan {
+	type = string
+	default = "startup-4"
+	description = "The Aiven postgres plan to create"
+} 
+```
+
+The [Aiven for Apache Kafka plan](https://aiven.io/pricing?tab=plan-comparison&product=kafka) that will be created
+Requires a minimum business-4 for Kafka Connect integration
+```
+variable kafka_plan {
+	type = string
+	default = "business-4"
+	description = "The Aiven Kafka plan to create"
+} 
+```
+The [Aivnen for Apache Kafka Connect plan](https://aiven.io/pricing?tab=plan-pricing&product=kafka_connect) that will be created
+```
+variable kc_plan {
+	type = string
+	default = "startup-4"
+	description = "The Aiven Kafka Connect plan to create"
+} 
+```
+
+The [Aiven for Clickhouse plan](https://aiven.io/pricing?tab=plan-comparison&product=clickhouse) that will be created
+```
+variable ch_plan {
+	type = string
+	default = "hobbyist"
+	description = "The Aiven Clickhouse plan to create"
+} 
+```
+
+Once your variables are ready it's quite simply
+```
+$> terraform init
 $> terraform plan
 $> terraform apply
 ```
+Get a coffee and let it build...

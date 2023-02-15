@@ -28,7 +28,7 @@ variable pg_plan {
 } 
 variable kafka_plan {
 	type = string
-	default = "startup-2"
+	default = "business-4"
 	description = "The Aiven Kafka plan to create"
 } 
 variable kc_plan {

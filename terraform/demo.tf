@@ -180,6 +180,94 @@ resource "aiven_clickhouse" "clickhouse" {
   service_name            = "${var.service_prefix}clickhouse"
   maintenance_window_dow  = "monday"
   maintenance_window_time = "10:00:00"
+  depends_on = [
+    aiven_kafka.kafka-service, aiven_pg.postgres-service
+  ]
+
+}
+
+resource "aiven_service_integration" "clickhouse-kafka" {
+    project                 = var.aiven_project_name
+      integration_type = "clickhouse_kafka"
+      source_service_name = aiven_kafka.kafka-service.service_name
+      destination_service_name = aiven_clickhouse.clickhouse.service_name
+}
+
+resource "aiven_service_integration" "clickhouse-postgresql" {
+    project                 = var.aiven_project_name
+      integration_type = "clickhouse_postgresql"
+      source_service_name = aiven_pg.postgres-service.service_name
+      destination_service_name = aiven_clickhouse.clickhouse.service_name
+}
+
+resource "local_file" "create_sh" {
+  content  = <<EOF
+
+    INTEGRATION_ID=$(avn service integration-list --project ${var.aiven_project_name} ${aiven_clickhouse.clickhouse.service_name} --json | jq -r '.[] | select(.integration_type == "clickhouse_kafka" and .source == "${aiven_kafka.kafka-service.service_name}").service_integration_id')
+
+    avn service integration-update $INTEGRATION_ID \
+      --project ${var.aiven_project_name} \
+      --user-config-json '{
+        "tables": [
+          {
+              "name": "purchases_queue",
+              "columns": [
+                  {"name": "id" , "type": "Int64"},
+                  {"name": "store_id" , "type": "Int64"},
+                  {"name": "customer_id" , "type": "Int64"},
+                  {"name": "total_quantity" , "type": "Int64"},
+                  {"name": "price" , "type": "Int64"},
+                  {"name": "order_placed" , "type": "DateTime('UTC')"},
+                  {"name": "order_collected" , "type": "DateTime('UTC')"}
+              ],
+              "topics": [{"name": "${aiven_kafka.kafka-service.service_name}.public.purchase"}],
+              "data_format": "JSONEachRow",
+              "group_name": "purchase_clickhouse_consumer"
+          }
+        ]
+      }'
+
+    clickhouse client --host ${aiven_clickhouse.clickhouse.service_host} \
+                  --secure \
+                  --port ${aiven_clickhouse.clickhouse.service_port} \
+                  --user ${aiven_clickhouse.clickhouse.service_username} \
+                  --password ${aiven_clickhouse.clickhouse.service_password} \
+                  < ../ch/ch-create.sql
+    EOF
+  filename = "../ch/create.sh"
+  file_permission = 0711
+}
+
+resource "local_file" "create_ch_mv" {
+  content = <<EOF
+  CREATE MATERIALIZED VIEW default.purchases_mv to default.purchases AS
+    SELECT id, store_id, item_id, customer_id, total_quantity, round(divide(price/100),2),
+    order_placed, order_collected
+    FROM `service_${aiven_kafka.kafka-service.service_name}`.purchases_queue
+  EOF
+
+  filename = "../ch/create_mv.sql"
+  file_permission = 0444
+}
+
+# Create the table required for clickhouse
+resource "null_resource" "create_ch_tables" {
+  depends_on = [
+    local_file.create_sh, aiven_clickhouse.clickhouse, aiven_service_integration.clickhouse-kafka
+  ]
+  provisioner "local-exec" {
+    command = "${abspath(path.module)}/../ch/create.sh"
+  }
+}
+
+# Create the materialised view for clickhouse
+resource "null_resource" "create_ch_mv" {
+    depends_on = [
+    null_resource.create_ch_tables, local_file.create_ch_mv, aiven_clickhouse.clickhouse, aiven_service_integration.clickhouse-kafka
+  ]
+  provisioner "local-exec" {
+    command = "    clickhouse client --host ${aiven_clickhouse.clickhouse.service_host} --secure --port ${aiven_clickhouse.clickhouse.service_port} --user ${aiven_clickhouse.clickhouse.service_username} --password ${aiven_clickhouse.clickhouse.service_password} < ${abspath(path.module)}/../ch/create_mv.sql"
+  }
 }
 
 

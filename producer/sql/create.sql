@@ -2062,4 +2062,6 @@ insert into customer (first_name,last_name,email) VALUES ('Fulvia','Doubleday','
 insert into customer (first_name,last_name,email) VALUES ('Trever','Guitonneau','tguitonneaurq@ca.gov');
 insert into customer (first_name,last_name,email) VALUES ('Emalee','Piolli','epiollirr@theglobeandmail.com');
 
+insert into purchase (store_id, item_id, customer_id, total_quantity, price) values(1,1,1,0,0);
+
 COMMIT;
