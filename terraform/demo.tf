@@ -214,13 +214,14 @@ resource "local_file" "create_sh" {
               "columns": [
                   {"name": "id" , "type": "Int64"},
                   {"name": "store_id" , "type": "Int64"},
+                  {"name": "item_id", "type": "Int64"},
                   {"name": "customer_id" , "type": "Int64"},
                   {"name": "total_quantity" , "type": "Int64"},
                   {"name": "price" , "type": "Int64"},
-                  {"name": "order_placed" , "type": "DateTime('UTC')"},
-                  {"name": "order_collected" , "type": "DateTime('UTC')"}
+                  {"name": "order_placed" , "type": "DateTime"},
+                  {"name": "order_collected" , "type": "DateTime"}
               ],
-              "topics": [{"name": "${aiven_kafka.kafka-service.service_name}.public.purchase"}],
+              "topics": [{"name": "${aiven_pg.postgres-service.service_name}.public.purchase"}],
               "data_format": "JSONEachRow",
               "group_name": "purchase_clickhouse_consumer"
           }
@@ -241,7 +242,7 @@ resource "local_file" "create_sh" {
 resource "local_file" "create_ch_mv" {
   content = <<EOF
   CREATE MATERIALIZED VIEW default.purchases_mv to default.purchases AS
-    SELECT id, store_id, item_id, customer_id, total_quantity, round(divide(price/100),2),
+    SELECT id, store_id, item_id, customer_id, total_quantity, roundBankers(divide(price,100),2),
     order_placed, order_collected
     FROM `service_${aiven_kafka.kafka-service.service_name}`.purchases_queue
   EOF
@@ -253,7 +254,7 @@ resource "local_file" "create_ch_mv" {
 # Create the table required for clickhouse
 resource "null_resource" "create_ch_tables" {
   depends_on = [
-    local_file.create_sh, aiven_clickhouse.clickhouse, aiven_service_integration.clickhouse-kafka
+    local_file.create_sh, aiven_clickhouse.clickhouse, aiven_kafka.kafka-service, aiven_service_integration.clickhouse-kafka
   ]
   provisioner "local-exec" {
     command = "${abspath(path.module)}/../ch/create.sh"
@@ -263,10 +264,10 @@ resource "null_resource" "create_ch_tables" {
 # Create the materialised view for clickhouse
 resource "null_resource" "create_ch_mv" {
     depends_on = [
-    null_resource.create_ch_tables, local_file.create_ch_mv, aiven_clickhouse.clickhouse, aiven_service_integration.clickhouse-kafka
+    null_resource.create_ch_tables, local_file.create_ch_mv, aiven_clickhouse.clickhouse,aiven_kafka.kafka-service, aiven_service_integration.clickhouse-kafka
   ]
   provisioner "local-exec" {
-    command = "    clickhouse client --host ${aiven_clickhouse.clickhouse.service_host} --secure --port ${aiven_clickhouse.clickhouse.service_port} --user ${aiven_clickhouse.clickhouse.service_username} --password ${aiven_clickhouse.clickhouse.service_password} < ${abspath(path.module)}/../ch/create_mv.sql"
+    command = "clickhouse client --host ${aiven_clickhouse.clickhouse.service_host} --secure --port ${aiven_clickhouse.clickhouse.service_port} --user ${aiven_clickhouse.clickhouse.service_username} --password ${aiven_clickhouse.clickhouse.service_password} < ${abspath(path.module)}/../ch/create_mv.sql"
   }
 }
 

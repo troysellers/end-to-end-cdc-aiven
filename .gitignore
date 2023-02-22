@@ -9,3 +9,4 @@ video/
 creds/
 .env
 ch/create.sh
+ch/create_mv.sql
