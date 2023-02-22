@@ -234,6 +234,7 @@ resource "local_file" "create_sh" {
                   --user ${aiven_clickhouse.clickhouse.service_username} \
                   --password ${aiven_clickhouse.clickhouse.service_password} \
                   < ../ch/ch-create.sql
+    sleep 10
     EOF
   filename = "../ch/create.sh"
   file_permission = 0711

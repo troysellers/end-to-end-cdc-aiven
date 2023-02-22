@@ -7,7 +7,7 @@ CREATE TABLE default.purchases
     total_quantity Int64, 
     price Float64,
     order_placed DateTime('UTC'),
-    order_collected DateTime('UTC'),
+    order_collected DateTime('UTC')
 ) ENGINE = MergeTree ORDER BY (id)
 
 
