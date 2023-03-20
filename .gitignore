@@ -2,7 +2,6 @@
 terraform/.terraform*
 terraform/terraform.tfstate
 terraform/variables.tf
-*.go
 *.csv
 terraform/*.backup
 video/
