@@ -5,11 +5,14 @@ drop table if exists item;
 
 create table store (
     id SERIAL,
+    name text,
     street text,
     city text,
     state text,
     country text,
     post_code int,
+    latitude float,
+    longitude float,
     primary key (id)
 );
 

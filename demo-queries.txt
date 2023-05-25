@@ -1,0 +1,28 @@
+
+
+## Clickhouse queries
+- total items sold 
+select sum(price), item_id from purchases group by item_id order by 1 desc
+
+- show postgres table in CH
+select * from `service_e2e-cdc-service-pg_defaultdb_public`.item
+
+
+
+- total items with item names 
+select sum(p.price), count(*), i.name from default.purchases p join `service_e2e-cdc-service-pg_defaultdb_public`.item i on p.item_id = i.id 
+group by i.name order by 1 desc
+
+-sales by year
+select sum(p.price), toYear(p.order_placed) as year from purchases p where year > 1970 group by year order by 1 desc
+
+- sales by month this year
+select toMonth(p.order_placed) as monthNum, monthName(p.order_placed) as month, sum(p.price) from purchases p where toYear(p.order_placed) = 2023 group by month, monthNum order by monthNum
+
+- sales by product by year
+select toYear(p.order_placed) as year ,i.name, sum(p.price) as total from default.purchases p join `service_e2e-cdc-service-pg_defaultdb_public`.item i on p.item_id = i.id  group by year, i.name order by year desc
+
+
+- sales by store 
+select sum(p.price), count(*), s.name from default.purchases p join `service_e2e-cdc-service-pg_defaultdb_public`.store s on p.store_id = s.id 
+group by s.name order by 1 desc

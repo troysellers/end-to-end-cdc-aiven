@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"math/rand"
@@ -19,6 +20,9 @@ func init() {
 
 func main() {
 	fmt.Println("We shoud be running.")
+	prepop := flag.Bool("prepop", false, "Prepopulate the database with data")
+	flag.Parse()
+
 	stores, err := data.GetStores()
 	if err != nil {
 		log.Fatal(err)
@@ -36,12 +40,12 @@ func main() {
 	var wg sync.WaitGroup
 	for i := 1; i <= 100; i++ {
 		wg.Add(1)
-		go startOrdering(customers, stores, items, &wg)
+		go startOrdering(prepop, customers, stores, items, &wg)
 	}
 	wg.Wait()
 }
 
-func startOrdering(customers []*data.Customer, stores []*data.Store, items []*data.Item, wg *sync.WaitGroup) {
+func startOrdering(prepop *bool, customers []*data.Customer, stores []*data.Store, items []*data.Item, wg *sync.WaitGroup) {
 	r := time.Duration(rand.Intn(60))
 	time.Sleep(r * time.Second)
 	for { // it never ends!
@@ -53,7 +57,7 @@ func startOrdering(customers []*data.Customer, stores []*data.Store, items []*da
 		o.Price = (int64)(i.Price * o.TotalQuantity)
 		o.StoreId = stores[rand.Intn(len(stores)-1)].Id
 		o.CustomerId = customers[rand.Intn(len(customers)-1)].Id
-		o.OrderPlaced = randomBusinessTime()
+		o.OrderPlaced = randomBusinessTime(prepop)
 		if rand.Intn(100) <= 99 { //every now and then, an order will be missed.
 			o.OrderCollected = o.OrderPlaced.Add(1500 * time.Second)
 		}
@@ -61,18 +65,25 @@ func startOrdering(customers []*data.Customer, stores []*data.Store, items []*da
 			log.Println(err)
 		}
 		log.Printf("ordered at %v", o.OrderPlaced)
-		time.Sleep(60 * time.Second)
+		time.Sleep(1 * time.Second)
 	}
 }
 
-func randomBusinessTime() time.Time {
+func randomBusinessTime(prepop *bool) time.Time {
 	now := time.Now()
+	var year, day int
+	var month time.Month
 
-	// Generate a random time in the last 2 years
-	year := rand.Intn(2) + now.Year() - 2
-	month := time.Month(rand.Intn(12) + 1)
-	day := rand.Intn(28) + 1
+	if *prepop {
 
+		rand.Seed(time.Now().UnixNano())
+		randomDays := rand.Intn(731)
+		subDate := now.AddDate(0, 0, -randomDays)
+		// Generate a random time in the last 2 years
+		year = subDate.Year()
+		month = subDate.Month()
+		day = subDate.Day()
+	}
 	// Generate a random time between 9am and 5pm
 	hour := rand.Intn(8) + 9
 	minute := rand.Intn(60)

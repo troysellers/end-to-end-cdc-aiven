@@ -51,7 +51,7 @@ resource "aiven_connection_pool" "coffee_pool" {
   service_name  = aiven_pg.postgres-service.service_name
   database_name = "defaultdb"
   pool_mode     = "transaction"
-  pool_name     = "coffeePool"
+  pool_name     = "mydbpool"
   pool_size     = 10
   username      = aiven_pg.postgres-service.service_username
   depends_on = [
@@ -106,7 +106,7 @@ resource "aiven_kafka" "kafka-service" {
   kafka_user_config {
     kafka_connect   = true
     kafka_rest      = true
-    kafka_version   = "3.2"
+    kafka_version   = var.kafka_version
     schema_registry = true
     kafka {
       auto_create_topics_enable    = true
@@ -218,8 +218,8 @@ resource "local_file" "create_sh" {
                   {"name": "customer_id" , "type": "Int64"},
                   {"name": "total_quantity" , "type": "Int64"},
                   {"name": "price" , "type": "Int64"},
-                  {"name": "order_placed" , "type": "DateTime"},
-                  {"name": "order_collected" , "type": "DateTime"}
+                  {"name": "order_placed" , "type": "DateTime64(6,'UTC')"},
+                  {"name": "order_collected" , "type": "DateTime64(6,'UTC')"}
               ],
               "topics": [{"name": "${aiven_pg.postgres-service.service_name}.public.purchase"}],
               "data_format": "JSONEachRow",
@@ -243,7 +243,7 @@ resource "local_file" "create_sh" {
 resource "local_file" "create_ch_mv" {
   content = <<EOF
   CREATE MATERIALIZED VIEW default.purchases_mv to default.purchases AS
-    SELECT id, store_id, item_id, customer_id, total_quantity, roundBankers(divide(price,100),2),
+    SELECT id, store_id, item_id, customer_id, total_quantity, roundBankers(divide(price,100),2) as price,
     order_placed, order_collected
     FROM `service_${aiven_kafka.kafka-service.service_name}`.purchases_queue
   EOF
