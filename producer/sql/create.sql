@@ -3,17 +3,16 @@ drop table if exists store;
 drop table if exists customer;
 drop table if exists item;
 
-create table store (
-    id SERIAL,
+CREATE TABLE store (
+    id SERIAL PRIMARY KEY,
     name text,
-    street text,
+    address text,
     city text,
     state text,
     country text,
-    post_code int,
-    latitude float,
-    longitude float,
-    primary key (id)
+    postal_code VARCHAR(10),
+    latitude NUMERIC(10, 6),
+    longitude NUMERIC(10, 6)
 );
 
 create table customer (
@@ -63,1006 +62,1007 @@ insert into item (name, description, price, cost) VALUES ('Croissant', 'Deliciou
 insert into item (name, description, price, cost) VALUES ('Cappuccion', 'Espresso, steamed milk, foam and chocolate powder dusting', 450, 100);
 
 
-insert into store (street,city,state,country,post_code) VALUES ('8738 Jenifer Crossing','Eastern Suburbs Mc','New South Wales','Australia',1315);
-insert into store (street,city,state,country,post_code) VALUES ('75 Hansons Drive','Perth','Western Australia','Australia',6843);
-insert into store (street,city,state,country,post_code) VALUES ('848 Westerfield Pass','Sydney','New South Wales','Australia',1196);
-insert into store (street,city,state,country,post_code) VALUES ('2 Porter Trail','Adelaide Mail Centre','South Australia','Australia',5874);
-insert into store (street,city,state,country,post_code) VALUES ('93 Monica Avenue','Eastern Suburbs Mc','New South Wales','Australia',1325);
-insert into store (street,city,state,country,post_code) VALUES ('37271 Nova Road','Sydney','New South Wales','Australia',1028);
-insert into store (street,city,state,country,post_code) VALUES ('97569 Sloan Crossing','Sydney','New South Wales','Australia',1009);
-insert into store (street,city,state,country,post_code) VALUES ('6300 Northwestern Drive','Adelaide Mail Centre','South Australia','Australia',5899);
-insert into store (street,city,state,country,post_code) VALUES ('0 Bluejay Crossing','Sydney','New South Wales','Australia',1033);
-insert into store (street,city,state,country,post_code) VALUES ('99362 Stoughton Parkway','Eastern Suburbs Mc','New South Wales','Australia',1391);
-insert into store (street,city,state,country,post_code) VALUES ('096 Prairieview Drive','Hobart','Tasmania','Australia',7808);
-insert into store (street,city,state,country,post_code) VALUES ('3 Colorado Terrace','Sydney','New South Wales','Australia',1171);
-insert into store (street,city,state,country,post_code) VALUES ('35 Monterey Court','Sydney','New South Wales','Australia',1009);
-insert into store (street,city,state,country,post_code) VALUES ('29046 Fairfield Alley','Adelaide','South Australia','Australia',5839);
-insert into store (street,city,state,country,post_code) VALUES ('49 Warner Crossing','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('630 Aberg Plaza','Sydney','New South Wales','Australia',1191);
-insert into store (street,city,state,country,post_code) VALUES ('1600 Artisan Avenue','Sydney','New South Wales','Australia',1028);
-insert into store (street,city,state,country,post_code) VALUES ('98521 Blackbird Avenue','Melbourne','Victoria','Australia',8045);
-insert into store (street,city,state,country,post_code) VALUES ('6980 Eliot Lane','Sydney','New South Wales','Australia',1171);
-insert into store (street,city,state,country,post_code) VALUES ('305 Dwight Avenue','Eastern Suburbs Mc','New South Wales','Australia',1325);
-insert into store (street,city,state,country,post_code) VALUES ('84 Pepper Wood Way','Melbourne','Victoria','Australia',8045);
-insert into store (street,city,state,country,post_code) VALUES ('64 Novick Point','Sydney','New South Wales','Australia',1043);
-insert into store (street,city,state,country,post_code) VALUES ('0854 Wayridge Center','Sydney','New South Wales','Australia',1028);
-insert into store (street,city,state,country,post_code) VALUES ('4214 Kim Street','Melbourne','Victoria','Australia',8383);
-insert into store (street,city,state,country,post_code) VALUES ('57 Aberg Trail','Sydney','New South Wales','Australia',1009);
-insert into store (street,city,state,country,post_code) VALUES ('4 Randy Trail','Melbourne','Victoria','Australia',8045);
-insert into store (street,city,state,country,post_code) VALUES ('44 Stuart Hill','Sydney','New South Wales','Australia',1171);
-insert into store (street,city,state,country,post_code) VALUES ('110 Veith Place','Sydney','New South Wales','Australia',1196);
-insert into store (street,city,state,country,post_code) VALUES ('966 Harbort Junction','Adelaide Mail Centre','South Australia','Australia',5869);
-insert into store (street,city,state,country,post_code) VALUES ('356 Maryland Alley','Perth','Western Australia','Australia',6817);
-insert into store (street,city,state,country,post_code) VALUES ('11369 Rigney Park','Sydney','New South Wales','Australia',1043);
-insert into store (street,city,state,country,post_code) VALUES ('31490 Rockefeller Crossing','Melbourne','Victoria','Australia',8045);
-insert into store (street,city,state,country,post_code) VALUES ('9757 Village Green Way','Perth','Western Australia','Australia',6843);
-insert into store (street,city,state,country,post_code) VALUES ('59 Nova Park','Sydney','New South Wales','Australia',1171);
-insert into store (street,city,state,country,post_code) VALUES ('756 Acker Road','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('56920 Butternut Circle','Sydney','New South Wales','Australia',1161);
-insert into store (street,city,state,country,post_code) VALUES ('1 Susan Park','Melbourne','Victoria','Australia',8383);
-insert into store (street,city,state,country,post_code) VALUES ('84333 Birchwood Place','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('4 Washington Parkway','Strawberry Hills','New South Wales','Australia',1424);
-insert into store (street,city,state,country,post_code) VALUES ('5789 International Court','Sydney','New South Wales','Australia',1140);
-insert into store (street,city,state,country,post_code) VALUES ('091 Fulton Place','Adelaide Mail Centre','South Australia','Australia',5899);
-insert into store (street,city,state,country,post_code) VALUES ('42954 Ridgeway Point','Perth','Western Australia','Australia',6817);
-insert into store (street,city,state,country,post_code) VALUES ('6649 Bashford Park','Sydney','New South Wales','Australia',1028);
-insert into store (street,city,state,country,post_code) VALUES ('041 Brown Road','Adelaide Mail Centre','South Australia','Australia',5874);
-insert into store (street,city,state,country,post_code) VALUES ('490 Cottonwood Lane','Strawberry Hills','New South Wales','Australia',1424);
-insert into store (street,city,state,country,post_code) VALUES ('862 International Terrace','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('29 Springview Junction','Melbourne','Victoria','Australia',8383);
-insert into store (street,city,state,country,post_code) VALUES ('68903 Spohn Way','Sydney','New South Wales','Australia',1043);
-insert into store (street,city,state,country,post_code) VALUES ('8089 Quincy Trail','Melbourne','Victoria','Australia',8045);
-insert into store (street,city,state,country,post_code) VALUES ('3 5th Place','Sydney','New South Wales','Australia',1140);
-insert into store (street,city,state,country,post_code) VALUES ('52383 Vidon Alley','Sydney','New South Wales','Australia',1161);
-insert into store (street,city,state,country,post_code) VALUES ('4852 Coleman Drive','Sydney','New South Wales','Australia',1161);
-insert into store (street,city,state,country,post_code) VALUES ('2 Vermont Terrace','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('189 Killdeer Circle','Eastern Suburbs Mc','New South Wales','Australia',1325);
-insert into store (street,city,state,country,post_code) VALUES ('09 Macpherson Street','Adelaide Mail Centre','South Australia','Australia',5874);
-insert into store (street,city,state,country,post_code) VALUES ('83 Hagan Alley','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('55 Arkansas Street','Melbourne','Victoria','Australia',8383);
-insert into store (street,city,state,country,post_code) VALUES ('0283 Karstens Crossing','Australia Square','New South Wales','Australia',1213);
-insert into store (street,city,state,country,post_code) VALUES ('26 Graceland Terrace','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('76 Dunning Court','Perth','Western Australia','Australia',6843);
-insert into store (street,city,state,country,post_code) VALUES ('4 Northwestern Hill','Sydney','New South Wales','Australia',1028);
-insert into store (street,city,state,country,post_code) VALUES ('171 Hooker Court','Adelaide Mail Centre','South Australia','Australia',5889);
-insert into store (street,city,state,country,post_code) VALUES ('1749 Florence Lane','Sydney','New South Wales','Australia',1181);
-insert into store (street,city,state,country,post_code) VALUES ('38478 2nd Park','Sydney','New South Wales','Australia',1120);
-insert into store (street,city,state,country,post_code) VALUES ('45256 Westerfield Parkway','Sydney','New South Wales','Australia',1120);
-insert into store (street,city,state,country,post_code) VALUES ('02 Tennessee Park','Sydney','New South Wales','Australia',1206);
-insert into store (street,city,state,country,post_code) VALUES ('24614 Morrow Court','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('60020 Chinook Alley','Eastern Suburbs Mc','New South Wales','Australia',1391);
-insert into store (street,city,state,country,post_code) VALUES ('7434 Holy Cross Road','Sydney','New South Wales','Australia',1043);
-insert into store (street,city,state,country,post_code) VALUES ('4 Manufacturers Circle','Sydney','New South Wales','Australia',1009);
-insert into store (street,city,state,country,post_code) VALUES ('7 Calypso Alley','Perth','Western Australia','Australia',6843);
-insert into store (street,city,state,country,post_code) VALUES ('789 Kropf Point','Eastern Suburbs Mc','New South Wales','Australia',1315);
-insert into store (street,city,state,country,post_code) VALUES ('313 Veith Trail','Melbourne','Victoria','Australia',8045);
-insert into store (street,city,state,country,post_code) VALUES ('6 3rd Junction','Hobart','Tasmania','Australia',7808);
-insert into store (street,city,state,country,post_code) VALUES ('8 Montana Pass','Sydney South','New South Wales','Australia',1235);
-insert into store (street,city,state,country,post_code) VALUES ('0043 Buhler Parkway','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('3572 Carpenter Way','Perth','Western Australia','Australia',6843);
-insert into store (street,city,state,country,post_code) VALUES ('3 Melody Circle','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('64606 Eggendart Court','Eastern Suburbs Mc','New South Wales','Australia',1325);
-insert into store (street,city,state,country,post_code) VALUES ('68 Stoughton Way','Adelaide Mail Centre','South Australia','Australia',5889);
-insert into store (street,city,state,country,post_code) VALUES ('406 Prairieview Court','Sydney South','New South Wales','Australia',1235);
-insert into store (street,city,state,country,post_code) VALUES ('5 Lakeland Court','Sydney','New South Wales','Australia',1171);
-insert into store (street,city,state,country,post_code) VALUES ('3 Summerview Park','Sydney','New South Wales','Australia',1009);
-insert into store (street,city,state,country,post_code) VALUES ('70983 Tony Avenue','Sydney','New South Wales','Australia',1043);
-insert into store (street,city,state,country,post_code) VALUES ('59068 Jana Drive','Launceston','Tasmania','Australia',7916);
-insert into store (street,city,state,country,post_code) VALUES ('81 Talmadge Plaza','Melbourne','Victoria','Australia',8045);
-insert into store (street,city,state,country,post_code) VALUES ('263 Summer Ridge Hill','Eastern Suburbs Mc','New South Wales','Australia',1391);
-insert into store (street,city,state,country,post_code) VALUES ('31 Duke Circle','Launceston','Tasmania','Australia',7916);
-insert into store (street,city,state,country,post_code) VALUES ('0312 Quincy Avenue','Melbourne','Victoria','Australia',8045);
-insert into store (street,city,state,country,post_code) VALUES ('1 Maple Street','Hobart','Tasmania','Australia',7803);
-insert into store (street,city,state,country,post_code) VALUES ('0129 Sugar Street','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('01032 Waywood Plaza','Sydney','New South Wales','Australia',1161);
-insert into store (street,city,state,country,post_code) VALUES ('614 Banding Park','Sydney','New South Wales','Australia',1191);
-insert into store (street,city,state,country,post_code) VALUES ('1 Nova Street','Sydney South','New South Wales','Australia',1235);
-insert into store (street,city,state,country,post_code) VALUES ('91041 Porter Road','Australia Square','New South Wales','Australia',1213);
-insert into store (street,city,state,country,post_code) VALUES ('6 Michigan Street','Adelaide Mail Centre','South Australia','Australia',5889);
-insert into store (street,city,state,country,post_code) VALUES ('74878 Buena Vista Drive','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('778 Bashford Center','Sydney','New South Wales','Australia',1181);
-insert into store (street,city,state,country,post_code) VALUES ('65754 Kennedy Alley','Australia Square','New South Wales','Australia',1213);
-insert into store (street,city,state,country,post_code) VALUES ('2 Kingsford Terrace','Eastern Suburbs Mc','New South Wales','Australia',1315);
-insert into store (street,city,state,country,post_code) VALUES ('2 Kings Point','Perth','Western Australia','Australia',6843);
-insert into store (street,city,state,country,post_code) VALUES ('1 Northridge Court','Sydney','New South Wales','Australia',1043);
-insert into store (street,city,state,country,post_code) VALUES ('4075 Oriole Way','Sydney','New South Wales','Australia',1140);
-insert into store (street,city,state,country,post_code) VALUES ('1245 Londonderry Trail','Adelaide Mail Centre','South Australia','Australia',5889);
-insert into store (street,city,state,country,post_code) VALUES ('01311 Stephen Trail','Eastern Suburbs Mc','New South Wales','Australia',1325);
-insert into store (street,city,state,country,post_code) VALUES ('2166 Jenna Lane','Sydney South','New South Wales','Australia',1235);
-insert into store (street,city,state,country,post_code) VALUES ('96369 Monica Point','Brisbane','Queensland','Australia',9010);
-insert into store (street,city,state,country,post_code) VALUES ('80750 Dixon Point','Eastern Suburbs Mc','New South Wales','Australia',1391);
-insert into store (street,city,state,country,post_code) VALUES ('8031 Butternut Court','Strawberry Hills','New South Wales','Australia',1424);
-insert into store (street,city,state,country,post_code) VALUES ('724 Onsgard Junction','Sydney','New South Wales','Australia',1009);
-insert into store (street,city,state,country,post_code) VALUES ('3015 Merchant Junction','Sydney','New South Wales','Australia',1120);
-insert into store (street,city,state,country,post_code) VALUES ('596 Heffernan Plaza','Adelaide','South Australia','Australia',5839);
-insert into store (street,city,state,country,post_code) VALUES ('10 Burrows Court','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('08926 Sage Place','Perth','Western Australia','Australia',6817);
-insert into store (street,city,state,country,post_code) VALUES ('85 Daystar Court','Northern Suburbs Mc','New South Wales','Australia',1694);
-insert into store (street,city,state,country,post_code) VALUES ('18 1st Center','Melbourne','Victoria','Australia',8045);
-insert into store (street,city,state,country,post_code) VALUES ('22 Clarendon Place','Launceston','Tasmania','Australia',7916);
-insert into store (street,city,state,country,post_code) VALUES ('5378 Kings Drive','Sydney','New South Wales','Australia',1043);
-insert into store (street,city,state,country,post_code) VALUES ('58314 Kingsford Terrace','Adelaide Mail Centre','South Australia','Australia',5899);
-insert into store (street,city,state,country,post_code) VALUES ('45273 Hoepker Alley','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('818 Fulton Alley','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('0381 Cambridge Way','Launceston','Tasmania','Australia',7916);
-insert into store (street,city,state,country,post_code) VALUES ('7 Donald Park','Sydney','New South Wales','Australia',1196);
-insert into store (street,city,state,country,post_code) VALUES ('67627 Hansons Place','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('19713 Manitowish Pass','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('97553 Charing Cross Lane','Perth','Western Australia','Australia',6817);
-insert into store (street,city,state,country,post_code) VALUES ('8 Rigney Plaza','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('98 Sauthoff Alley','Adelaide','South Australia','Australia',5839);
-insert into store (street,city,state,country,post_code) VALUES ('04854 Spenser Park','Hobart','Tasmania','Australia',7808);
-insert into store (street,city,state,country,post_code) VALUES ('2504 Pearson Road','Hobart','Tasmania','Australia',7803);
-insert into store (street,city,state,country,post_code) VALUES ('42 Dayton Park','Sydney','New South Wales','Australia',1206);
-insert into store (street,city,state,country,post_code) VALUES ('1 Burning Wood Park','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('61 Huxley Pass','Sydney','New South Wales','Australia',1120);
-insert into store (street,city,state,country,post_code) VALUES ('57 Mendota Center','Sydney South','New South Wales','Australia',1235);
-insert into store (street,city,state,country,post_code) VALUES ('6 Memorial Street','Sydney','New South Wales','Australia',1028);
-insert into store (street,city,state,country,post_code) VALUES ('547 Fordem Trail','Eastern Suburbs Mc','New South Wales','Australia',1325);
-insert into store (street,city,state,country,post_code) VALUES ('205 Main Lane','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('0 Valley Edge Avenue','Sydney','New South Wales','Australia',1120);
-insert into store (street,city,state,country,post_code) VALUES ('6 Eastwood Trail','Hobart','Tasmania','Australia',7808);
-insert into store (street,city,state,country,post_code) VALUES ('11241 Mayer Hill','Eastern Suburbs Mc','New South Wales','Australia',1325);
-insert into store (street,city,state,country,post_code) VALUES ('574 Glendale Court','Sydney','New South Wales','Australia',1206);
-insert into store (street,city,state,country,post_code) VALUES ('4214 Russell Parkway','Melbourne','Victoria','Australia',8383);
-insert into store (street,city,state,country,post_code) VALUES ('88 Pine View Circle','Eastern Suburbs Mc','New South Wales','Australia',1315);
-insert into store (street,city,state,country,post_code) VALUES ('404 Gulseth Road','Hobart','Tasmania','Australia',7808);
-insert into store (street,city,state,country,post_code) VALUES ('281 Buell Drive','Sydney','New South Wales','Australia',1191);
-insert into store (street,city,state,country,post_code) VALUES ('3675 Hoepker Pass','Strawberry Hills','New South Wales','Australia',1424);
-insert into store (street,city,state,country,post_code) VALUES ('9 Nevada Court','Sydney','New South Wales','Australia',1206);
-insert into store (street,city,state,country,post_code) VALUES ('30805 Northview Park','Brisbane','Queensland','Australia',9010);
-insert into store (street,city,state,country,post_code) VALUES ('56266 Pennsylvania Street','Eastern Suburbs Mc','New South Wales','Australia',1325);
-insert into store (street,city,state,country,post_code) VALUES ('9394 Commercial Court','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('74 Vera Avenue','Melbourne','Victoria','Australia',8383);
-insert into store (street,city,state,country,post_code) VALUES ('0 Lukken Park','Sydney','New South Wales','Australia',1140);
-insert into store (street,city,state,country,post_code) VALUES ('05116 Knutson Court','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('258 Scofield Lane','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('8601 Springview Junction','Sydney','New South Wales','Australia',1171);
-insert into store (street,city,state,country,post_code) VALUES ('8301 Everett Hill','Adelaide','South Australia','Australia',5839);
-insert into store (street,city,state,country,post_code) VALUES ('93231 Summerview Hill','Sydney','New South Wales','Australia',1191);
-insert into store (street,city,state,country,post_code) VALUES ('4 Hermina Park','Melbourne','Victoria','Australia',8383);
-insert into store (street,city,state,country,post_code) VALUES ('771 Dwight Road','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('1359 Boyd Center','Sydney','New South Wales','Australia',1028);
-insert into store (street,city,state,country,post_code) VALUES ('4225 Stoughton Pass','Sydney','New South Wales','Australia',1206);
-insert into store (street,city,state,country,post_code) VALUES ('5356 Forest Run Way','Eastern Suburbs Mc','New South Wales','Australia',1315);
-insert into store (street,city,state,country,post_code) VALUES ('929 Buena Vista Avenue','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('992 Sutherland Pass','Sydney','New South Wales','Australia',1120);
-insert into store (street,city,state,country,post_code) VALUES ('808 Sommers Park','Adelaide Mail Centre','South Australia','Australia',5899);
-insert into store (street,city,state,country,post_code) VALUES ('1075 Bonner Road','Eastern Suburbs Mc','New South Wales','Australia',1325);
-insert into store (street,city,state,country,post_code) VALUES ('110 Sauthoff Street','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('657 Main Drive','Adelaide Mail Centre','South Australia','Australia',5889);
-insert into store (street,city,state,country,post_code) VALUES ('7969 Namekagon Center','Launceston','Tasmania','Australia',7916);
-insert into store (street,city,state,country,post_code) VALUES ('9174 Buhler Way','Sydney','New South Wales','Australia',1028);
-insert into store (street,city,state,country,post_code) VALUES ('1 Sutherland Court','Sydney','New South Wales','Australia',1181);
-insert into store (street,city,state,country,post_code) VALUES ('417 Pankratz Park','Adelaide Mail Centre','South Australia','Australia',5889);
-insert into store (street,city,state,country,post_code) VALUES ('22 Carey Road','Sydney','New South Wales','Australia',1028);
-insert into store (street,city,state,country,post_code) VALUES ('5824 Caliangt Parkway','Sydney','New South Wales','Australia',1181);
-insert into store (street,city,state,country,post_code) VALUES ('6207 Hansons Junction','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('99278 Elka Lane','Launceston','Tasmania','Australia',7916);
-insert into store (street,city,state,country,post_code) VALUES ('6957 Maple Wood Pass','Sydney','New South Wales','Australia',1033);
-insert into store (street,city,state,country,post_code) VALUES ('659 Muir Way','Sydney','New South Wales','Australia',1171);
-insert into store (street,city,state,country,post_code) VALUES ('24 Fulton Parkway','Strawberry Hills','New South Wales','Australia',1424);
-insert into store (street,city,state,country,post_code) VALUES ('766 Sachtjen Road','Eastern Suburbs Mc','New South Wales','Australia',1315);
-insert into store (street,city,state,country,post_code) VALUES ('828 Declaration Plaza','Hobart','Tasmania','Australia',7803);
-insert into store (street,city,state,country,post_code) VALUES ('3 Leroy Pass','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('9 Thompson Crossing','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('874 Lyons Plaza','Adelaide Mail Centre','South Australia','Australia',5899);
-insert into store (street,city,state,country,post_code) VALUES ('1 Basil Terrace','Hobart','Tasmania','Australia',7808);
-insert into store (street,city,state,country,post_code) VALUES ('3 Luster Junction','Australia Square','New South Wales','Australia',1213);
-insert into store (street,city,state,country,post_code) VALUES ('8 Ridgeview Plaza','Sydney','New South Wales','Australia',1161);
-insert into store (street,city,state,country,post_code) VALUES ('92 Bellgrove Hill','Brisbane','Queensland','Australia',9010);
-insert into store (street,city,state,country,post_code) VALUES ('92 Lawn Drive','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('5 Roxbury Lane','Strawberry Hills','New South Wales','Australia',1424);
-insert into store (street,city,state,country,post_code) VALUES ('6 3rd Lane','Eastern Suburbs Mc','New South Wales','Australia',1391);
-insert into store (street,city,state,country,post_code) VALUES ('17 Basil Crossing','Hobart','Tasmania','Australia',7803);
-insert into store (street,city,state,country,post_code) VALUES ('0 Longview Road','Sydney','New South Wales','Australia',1206);
-insert into store (street,city,state,country,post_code) VALUES ('15824 Hallows Plaza','Launceston','Tasmania','Australia',7916);
-insert into store (street,city,state,country,post_code) VALUES ('2308 Browning Hill','Melbourne','Victoria','Australia',8383);
-insert into store (street,city,state,country,post_code) VALUES ('4803 Gerald Road','Launceston','Tasmania','Australia',7916);
-insert into store (street,city,state,country,post_code) VALUES ('89 Shasta Lane','Sydney','New South Wales','Australia',1028);
-insert into store (street,city,state,country,post_code) VALUES ('035 John Wall Lane','Adelaide Mail Centre','South Australia','Australia',5899);
-insert into store (street,city,state,country,post_code) VALUES ('80 Hanson Lane','Strawberry Hills','New South Wales','Australia',1424);
-insert into store (street,city,state,country,post_code) VALUES ('22 Helena Point','Sydney','New South Wales','Australia',1043);
-insert into store (street,city,state,country,post_code) VALUES ('46033 Calypso Park','Hobart','Tasmania','Australia',7808);
-insert into store (street,city,state,country,post_code) VALUES ('35648 Kennedy Center','Melbourne','Victoria','Australia',8045);
-insert into store (street,city,state,country,post_code) VALUES ('21 Parkside Hill','Sydney','New South Wales','Australia',1181);
-insert into store (street,city,state,country,post_code) VALUES ('25177 Drewry Junction','Brisbane','Queensland','Australia',9010);
-insert into store (street,city,state,country,post_code) VALUES ('31201 Spenser Circle','Perth','Western Australia','Australia',6843);
-insert into store (street,city,state,country,post_code) VALUES ('68911 Bunting Way','Eastern Suburbs Mc','New South Wales','Australia',1325);
-insert into store (street,city,state,country,post_code) VALUES ('70622 Coleman Terrace','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('44 Pleasure Trail','Sydney','New South Wales','Australia',1206);
-insert into store (street,city,state,country,post_code) VALUES ('464 1st Road','Northern Suburbs Mc','New South Wales','Australia',1694);
-insert into store (street,city,state,country,post_code) VALUES ('306 Fieldstone Trail','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('35093 Oneill Trail','Adelaide Mail Centre','South Australia','Australia',5869);
-insert into store (street,city,state,country,post_code) VALUES ('45202 Doe Crossing Center','Sydney','New South Wales','Australia',1206);
-insert into store (street,city,state,country,post_code) VALUES ('3 Westerfield Parkway','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('303 Sugar Point','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('55413 Gina Alley','Eastern Suburbs Mc','New South Wales','Australia',1315);
-insert into store (street,city,state,country,post_code) VALUES ('972 Elgar Plaza','Sydney','New South Wales','Australia',1009);
-insert into store (street,city,state,country,post_code) VALUES ('63 Express Drive','Sydney','New South Wales','Australia',1028);
-insert into store (street,city,state,country,post_code) VALUES ('267 Shopko Park','Sydney','New South Wales','Australia',1009);
-insert into store (street,city,state,country,post_code) VALUES ('09 Ilene Park','Sydney','New South Wales','Australia',1033);
-insert into store (street,city,state,country,post_code) VALUES ('0 High Crossing Junction','Adelaide Mail Centre','South Australia','Australia',5899);
-insert into store (street,city,state,country,post_code) VALUES ('171 Elgar Park','Sydney','New South Wales','Australia',1028);
-insert into store (street,city,state,country,post_code) VALUES ('7 Buell Court','Adelaide Mail Centre','South Australia','Australia',5899);
-insert into store (street,city,state,country,post_code) VALUES ('7 Caliangt Court','Sydney','New South Wales','Australia',1009);
-insert into store (street,city,state,country,post_code) VALUES ('582 Westerfield Circle','Sydney South','New South Wales','Australia',1235);
-insert into store (street,city,state,country,post_code) VALUES ('4831 Carioca Drive','Sydney','New South Wales','Australia',1028);
-insert into store (street,city,state,country,post_code) VALUES ('5 Corscot Center','Hobart','Tasmania','Australia',7803);
-insert into store (street,city,state,country,post_code) VALUES ('5 Stephen Trail','Melbourne','Victoria','Australia',8045);
-insert into store (street,city,state,country,post_code) VALUES ('9 Bellgrove Lane','Sydney','New South Wales','Australia',1033);
-insert into store (street,city,state,country,post_code) VALUES ('86638 Crest Line Way','Northern Suburbs Mc','New South Wales','Australia',1694);
-insert into store (street,city,state,country,post_code) VALUES ('97421 Mosinee Junction','Adelaide Mail Centre','South Australia','Australia',5869);
-insert into store (street,city,state,country,post_code) VALUES ('76 Main Circle','Sydney','New South Wales','Australia',1181);
-insert into store (street,city,state,country,post_code) VALUES ('742 Tony Circle','Sydney','New South Wales','Australia',1181);
-insert into store (street,city,state,country,post_code) VALUES ('4 Homewood Hill','Strawberry Hills','New South Wales','Australia',1424);
-insert into store (street,city,state,country,post_code) VALUES ('351 Sundown Road','Perth','Western Australia','Australia',6843);
-insert into store (street,city,state,country,post_code) VALUES ('1042 Old Gate Center','Sydney','New South Wales','Australia',1206);
-insert into store (street,city,state,country,post_code) VALUES ('9 Delladonna Court','Strawberry Hills','New South Wales','Australia',1424);
-insert into store (street,city,state,country,post_code) VALUES ('7 School Pass','Melbourne','Victoria','Australia',8383);
-insert into store (street,city,state,country,post_code) VALUES ('4 Sunbrook Drive','Northern Suburbs Mc','New South Wales','Australia',1694);
-insert into store (street,city,state,country,post_code) VALUES ('78509 Jenifer Road','Brisbane','Queensland','Australia',9010);
-insert into store (street,city,state,country,post_code) VALUES ('3623 Stuart Hill','Sydney','New South Wales','Australia',1206);
-insert into store (street,city,state,country,post_code) VALUES ('734 Blackbird Park','Northern Suburbs Mc','New South Wales','Australia',1694);
-insert into store (street,city,state,country,post_code) VALUES ('47 Florence Park','Adelaide','South Australia','Australia',5839);
-insert into store (street,city,state,country,post_code) VALUES ('0 Maryland Circle','Adelaide Mail Centre','South Australia','Australia',5869);
-insert into store (street,city,state,country,post_code) VALUES ('62340 Elmside Drive','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('8 Mesta Pass','Strawberry Hills','New South Wales','Australia',1424);
-insert into store (street,city,state,country,post_code) VALUES ('767 Morning Crossing','Sydney','New South Wales','Australia',1196);
-insert into store (street,city,state,country,post_code) VALUES ('11558 Golden Leaf Park','Sydney','New South Wales','Australia',1181);
-insert into store (street,city,state,country,post_code) VALUES ('297 Tomscot Park','Perth','Western Australia','Australia',6843);
-insert into store (street,city,state,country,post_code) VALUES ('84790 Jana Court','Sydney','New South Wales','Australia',1161);
-insert into store (street,city,state,country,post_code) VALUES ('19 Artisan Way','Eastern Suburbs Mc','New South Wales','Australia',1315);
-insert into store (street,city,state,country,post_code) VALUES ('3824 New Castle Road','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('2253 Glendale Pass','Strawberry Hills','New South Wales','Australia',1424);
-insert into store (street,city,state,country,post_code) VALUES ('06489 Rusk Parkway','Eastern Suburbs Mc','New South Wales','Australia',1325);
-insert into store (street,city,state,country,post_code) VALUES ('1366 Brown Park','Sydney South','New South Wales','Australia',1235);
-insert into store (street,city,state,country,post_code) VALUES ('08076 Lindbergh Lane','Sydney','New South Wales','Australia',1191);
-insert into store (street,city,state,country,post_code) VALUES ('778 Cordelia Drive','Sydney','New South Wales','Australia',1161);
-insert into store (street,city,state,country,post_code) VALUES ('730 Namekagon Street','Melbourne','Victoria','Australia',8383);
-insert into store (street,city,state,country,post_code) VALUES ('62 Columbus Hill','Brisbane','Queensland','Australia',9010);
-insert into store (street,city,state,country,post_code) VALUES ('7 Westend Pass','Sydney','New South Wales','Australia',1161);
-insert into store (street,city,state,country,post_code) VALUES ('9224 Kim Lane','Launceston','Tasmania','Australia',7916);
-insert into store (street,city,state,country,post_code) VALUES ('96 Porter Terrace','Adelaide Mail Centre','South Australia','Australia',5869);
-insert into store (street,city,state,country,post_code) VALUES ('9 Melby Hill','Sydney','New South Wales','Australia',1033);
-insert into store (street,city,state,country,post_code) VALUES ('1 Dorton Pass','Sydney','New South Wales','Australia',1181);
-insert into store (street,city,state,country,post_code) VALUES ('431 Scott Way','Launceston','Tasmania','Australia',7916);
-insert into store (street,city,state,country,post_code) VALUES ('07947 Talisman Plaza','Adelaide Mail Centre','South Australia','Australia',5869);
-insert into store (street,city,state,country,post_code) VALUES ('4288 Di Loreto Place','Melbourne','Victoria','Australia',8383);
-insert into store (street,city,state,country,post_code) VALUES ('0 Twin Pines Park','Adelaide Mail Centre','South Australia','Australia',5899);
-insert into store (street,city,state,country,post_code) VALUES ('878 Schmedeman Court','Sydney','New South Wales','Australia',1181);
-insert into store (street,city,state,country,post_code) VALUES ('9 American Ash Center','Eastern Suburbs Mc','New South Wales','Australia',1315);
-insert into store (street,city,state,country,post_code) VALUES ('0 Grayhawk Avenue','Perth','Western Australia','Australia',6843);
-insert into store (street,city,state,country,post_code) VALUES ('2870 Talmadge Junction','Sydney','New South Wales','Australia',1043);
-insert into store (street,city,state,country,post_code) VALUES ('7 Transport Center','Melbourne','Victoria','Australia',8045);
-insert into store (street,city,state,country,post_code) VALUES ('571 Dayton Road','Adelaide','South Australia','Australia',5839);
-insert into store (street,city,state,country,post_code) VALUES ('83166 Sauthoff Road','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('26 Nevada Way','Adelaide Mail Centre','South Australia','Australia',5889);
-insert into store (street,city,state,country,post_code) VALUES ('93 Hooker Junction','Northern Suburbs Mc','New South Wales','Australia',1694);
-insert into store (street,city,state,country,post_code) VALUES ('87692 Talisman Park','Sydney','New South Wales','Australia',1120);
-insert into store (street,city,state,country,post_code) VALUES ('98 Glendale Road','Sydney','New South Wales','Australia',1140);
-insert into store (street,city,state,country,post_code) VALUES ('751 Kingsford Avenue','Adelaide Mail Centre','South Australia','Australia',5869);
-insert into store (street,city,state,country,post_code) VALUES ('48 Hudson Plaza','Adelaide Mail Centre','South Australia','Australia',5869);
-insert into store (street,city,state,country,post_code) VALUES ('42875 Eastlawn Center','Australia Square','New South Wales','Australia',1213);
-insert into store (street,city,state,country,post_code) VALUES ('54640 Vermont Terrace','Sydney','New South Wales','Australia',1043);
-insert into store (street,city,state,country,post_code) VALUES ('0846 Rieder Pass','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('919 Darwin Crossing','Adelaide Mail Centre','South Australia','Australia',5899);
-insert into store (street,city,state,country,post_code) VALUES ('6653 Northland Avenue','Adelaide Mail Centre','South Australia','Australia',5889);
-insert into store (street,city,state,country,post_code) VALUES ('492 Vermont Hill','Northern Suburbs Mc','New South Wales','Australia',1694);
-insert into store (street,city,state,country,post_code) VALUES ('81615 Miller Way','Sydney South','New South Wales','Australia',1235);
-insert into store (street,city,state,country,post_code) VALUES ('983 Meadow Ridge Street','Australia Square','New South Wales','Australia',1213);
-insert into store (street,city,state,country,post_code) VALUES ('14 Westridge Park','Eastern Suburbs Mc','New South Wales','Australia',1315);
-insert into store (street,city,state,country,post_code) VALUES ('3580 Lyons Junction','Melbourne','Victoria','Australia',8383);
-insert into store (street,city,state,country,post_code) VALUES ('08 Texas Parkway','Sydney South','New South Wales','Australia',1235);
-insert into store (street,city,state,country,post_code) VALUES ('80 Hallows Street','Perth','Western Australia','Australia',6817);
-insert into store (street,city,state,country,post_code) VALUES ('624 Arapahoe Center','Eastern Suburbs Mc','New South Wales','Australia',1391);
-insert into store (street,city,state,country,post_code) VALUES ('589 Paget Street','Adelaide Mail Centre','South Australia','Australia',5899);
-insert into store (street,city,state,country,post_code) VALUES ('05 Fuller Alley','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('0 Huxley Park','Sydney','New South Wales','Australia',1161);
-insert into store (street,city,state,country,post_code) VALUES ('6505 Ohio Circle','Sydney','New South Wales','Australia',1120);
-insert into store (street,city,state,country,post_code) VALUES ('5 Del Sol Hill','Eastern Suburbs Mc','New South Wales','Australia',1391);
-insert into store (street,city,state,country,post_code) VALUES ('8931 Maywood Crossing','Eastern Suburbs Mc','New South Wales','Australia',1315);
-insert into store (street,city,state,country,post_code) VALUES ('4 Bluestem Lane','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('95893 Westridge Avenue','Sydney South','New South Wales','Australia',1235);
-insert into store (street,city,state,country,post_code) VALUES ('07 Debra Way','Northern Suburbs Mc','New South Wales','Australia',1694);
-insert into store (street,city,state,country,post_code) VALUES ('4866 Hermina Pass','Adelaide Mail Centre','South Australia','Australia',5889);
-insert into store (street,city,state,country,post_code) VALUES ('8719 Badeau Street','Sydney','New South Wales','Australia',1028);
-insert into store (street,city,state,country,post_code) VALUES ('6013 Stang Parkway','Sydney','New South Wales','Australia',1191);
-insert into store (street,city,state,country,post_code) VALUES ('27 Dorton Junction','Sydney','New South Wales','Australia',1171);
-insert into store (street,city,state,country,post_code) VALUES ('8 American Ash Trail','Eastern Suburbs Mc','New South Wales','Australia',1315);
-insert into store (street,city,state,country,post_code) VALUES ('4814 Knutson Crossing','Sydney','New South Wales','Australia',1161);
-insert into store (street,city,state,country,post_code) VALUES ('79329 Green Ridge Pass','Sydney','New South Wales','Australia',1196);
-insert into store (street,city,state,country,post_code) VALUES ('23414 Marcy Place','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('1 Scott Pass','Adelaide Mail Centre','South Australia','Australia',5889);
-insert into store (street,city,state,country,post_code) VALUES ('852 Fair Oaks Terrace','Eastern Suburbs Mc','New South Wales','Australia',1315);
-insert into store (street,city,state,country,post_code) VALUES ('66050 Gateway Junction','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('473 Bluejay Street','Sydney','New South Wales','Australia',1033);
-insert into store (street,city,state,country,post_code) VALUES ('33 Rutledge Trail','Sydney','New South Wales','Australia',1161);
-insert into store (street,city,state,country,post_code) VALUES ('7910 Grasskamp Circle','Adelaide Mail Centre','South Australia','Australia',5869);
-insert into store (street,city,state,country,post_code) VALUES ('00 Hanover Place','Sydney','New South Wales','Australia',1181);
-insert into store (street,city,state,country,post_code) VALUES ('04 Messerschmidt Road','Adelaide Mail Centre','South Australia','Australia',5889);
-insert into store (street,city,state,country,post_code) VALUES ('356 Judy Park','Adelaide','South Australia','Australia',5839);
-insert into store (street,city,state,country,post_code) VALUES ('334 Burrows Point','Sydney','New South Wales','Australia',1120);
-insert into store (street,city,state,country,post_code) VALUES ('338 Moose Junction','Eastern Suburbs Mc','New South Wales','Australia',1315);
-insert into store (street,city,state,country,post_code) VALUES ('977 Loftsgordon Parkway','Sydney','New South Wales','Australia',1120);
-insert into store (street,city,state,country,post_code) VALUES ('8324 Declaration Crossing','Melbourne','Victoria','Australia',8045);
-insert into store (street,city,state,country,post_code) VALUES ('6280 Chinook Pass','Sydney','New South Wales','Australia',1206);
-insert into store (street,city,state,country,post_code) VALUES ('32944 Amoth Road','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('88258 Waywood Drive','Sydney','New South Wales','Australia',1181);
-insert into store (street,city,state,country,post_code) VALUES ('364 Stoughton Avenue','Eastern Suburbs Mc','New South Wales','Australia',1391);
-insert into store (street,city,state,country,post_code) VALUES ('30091 Macpherson Drive','Sydney','New South Wales','Australia',1043);
-insert into store (street,city,state,country,post_code) VALUES ('1 Kennedy Junction','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('102 Mayfield Center','Perth','Western Australia','Australia',6817);
-insert into store (street,city,state,country,post_code) VALUES ('098 Cambridge Pass','Sydney','New South Wales','Australia',1140);
-insert into store (street,city,state,country,post_code) VALUES ('1 Barby Way','Adelaide Mail Centre','South Australia','Australia',5874);
-insert into store (street,city,state,country,post_code) VALUES ('81738 Hayes Lane','Hobart','Tasmania','Australia',7808);
-insert into store (street,city,state,country,post_code) VALUES ('67 Mallory Hill','Hobart','Tasmania','Australia',7808);
-insert into store (street,city,state,country,post_code) VALUES ('64 Texas Pass','Sydney','New South Wales','Australia',1191);
-insert into store (street,city,state,country,post_code) VALUES ('5728 Oneill Park','Brisbane','Queensland','Australia',9010);
-insert into store (street,city,state,country,post_code) VALUES ('54 Hansons Pass','Sydney','New South Wales','Australia',1191);
-insert into store (street,city,state,country,post_code) VALUES ('3829 Harbort Way','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('8 Crownhardt Trail','Northern Suburbs Mc','New South Wales','Australia',1694);
-insert into store (street,city,state,country,post_code) VALUES ('12919 Lillian Alley','Sydney','New South Wales','Australia',1028);
-insert into store (street,city,state,country,post_code) VALUES ('94066 Sunbrook Parkway','Adelaide Mail Centre','South Australia','Australia',5899);
-insert into store (street,city,state,country,post_code) VALUES ('08 Spohn Drive','Melbourne','Victoria','Australia',8045);
-insert into store (street,city,state,country,post_code) VALUES ('5 Dunning Alley','Adelaide Mail Centre','South Australia','Australia',5869);
-insert into store (street,city,state,country,post_code) VALUES ('3899 Coolidge Drive','Brisbane','Queensland','Australia',9010);
-insert into store (street,city,state,country,post_code) VALUES ('31 Fairview Way','Sydney South','New South Wales','Australia',1235);
-insert into store (street,city,state,country,post_code) VALUES ('08718 Bay Parkway','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('1010 Butterfield Place','Adelaide Mail Centre','South Australia','Australia',5874);
-insert into store (street,city,state,country,post_code) VALUES ('38 Coolidge Trail','Hobart','Tasmania','Australia',7808);
-insert into store (street,city,state,country,post_code) VALUES ('50102 Schurz Parkway','Sydney','New South Wales','Australia',1196);
-insert into store (street,city,state,country,post_code) VALUES ('12 Clove Park','Hobart','Tasmania','Australia',7808);
-insert into store (street,city,state,country,post_code) VALUES ('48 Nobel Place','Sydney','New South Wales','Australia',1181);
-insert into store (street,city,state,country,post_code) VALUES ('27 Goodland Place','Brisbane','Queensland','Australia',9010);
-insert into store (street,city,state,country,post_code) VALUES ('45 Pleasure Terrace','Perth','Western Australia','Australia',6817);
-insert into store (street,city,state,country,post_code) VALUES ('2781 Warner Lane','Sydney','New South Wales','Australia',1043);
-insert into store (street,city,state,country,post_code) VALUES ('08 Talisman Pass','Australia Square','New South Wales','Australia',1213);
-insert into store (street,city,state,country,post_code) VALUES ('76964 Rockefeller Hill','Sydney','New South Wales','Australia',1028);
-insert into store (street,city,state,country,post_code) VALUES ('54591 Milwaukee Plaza','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('99691 Dunning Terrace','Sydney','New South Wales','Australia',1196);
-insert into store (street,city,state,country,post_code) VALUES ('01 Springview Way','Sydney','New South Wales','Australia',1191);
-insert into store (street,city,state,country,post_code) VALUES ('824 Hooker Court','Melbourne','Victoria','Australia',8383);
-insert into store (street,city,state,country,post_code) VALUES ('304 Scott Plaza','Sydney','New South Wales','Australia',1009);
-insert into store (street,city,state,country,post_code) VALUES ('5 Paget Center','Sydney','New South Wales','Australia',1120);
-insert into store (street,city,state,country,post_code) VALUES ('7870 Butternut Way','Sydney','New South Wales','Australia',1196);
-insert into store (street,city,state,country,post_code) VALUES ('22628 Summit Hill','Sydney','New South Wales','Australia',1140);
-insert into store (street,city,state,country,post_code) VALUES ('7 Sommers Street','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('9 Anzinger Point','Adelaide Mail Centre','South Australia','Australia',5899);
-insert into store (street,city,state,country,post_code) VALUES ('3 Bunker Hill Park','Perth','Western Australia','Australia',6817);
-insert into store (street,city,state,country,post_code) VALUES ('13 Stone Corner Trail','Eastern Suburbs Mc','New South Wales','Australia',1325);
-insert into store (street,city,state,country,post_code) VALUES ('72710 Elka Junction','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('2659 American Plaza','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('02 Green Ridge Circle','Australia Square','New South Wales','Australia',1213);
-insert into store (street,city,state,country,post_code) VALUES ('27227 Maple Wood Terrace','Eastern Suburbs Mc','New South Wales','Australia',1391);
-insert into store (street,city,state,country,post_code) VALUES ('1 Transport Street','Sydney','New South Wales','Australia',1196);
-insert into store (street,city,state,country,post_code) VALUES ('8051 Prentice Trail','Brisbane','Queensland','Australia',9010);
-insert into store (street,city,state,country,post_code) VALUES ('918 Riverside Hill','Sydney','New South Wales','Australia',1009);
-insert into store (street,city,state,country,post_code) VALUES ('70884 New Castle Park','Australia Square','New South Wales','Australia',1213);
-insert into store (street,city,state,country,post_code) VALUES ('7 Dixon Road','Sydney','New South Wales','Australia',1171);
-insert into store (street,city,state,country,post_code) VALUES ('7782 Thackeray Hill','Adelaide Mail Centre','South Australia','Australia',5899);
-insert into store (street,city,state,country,post_code) VALUES ('13795 Northwestern Center','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('4693 Lawn Plaza','Adelaide Mail Centre','South Australia','Australia',5899);
-insert into store (street,city,state,country,post_code) VALUES ('09436 La Follette Parkway','Strawberry Hills','New South Wales','Australia',1424);
-insert into store (street,city,state,country,post_code) VALUES ('284 Glacier Hill Center','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('349 Pawling Road','Adelaide Mail Centre','South Australia','Australia',5889);
-insert into store (street,city,state,country,post_code) VALUES ('4 Heath Street','Sydney','New South Wales','Australia',1028);
-insert into store (street,city,state,country,post_code) VALUES ('99433 Novick Way','Northern Suburbs Mc','New South Wales','Australia',1694);
-insert into store (street,city,state,country,post_code) VALUES ('20483 Dexter Center','Northern Suburbs Mc','New South Wales','Australia',1694);
-insert into store (street,city,state,country,post_code) VALUES ('61 Darwin Drive','Adelaide Mail Centre','South Australia','Australia',5899);
-insert into store (street,city,state,country,post_code) VALUES ('86 Union Avenue','Perth','Western Australia','Australia',6843);
-insert into store (street,city,state,country,post_code) VALUES ('27040 Gerald Drive','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('11 Grover Road','Perth','Western Australia','Australia',6817);
-insert into store (street,city,state,country,post_code) VALUES ('3 Nancy Terrace','Eastern Suburbs Mc','New South Wales','Australia',1391);
-insert into store (street,city,state,country,post_code) VALUES ('73 Maple Park','Sydney','New South Wales','Australia',1140);
-insert into store (street,city,state,country,post_code) VALUES ('76 Anderson Pass','Melbourne','Victoria','Australia',8383);
-insert into store (street,city,state,country,post_code) VALUES ('6224 Glacier Hill Alley','Sydney','New South Wales','Australia',1206);
-insert into store (street,city,state,country,post_code) VALUES ('875 Buena Vista Avenue','Launceston','Tasmania','Australia',7916);
-insert into store (street,city,state,country,post_code) VALUES ('9038 Wayridge Junction','Adelaide','South Australia','Australia',5839);
-insert into store (street,city,state,country,post_code) VALUES ('83011 Stephen Road','Hobart','Tasmania','Australia',7803);
-insert into store (street,city,state,country,post_code) VALUES ('6713 Armistice Way','Strawberry Hills','New South Wales','Australia',1424);
-insert into store (street,city,state,country,post_code) VALUES ('50 Hayes Park','Perth','Western Australia','Australia',6817);
-insert into store (street,city,state,country,post_code) VALUES ('7440 Larry Hill','Sydney','New South Wales','Australia',1161);
-insert into store (street,city,state,country,post_code) VALUES ('8 Forster Avenue','Sydney','New South Wales','Australia',1033);
-insert into store (street,city,state,country,post_code) VALUES ('289 Michigan Road','Sydney','New South Wales','Australia',1033);
-insert into store (street,city,state,country,post_code) VALUES ('8 Grover Parkway','Adelaide Mail Centre','South Australia','Australia',5889);
-insert into store (street,city,state,country,post_code) VALUES ('2 Melby Drive','Eastern Suburbs Mc','New South Wales','Australia',1391);
-insert into store (street,city,state,country,post_code) VALUES ('2212 Rusk Street','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('6 Carioca Crossing','Australia Square','New South Wales','Australia',1213);
-insert into store (street,city,state,country,post_code) VALUES ('58 Florence Alley','Eastern Suburbs Mc','New South Wales','Australia',1391);
-insert into store (street,city,state,country,post_code) VALUES ('035 Jackson Street','Hobart','Tasmania','Australia',7808);
-insert into store (street,city,state,country,post_code) VALUES ('7 Village Green Court','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('592 Basil Avenue','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('419 Weeping Birch Way','Sydney','New South Wales','Australia',1171);
-insert into store (street,city,state,country,post_code) VALUES ('6839 Sunbrook Parkway','Strawberry Hills','New South Wales','Australia',1424);
-insert into store (street,city,state,country,post_code) VALUES ('0135 Lighthouse Bay Lane','Adelaide','South Australia','Australia',5839);
-insert into store (street,city,state,country,post_code) VALUES ('538 Ridgeway Trail','Melbourne','Victoria','Australia',8045);
-insert into store (street,city,state,country,post_code) VALUES ('2 Dovetail Alley','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('7 Ilene Avenue','Sydney','New South Wales','Australia',1196);
-insert into store (street,city,state,country,post_code) VALUES ('6 Susan Circle','Sydney','New South Wales','Australia',1206);
-insert into store (street,city,state,country,post_code) VALUES ('3904 Northland Crossing','Sydney','New South Wales','Australia',1043);
-insert into store (street,city,state,country,post_code) VALUES ('780 Jenna Center','Eastern Suburbs Mc','New South Wales','Australia',1391);
-insert into store (street,city,state,country,post_code) VALUES ('7062 Cordelia Center','Sydney','New South Wales','Australia',1043);
-insert into store (street,city,state,country,post_code) VALUES ('05 Larry Terrace','Launceston','Tasmania','Australia',7916);
-insert into store (street,city,state,country,post_code) VALUES ('337 3rd Drive','Sydney South','New South Wales','Australia',1235);
-insert into store (street,city,state,country,post_code) VALUES ('2 Center Way','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('37864 Esker Terrace','Perth','Western Australia','Australia',6817);
-insert into store (street,city,state,country,post_code) VALUES ('27 Ludington Park','Eastern Suburbs Mc','New South Wales','Australia',1391);
-insert into store (street,city,state,country,post_code) VALUES ('5 Goodland Drive','Adelaide','South Australia','Australia',5839);
-insert into store (street,city,state,country,post_code) VALUES ('68676 Meadow Ridge Parkway','Eastern Suburbs Mc','New South Wales','Australia',1391);
-insert into store (street,city,state,country,post_code) VALUES ('72 Declaration Terrace','Perth','Western Australia','Australia',6843);
-insert into store (street,city,state,country,post_code) VALUES ('15 Raven Hill','Adelaide','South Australia','Australia',5839);
-insert into store (street,city,state,country,post_code) VALUES ('09352 Walton Hill','Hobart','Tasmania','Australia',7803);
-insert into store (street,city,state,country,post_code) VALUES ('35199 American Park','Sydney','New South Wales','Australia',1196);
-insert into store (street,city,state,country,post_code) VALUES ('4506 Chinook Court','Sydney South','New South Wales','Australia',1235);
-insert into store (street,city,state,country,post_code) VALUES ('8023 Michigan Court','Sydney','New South Wales','Australia',1161);
-insert into store (street,city,state,country,post_code) VALUES ('09 Hermina Center','Sydney','New South Wales','Australia',1043);
-insert into store (street,city,state,country,post_code) VALUES ('2151 Eagle Crest Hill','Eastern Suburbs Mc','New South Wales','Australia',1325);
-insert into store (street,city,state,country,post_code) VALUES ('920 Autumn Leaf Place','Sydney','New South Wales','Australia',1009);
-insert into store (street,city,state,country,post_code) VALUES ('79 Moulton Alley','Adelaide','South Australia','Australia',5839);
-insert into store (street,city,state,country,post_code) VALUES ('42 Carioca Alley','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('36 Ryan Way','Sydney','New South Wales','Australia',1191);
-insert into store (street,city,state,country,post_code) VALUES ('211 Hintze Parkway','Sydney','New South Wales','Australia',1191);
-insert into store (street,city,state,country,post_code) VALUES ('8 Bartillon Avenue','Sydney','New South Wales','Australia',1191);
-insert into store (street,city,state,country,post_code) VALUES ('6460 Buhler Street','Launceston','Tasmania','Australia',7916);
-insert into store (street,city,state,country,post_code) VALUES ('7901 Scott Way','Sydney','New South Wales','Australia',1028);
-insert into store (street,city,state,country,post_code) VALUES ('0 Forest Dale Terrace','Perth','Western Australia','Australia',6817);
-insert into store (street,city,state,country,post_code) VALUES ('2729 Browning Place','Adelaide Mail Centre','South Australia','Australia',5874);
-insert into store (street,city,state,country,post_code) VALUES ('0 Boyd Parkway','Eastern Suburbs Mc','New South Wales','Australia',1315);
-insert into store (street,city,state,country,post_code) VALUES ('347 Elmside Crossing','Sydney','New South Wales','Australia',1120);
-insert into store (street,city,state,country,post_code) VALUES ('49 Tennyson Terrace','Sydney','New South Wales','Australia',1191);
-insert into store (street,city,state,country,post_code) VALUES ('2 Maywood Plaza','Adelaide Mail Centre','South Australia','Australia',5869);
-insert into store (street,city,state,country,post_code) VALUES ('1732 Burrows Parkway','Sydney','New South Wales','Australia',1181);
-insert into store (street,city,state,country,post_code) VALUES ('898 Montana Trail','Adelaide Mail Centre','South Australia','Australia',5899);
-insert into store (street,city,state,country,post_code) VALUES ('8 Corben Lane','Sydney','New South Wales','Australia',1028);
-insert into store (street,city,state,country,post_code) VALUES ('7 Northridge Way','Melbourne','Victoria','Australia',8383);
-insert into store (street,city,state,country,post_code) VALUES ('309 Pennsylvania Trail','Hobart','Tasmania','Australia',7808);
-insert into store (street,city,state,country,post_code) VALUES ('7 Hoffman Trail','Hobart','Tasmania','Australia',7808);
-insert into store (street,city,state,country,post_code) VALUES ('59153 Melby Street','Sydney','New South Wales','Australia',1140);
-insert into store (street,city,state,country,post_code) VALUES ('408 Lindbergh Way','Sydney','New South Wales','Australia',1161);
-insert into store (street,city,state,country,post_code) VALUES ('5659 Bobwhite Pass','Northern Suburbs Mc','New South Wales','Australia',1694);
-insert into store (street,city,state,country,post_code) VALUES ('08 Arrowood Avenue','Sydney','New South Wales','Australia',1206);
-insert into store (street,city,state,country,post_code) VALUES ('814 Chinook Pass','Hobart','Tasmania','Australia',7803);
-insert into store (street,city,state,country,post_code) VALUES ('44500 Jay Junction','Sydney','New South Wales','Australia',1181);
-insert into store (street,city,state,country,post_code) VALUES ('51269 Jay Street','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('0209 Saint Paul Terrace','Eastern Suburbs Mc','New South Wales','Australia',1325);
-insert into store (street,city,state,country,post_code) VALUES ('61084 Dottie Parkway','Strawberry Hills','New South Wales','Australia',1424);
-insert into store (street,city,state,country,post_code) VALUES ('4 Sachtjen Point','Perth','Western Australia','Australia',6817);
-insert into store (street,city,state,country,post_code) VALUES ('112 Kipling Road','Sydney','New South Wales','Australia',1043);
-insert into store (street,city,state,country,post_code) VALUES ('52580 Maple Wood Plaza','Sydney','New South Wales','Australia',1196);
-insert into store (street,city,state,country,post_code) VALUES ('71 Maryland Trail','Australia Square','New South Wales','Australia',1213);
-insert into store (street,city,state,country,post_code) VALUES ('133 Arapahoe Hill','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('88 Merry Way','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('52 Sunfield Alley','Sydney','New South Wales','Australia',1009);
-insert into store (street,city,state,country,post_code) VALUES ('690 Clarendon Center','Strawberry Hills','New South Wales','Australia',1424);
-insert into store (street,city,state,country,post_code) VALUES ('33 Katie Pass','Sydney','New South Wales','Australia',1196);
-insert into store (street,city,state,country,post_code) VALUES ('34638 School Junction','Sydney','New South Wales','Australia',1196);
-insert into store (street,city,state,country,post_code) VALUES ('99809 Elka Drive','Adelaide','South Australia','Australia',5839);
-insert into store (street,city,state,country,post_code) VALUES ('068 Roxbury Parkway','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('31 Lindbergh Plaza','Sydney','New South Wales','Australia',1181);
-insert into store (street,city,state,country,post_code) VALUES ('95087 Holy Cross Lane','Sydney','New South Wales','Australia',1009);
-insert into store (street,city,state,country,post_code) VALUES ('54 Waxwing Junction','Brisbane','Queensland','Australia',9010);
-insert into store (street,city,state,country,post_code) VALUES ('3 Vernon Pass','Australia Square','New South Wales','Australia',1213);
-insert into store (street,city,state,country,post_code) VALUES ('2385 Daystar Way','Sydney','New South Wales','Australia',1028);
-insert into store (street,city,state,country,post_code) VALUES ('98 Northfield Avenue','Launceston','Tasmania','Australia',7916);
-insert into store (street,city,state,country,post_code) VALUES ('95 Huxley Place','Sydney','New South Wales','Australia',1206);
-insert into store (street,city,state,country,post_code) VALUES ('1 Annamark Crossing','Adelaide Mail Centre','South Australia','Australia',5889);
-insert into store (street,city,state,country,post_code) VALUES ('1478 Hallows Court','Brisbane','Queensland','Australia',9010);
-insert into store (street,city,state,country,post_code) VALUES ('98 Chive Avenue','Sydney','New South Wales','Australia',1191);
-insert into store (street,city,state,country,post_code) VALUES ('42789 Lyons Hill','Sydney','New South Wales','Australia',1043);
-insert into store (street,city,state,country,post_code) VALUES ('6 Packers Avenue','Adelaide Mail Centre','South Australia','Australia',5869);
-insert into store (street,city,state,country,post_code) VALUES ('71518 Talisman Circle','Adelaide Mail Centre','South Australia','Australia',5874);
-insert into store (street,city,state,country,post_code) VALUES ('36069 Gulseth Drive','Sydney','New South Wales','Australia',1043);
-insert into store (street,city,state,country,post_code) VALUES ('7 Ruskin Place','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('55 Steensland Avenue','Sydney','New South Wales','Australia',1206);
-insert into store (street,city,state,country,post_code) VALUES ('1038 Glendale Plaza','Adelaide Mail Centre','South Australia','Australia',5874);
-insert into store (street,city,state,country,post_code) VALUES ('976 Michigan Terrace','Adelaide Mail Centre','South Australia','Australia',5899);
-insert into store (street,city,state,country,post_code) VALUES ('2233 Green Crossing','Adelaide Mail Centre','South Australia','Australia',5899);
-insert into store (street,city,state,country,post_code) VALUES ('2602 Elgar Park','Strawberry Hills','New South Wales','Australia',1424);
-insert into store (street,city,state,country,post_code) VALUES ('919 Glendale Alley','Adelaide Mail Centre','South Australia','Australia',5869);
-insert into store (street,city,state,country,post_code) VALUES ('9687 Sherman Hill','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('5 Anhalt Avenue','Sydney','New South Wales','Australia',1161);
-insert into store (street,city,state,country,post_code) VALUES ('579 5th Place','Sydney','New South Wales','Australia',1161);
-insert into store (street,city,state,country,post_code) VALUES ('74757 Pankratz Plaza','Sydney','New South Wales','Australia',1196);
-insert into store (street,city,state,country,post_code) VALUES ('08342 Mayfield Circle','Melbourne','Victoria','Australia',8383);
-insert into store (street,city,state,country,post_code) VALUES ('71102 Declaration Circle','Sydney South','New South Wales','Australia',1235);
-insert into store (street,city,state,country,post_code) VALUES ('09 Gale Court','Australia Square','New South Wales','Australia',1213);
-insert into store (street,city,state,country,post_code) VALUES ('91871 Trailsway Alley','Eastern Suburbs Mc','New South Wales','Australia',1391);
-insert into store (street,city,state,country,post_code) VALUES ('22368 Ryan Avenue','Adelaide Mail Centre','South Australia','Australia',5899);
-insert into store (street,city,state,country,post_code) VALUES ('276 Barby Avenue','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('6382 Dorton Street','Eastern Suburbs Mc','New South Wales','Australia',1315);
-insert into store (street,city,state,country,post_code) VALUES ('40 Killdeer Lane','Perth','Western Australia','Australia',6817);
-insert into store (street,city,state,country,post_code) VALUES ('4882 Claremont Hill','Brisbane','Queensland','Australia',9010);
-insert into store (street,city,state,country,post_code) VALUES ('5 South Alley','Adelaide Mail Centre','South Australia','Australia',5874);
-insert into store (street,city,state,country,post_code) VALUES ('222 Ludington Hill','Sydney','New South Wales','Australia',1033);
-insert into store (street,city,state,country,post_code) VALUES ('27 Glendale Junction','Sydney','New South Wales','Australia',1171);
-insert into store (street,city,state,country,post_code) VALUES ('35084 Chive Park','Sydney','New South Wales','Australia',1171);
-insert into store (street,city,state,country,post_code) VALUES ('22206 Katie Place','Adelaide','South Australia','Australia',5839);
-insert into store (street,city,state,country,post_code) VALUES ('6 Park Meadow Junction','Launceston','Tasmania','Australia',7916);
-insert into store (street,city,state,country,post_code) VALUES ('6 Summer Ridge Avenue','Melbourne','Victoria','Australia',8045);
-insert into store (street,city,state,country,post_code) VALUES ('373 Commercial Place','Adelaide Mail Centre','South Australia','Australia',5889);
-insert into store (street,city,state,country,post_code) VALUES ('18 Welch Alley','Adelaide Mail Centre','South Australia','Australia',5869);
-insert into store (street,city,state,country,post_code) VALUES ('3 Oriole Terrace','Perth','Western Australia','Australia',6817);
-insert into store (street,city,state,country,post_code) VALUES ('73531 Goodland Point','Sydney','New South Wales','Australia',1009);
-insert into store (street,city,state,country,post_code) VALUES ('493 Susan Parkway','Strawberry Hills','New South Wales','Australia',1424);
-insert into store (street,city,state,country,post_code) VALUES ('45 Del Sol Way','Eastern Suburbs Mc','New South Wales','Australia',1315);
-insert into store (street,city,state,country,post_code) VALUES ('2 Judy Hill','Australia Square','New South Wales','Australia',1213);
-insert into store (street,city,state,country,post_code) VALUES ('15992 Logan Avenue','Sydney','New South Wales','Australia',1043);
-insert into store (street,city,state,country,post_code) VALUES ('89 Morningstar Trail','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('51733 Muir Hill','Sydney','New South Wales','Australia',1191);
-insert into store (street,city,state,country,post_code) VALUES ('9 Dryden Trail','Melbourne','Victoria','Australia',8383);
-insert into store (street,city,state,country,post_code) VALUES ('45 Portage Trail','Adelaide','South Australia','Australia',5839);
-insert into store (street,city,state,country,post_code) VALUES ('212 Maryland Alley','Sydney','New South Wales','Australia',1140);
-insert into store (street,city,state,country,post_code) VALUES ('3629 Grover Lane','Sydney','New South Wales','Australia',1028);
-insert into store (street,city,state,country,post_code) VALUES ('0 Laurel Center','Perth','Western Australia','Australia',6843);
-insert into store (street,city,state,country,post_code) VALUES ('76 Onsgard Crossing','Australia Square','New South Wales','Australia',1213);
-insert into store (street,city,state,country,post_code) VALUES ('038 Anhalt Drive','Northern Suburbs Mc','New South Wales','Australia',1694);
-insert into store (street,city,state,country,post_code) VALUES ('8118 Eastwood Road','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('034 Roxbury Alley','Sydney','New South Wales','Australia',1191);
-insert into store (street,city,state,country,post_code) VALUES ('005 Portage Terrace','Sydney','New South Wales','Australia',1043);
-insert into store (street,city,state,country,post_code) VALUES ('57296 Petterle Trail','Sydney','New South Wales','Australia',1033);
-insert into store (street,city,state,country,post_code) VALUES ('9 Saint Paul Terrace','Adelaide','South Australia','Australia',5839);
-insert into store (street,city,state,country,post_code) VALUES ('52 Anderson Junction','Launceston','Tasmania','Australia',7916);
-insert into store (street,city,state,country,post_code) VALUES ('5 Eastlawn Plaza','Sydney','New South Wales','Australia',1043);
-insert into store (street,city,state,country,post_code) VALUES ('9 Kipling Trail','Sydney','New South Wales','Australia',1009);
-insert into store (street,city,state,country,post_code) VALUES ('4 Westport Drive','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('62323 Southridge Circle','Adelaide Mail Centre','South Australia','Australia',5899);
-insert into store (street,city,state,country,post_code) VALUES ('16388 Dawn Lane','Launceston','Tasmania','Australia',7916);
-insert into store (street,city,state,country,post_code) VALUES ('68395 Steensland Way','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('1 Monica Alley','Sydney','New South Wales','Australia',1196);
-insert into store (street,city,state,country,post_code) VALUES ('453 Prairieview Plaza','Melbourne','Victoria','Australia',8383);
-insert into store (street,city,state,country,post_code) VALUES ('24474 Hallows Pass','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('83 Caliangt Junction','Sydney','New South Wales','Australia',1161);
-insert into store (street,city,state,country,post_code) VALUES ('3053 Pawling Drive','Perth','Western Australia','Australia',6843);
-insert into store (street,city,state,country,post_code) VALUES ('6891 Dottie Drive','Hobart','Tasmania','Australia',7808);
-insert into store (street,city,state,country,post_code) VALUES ('899 Ohio Circle','Sydney','New South Wales','Australia',1191);
-insert into store (street,city,state,country,post_code) VALUES ('6 South Way','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('3 Northview Junction','Adelaide Mail Centre','South Australia','Australia',5874);
-insert into store (street,city,state,country,post_code) VALUES ('36908 Mesta Parkway','Perth','Western Australia','Australia',6817);
-insert into store (street,city,state,country,post_code) VALUES ('6 Bluestem Parkway','Sydney','New South Wales','Australia',1120);
-insert into store (street,city,state,country,post_code) VALUES ('099 Straubel Lane','Sydney South','New South Wales','Australia',1235);
-insert into store (street,city,state,country,post_code) VALUES ('833 Brentwood Trail','Melbourne','Victoria','Australia',8383);
-insert into store (street,city,state,country,post_code) VALUES ('234 Calypso Crossing','Perth','Western Australia','Australia',6843);
-insert into store (street,city,state,country,post_code) VALUES ('19 Darwin Lane','Sydney','New South Wales','Australia',1191);
-insert into store (street,city,state,country,post_code) VALUES ('75542 Vidon Drive','Adelaide','South Australia','Australia',5839);
-insert into store (street,city,state,country,post_code) VALUES ('3 Rieder Alley','Melbourne','Victoria','Australia',8045);
-insert into store (street,city,state,country,post_code) VALUES ('651 Riverside Drive','Launceston','Tasmania','Australia',7916);
-insert into store (street,city,state,country,post_code) VALUES ('1136 Blackbird Road','Eastern Suburbs Mc','New South Wales','Australia',1391);
-insert into store (street,city,state,country,post_code) VALUES ('694 Prairie Rose Park','Sydney','New South Wales','Australia',1043);
-insert into store (street,city,state,country,post_code) VALUES ('923 Jay Hill','Sydney','New South Wales','Australia',1206);
-insert into store (street,city,state,country,post_code) VALUES ('33 Rockefeller Circle','Adelaide Mail Centre','South Australia','Australia',5869);
-insert into store (street,city,state,country,post_code) VALUES ('4407 Union Terrace','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('4871 Morning Road','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('416 Twin Pines Parkway','Strawberry Hills','New South Wales','Australia',1424);
-insert into store (street,city,state,country,post_code) VALUES ('91 Vahlen Hill','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('43377 Roth Junction','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('72250 Buhler Alley','Strawberry Hills','New South Wales','Australia',1424);
-insert into store (street,city,state,country,post_code) VALUES ('4 Boyd Drive','Sydney','New South Wales','Australia',1206);
-insert into store (street,city,state,country,post_code) VALUES ('30 Prairie Rose Parkway','Perth','Western Australia','Australia',6843);
-insert into store (street,city,state,country,post_code) VALUES ('401 La Follette Hill','Adelaide Mail Centre','South Australia','Australia',5874);
-insert into store (street,city,state,country,post_code) VALUES ('362 Vermont Trail','Sydney','New South Wales','Australia',1033);
-insert into store (street,city,state,country,post_code) VALUES ('282 Utah Parkway','Hobart','Tasmania','Australia',7803);
-insert into store (street,city,state,country,post_code) VALUES ('976 Farragut Point','Melbourne','Victoria','Australia',8383);
-insert into store (street,city,state,country,post_code) VALUES ('3 Straubel Junction','Adelaide Mail Centre','South Australia','Australia',5899);
-insert into store (street,city,state,country,post_code) VALUES ('3 Jenifer Lane','Sydney','New South Wales','Australia',1140);
-insert into store (street,city,state,country,post_code) VALUES ('92 Homewood Terrace','Eastern Suburbs Mc','New South Wales','Australia',1391);
-insert into store (street,city,state,country,post_code) VALUES ('02 Utah Junction','Eastern Suburbs Mc','New South Wales','Australia',1391);
-insert into store (street,city,state,country,post_code) VALUES ('1 Straubel Pass','Sydney','New South Wales','Australia',1043);
-insert into store (street,city,state,country,post_code) VALUES ('3595 Portage Place','Sydney','New South Wales','Australia',1191);
-insert into store (street,city,state,country,post_code) VALUES ('42 Heffernan Court','Sydney','New South Wales','Australia',1120);
-insert into store (street,city,state,country,post_code) VALUES ('3 Summit Circle','Sydney','New South Wales','Australia',1033);
-insert into store (street,city,state,country,post_code) VALUES ('9 Orin Lane','Eastern Suburbs Mc','New South Wales','Australia',1391);
-insert into store (street,city,state,country,post_code) VALUES ('815 Declaration Street','Sydney','New South Wales','Australia',1140);
-insert into store (street,city,state,country,post_code) VALUES ('4277 Jana Alley','Sydney','New South Wales','Australia',1120);
-insert into store (street,city,state,country,post_code) VALUES ('60 Hagan Crossing','Perth','Western Australia','Australia',6843);
-insert into store (street,city,state,country,post_code) VALUES ('95538 Grover Circle','Sydney','New South Wales','Australia',1120);
-insert into store (street,city,state,country,post_code) VALUES ('989 Sauthoff Crossing','Adelaide Mail Centre','South Australia','Australia',5899);
-insert into store (street,city,state,country,post_code) VALUES ('4 Heath Crossing','Northern Suburbs Mc','New South Wales','Australia',1694);
-insert into store (street,city,state,country,post_code) VALUES ('1 Dottie Place','Adelaide Mail Centre','South Australia','Australia',5874);
-insert into store (street,city,state,country,post_code) VALUES ('36 Sauthoff Hill','Sydney','New South Wales','Australia',1161);
-insert into store (street,city,state,country,post_code) VALUES ('409 Cordelia Parkway','Adelaide Mail Centre','South Australia','Australia',5889);
-insert into store (street,city,state,country,post_code) VALUES ('04 Almo Parkway','Australia Square','New South Wales','Australia',1213);
-insert into store (street,city,state,country,post_code) VALUES ('9174 Sachs Point','Adelaide Mail Centre','South Australia','Australia',5869);
-insert into store (street,city,state,country,post_code) VALUES ('32 Moland Park','Sydney','New South Wales','Australia',1043);
-insert into store (street,city,state,country,post_code) VALUES ('39385 Sauthoff Drive','Eastern Suburbs Mc','New South Wales','Australia',1315);
-insert into store (street,city,state,country,post_code) VALUES ('32 Oak Circle','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('0 Talisman Trail','Sydney','New South Wales','Australia',1009);
-insert into store (street,city,state,country,post_code) VALUES ('1 Del Mar Trail','Adelaide Mail Centre','South Australia','Australia',5899);
-insert into store (street,city,state,country,post_code) VALUES ('90 Lunder Street','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('64404 Welch Street','Sydney','New South Wales','Australia',1140);
-insert into store (street,city,state,country,post_code) VALUES ('05 Kings Center','Sydney','New South Wales','Australia',1028);
-insert into store (street,city,state,country,post_code) VALUES ('888 Reindahl Avenue','Hobart','Tasmania','Australia',7808);
-insert into store (street,city,state,country,post_code) VALUES ('41 Ruskin Way','Australia Square','New South Wales','Australia',1213);
-insert into store (street,city,state,country,post_code) VALUES ('601 Truax Terrace','Sydney','New South Wales','Australia',1171);
-insert into store (street,city,state,country,post_code) VALUES ('4 Schiller Lane','Strawberry Hills','New South Wales','Australia',1424);
-insert into store (street,city,state,country,post_code) VALUES ('4 Talmadge Road','Hobart','Tasmania','Australia',7808);
-insert into store (street,city,state,country,post_code) VALUES ('87 Steensland Street','Sydney','New South Wales','Australia',1043);
-insert into store (street,city,state,country,post_code) VALUES ('9 Milwaukee Trail','Sydney','New South Wales','Australia',1181);
-insert into store (street,city,state,country,post_code) VALUES ('085 Tennessee Trail','Adelaide Mail Centre','South Australia','Australia',5899);
-insert into store (street,city,state,country,post_code) VALUES ('5978 Mesta Drive','Sydney','New South Wales','Australia',1161);
-insert into store (street,city,state,country,post_code) VALUES ('32 Oxford Plaza','Northern Suburbs Mc','New South Wales','Australia',1694);
-insert into store (street,city,state,country,post_code) VALUES ('6203 Rusk Lane','Hobart','Tasmania','Australia',7803);
-insert into store (street,city,state,country,post_code) VALUES ('6507 Park Meadow Pass','Sydney','New South Wales','Australia',1043);
-insert into store (street,city,state,country,post_code) VALUES ('70010 Artisan Road','Perth','Western Australia','Australia',6817);
-insert into store (street,city,state,country,post_code) VALUES ('36315 Center Pass','Strawberry Hills','New South Wales','Australia',1424);
-insert into store (street,city,state,country,post_code) VALUES ('9280 Petterle Trail','Strawberry Hills','New South Wales','Australia',1424);
-insert into store (street,city,state,country,post_code) VALUES ('230 Del Mar Terrace','Hobart','Tasmania','Australia',7803);
-insert into store (street,city,state,country,post_code) VALUES ('0 Browning Court','Sydney','New South Wales','Australia',1120);
-insert into store (street,city,state,country,post_code) VALUES ('57 Dexter Pass','Adelaide Mail Centre','South Australia','Australia',5899);
-insert into store (street,city,state,country,post_code) VALUES ('0654 Johnson Parkway','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('9112 Arizona Trail','Melbourne','Victoria','Australia',8383);
-insert into store (street,city,state,country,post_code) VALUES ('25250 Manitowish Road','Melbourne','Victoria','Australia',8383);
-insert into store (street,city,state,country,post_code) VALUES ('8 Northfield Place','Brisbane','Queensland','Australia',9010);
-insert into store (street,city,state,country,post_code) VALUES ('151 Stuart Hill','Hobart','Tasmania','Australia',7808);
-insert into store (street,city,state,country,post_code) VALUES ('51314 Lillian Lane','Sydney','New South Wales','Australia',1181);
-insert into store (street,city,state,country,post_code) VALUES ('033 Florence Place','Adelaide','South Australia','Australia',5839);
-insert into store (street,city,state,country,post_code) VALUES ('32 Menomonie Circle','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('1604 Namekagon Junction','Sydney','New South Wales','Australia',1043);
-insert into store (street,city,state,country,post_code) VALUES ('4 Gale Plaza','Adelaide Mail Centre','South Australia','Australia',5889);
-insert into store (street,city,state,country,post_code) VALUES ('5452 Spaight Place','Northern Suburbs Mc','New South Wales','Australia',1694);
-insert into store (street,city,state,country,post_code) VALUES ('85898 Derek Point','Sydney','New South Wales','Australia',1140);
-insert into store (street,city,state,country,post_code) VALUES ('4 Cody Way','Eastern Suburbs Mc','New South Wales','Australia',1315);
-insert into store (street,city,state,country,post_code) VALUES ('945 Eagle Crest Crossing','Hobart','Tasmania','Australia',7803);
-insert into store (street,city,state,country,post_code) VALUES ('99 Summerview Road','Northern Suburbs Mc','New South Wales','Australia',1694);
-insert into store (street,city,state,country,post_code) VALUES ('35 Mandrake Place','Adelaide Mail Centre','South Australia','Australia',5869);
-insert into store (street,city,state,country,post_code) VALUES ('117 Heffernan Road','Sydney','New South Wales','Australia',1009);
-insert into store (street,city,state,country,post_code) VALUES ('146 Johnson Crossing','Sydney','New South Wales','Australia',1206);
-insert into store (street,city,state,country,post_code) VALUES ('57079 Kings Park','Sydney','New South Wales','Australia',1191);
-insert into store (street,city,state,country,post_code) VALUES ('51706 Vera Street','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('4 Fordem Pass','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('4509 Kinsman Hill','Adelaide Mail Centre','South Australia','Australia',5889);
-insert into store (street,city,state,country,post_code) VALUES ('7117 La Follette Junction','Sydney','New South Wales','Australia',1171);
-insert into store (street,city,state,country,post_code) VALUES ('063 Waywood Way','Sydney South','New South Wales','Australia',1235);
-insert into store (street,city,state,country,post_code) VALUES ('94 Magdeline Hill','Perth','Western Australia','Australia',6843);
-insert into store (street,city,state,country,post_code) VALUES ('93 Service Avenue','Sydney','New South Wales','Australia',1181);
-insert into store (street,city,state,country,post_code) VALUES ('21 Talmadge Plaza','Melbourne','Victoria','Australia',8383);
-insert into store (street,city,state,country,post_code) VALUES ('8 Lawn Road','Hobart','Tasmania','Australia',7808);
-insert into store (street,city,state,country,post_code) VALUES ('4807 Old Gate Center','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('3077 Bunting Terrace','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('86084 Maywood Place','Sydney','New South Wales','Australia',1140);
-insert into store (street,city,state,country,post_code) VALUES ('3 Hooker Plaza','Sydney','New South Wales','Australia',1196);
-insert into store (street,city,state,country,post_code) VALUES ('015 Eastlawn Crossing','Northern Suburbs Mc','New South Wales','Australia',1694);
-insert into store (street,city,state,country,post_code) VALUES ('61 Harper Terrace','Launceston','Tasmania','Australia',7916);
-insert into store (street,city,state,country,post_code) VALUES ('0 Dawn Center','Sydney','New South Wales','Australia',1140);
-insert into store (street,city,state,country,post_code) VALUES ('74 Armistice Lane','Melbourne','Victoria','Australia',8045);
-insert into store (street,city,state,country,post_code) VALUES ('76 Farmco Alley','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('03553 Fisk Court','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('777 Monterey Drive','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('48534 Sachs Court','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('84240 Alpine Court','Northern Suburbs Mc','New South Wales','Australia',1694);
-insert into store (street,city,state,country,post_code) VALUES ('44 Summit Circle','Sydney South','New South Wales','Australia',1235);
-insert into store (street,city,state,country,post_code) VALUES ('0 Ohio Pass','Eastern Suburbs Mc','New South Wales','Australia',1391);
-insert into store (street,city,state,country,post_code) VALUES ('36 Caliangt Court','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('05 Blue Bill Park Hill','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('2 Old Shore Parkway','Melbourne','Victoria','Australia',8045);
-insert into store (street,city,state,country,post_code) VALUES ('215 Claremont Center','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('170 Continental Avenue','Eastern Suburbs Mc','New South Wales','Australia',1325);
-insert into store (street,city,state,country,post_code) VALUES ('23 Dwight Drive','Sydney South','New South Wales','Australia',1235);
-insert into store (street,city,state,country,post_code) VALUES ('6 Waubesa Lane','Eastern Suburbs Mc','New South Wales','Australia',1325);
-insert into store (street,city,state,country,post_code) VALUES ('05753 Lawn Trail','Eastern Suburbs Mc','New South Wales','Australia',1315);
-insert into store (street,city,state,country,post_code) VALUES ('5307 Parkside Center','Eastern Suburbs Mc','New South Wales','Australia',1391);
-insert into store (street,city,state,country,post_code) VALUES ('9 Briar Crest Terrace','Sydney','New South Wales','Australia',1028);
-insert into store (street,city,state,country,post_code) VALUES ('50 Cascade Trail','Adelaide','South Australia','Australia',5839);
-insert into store (street,city,state,country,post_code) VALUES ('9 Carpenter Terrace','Perth','Western Australia','Australia',6843);
-insert into store (street,city,state,country,post_code) VALUES ('3873 Tomscot Road','Strawberry Hills','New South Wales','Australia',1424);
-insert into store (street,city,state,country,post_code) VALUES ('9475 Chinook Alley','Melbourne','Victoria','Australia',8383);
-insert into store (street,city,state,country,post_code) VALUES ('830 Dennis Crossing','Australia Square','New South Wales','Australia',1213);
-insert into store (street,city,state,country,post_code) VALUES ('51768 Red Cloud Alley','Sydney','New South Wales','Australia',1120);
-insert into store (street,city,state,country,post_code) VALUES ('0734 Riverside Crossing','Adelaide Mail Centre','South Australia','Australia',5869);
-insert into store (street,city,state,country,post_code) VALUES ('301 Shoshone Crossing','Eastern Suburbs Mc','New South Wales','Australia',1315);
-insert into store (street,city,state,country,post_code) VALUES ('06 Transport Street','Melbourne','Victoria','Australia',8383);
-insert into store (street,city,state,country,post_code) VALUES ('06 Vernon Point','Sydney','New South Wales','Australia',1009);
-insert into store (street,city,state,country,post_code) VALUES ('7748 Victoria Hill','Hobart','Tasmania','Australia',7808);
-insert into store (street,city,state,country,post_code) VALUES ('71 Havey Lane','Eastern Suburbs Mc','New South Wales','Australia',1325);
-insert into store (street,city,state,country,post_code) VALUES ('9 Utah Center','Sydney','New South Wales','Australia',1120);
-insert into store (street,city,state,country,post_code) VALUES ('820 Golden Leaf Way','Strawberry Hills','New South Wales','Australia',1424);
-insert into store (street,city,state,country,post_code) VALUES ('100 Evergreen Crossing','Adelaide Mail Centre','South Australia','Australia',5889);
-insert into store (street,city,state,country,post_code) VALUES ('531 Coleman Point','Perth','Western Australia','Australia',6843);
-insert into store (street,city,state,country,post_code) VALUES ('8 Scofield Circle','Adelaide Mail Centre','South Australia','Australia',5869);
-insert into store (street,city,state,country,post_code) VALUES ('6 Susan Hill','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('1 Bellgrove Avenue','Sydney','New South Wales','Australia',1140);
-insert into store (street,city,state,country,post_code) VALUES ('40 Orin Alley','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('8 Lighthouse Bay Way','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('68187 Elgar Avenue','Launceston','Tasmania','Australia',7916);
-insert into store (street,city,state,country,post_code) VALUES ('319 Upham Junction','Sydney South','New South Wales','Australia',1235);
-insert into store (street,city,state,country,post_code) VALUES ('8 Fisk Parkway','Melbourne','Victoria','Australia',8383);
-insert into store (street,city,state,country,post_code) VALUES ('3 Nova Alley','Adelaide Mail Centre','South Australia','Australia',5874);
-insert into store (street,city,state,country,post_code) VALUES ('5 Basil Junction','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('4 Little Fleur Center','Sydney','New South Wales','Australia',1161);
-insert into store (street,city,state,country,post_code) VALUES ('3415 Delladonna Way','Eastern Suburbs Mc','New South Wales','Australia',1391);
-insert into store (street,city,state,country,post_code) VALUES ('5368 Memorial Terrace','Sydney','New South Wales','Australia',1033);
-insert into store (street,city,state,country,post_code) VALUES ('15 Sage Hill','Melbourne','Victoria','Australia',8045);
-insert into store (street,city,state,country,post_code) VALUES ('6 Valley Edge Drive','Sydney South','New South Wales','Australia',1235);
-insert into store (street,city,state,country,post_code) VALUES ('00677 Debra Way','Adelaide','South Australia','Australia',5839);
-insert into store (street,city,state,country,post_code) VALUES ('9 Shoshone Trail','Sydney','New South Wales','Australia',1033);
-insert into store (street,city,state,country,post_code) VALUES ('47876 La Follette Alley','Adelaide Mail Centre','South Australia','Australia',5889);
-insert into store (street,city,state,country,post_code) VALUES ('7 Daystar Junction','Sydney','New South Wales','Australia',1196);
-insert into store (street,city,state,country,post_code) VALUES ('936 Cottonwood Street','Launceston','Tasmania','Australia',7916);
-insert into store (street,city,state,country,post_code) VALUES ('99 Moulton Hill','Sydney','New South Wales','Australia',1206);
-insert into store (street,city,state,country,post_code) VALUES ('335 Kinsman Junction','Australia Square','New South Wales','Australia',1213);
-insert into store (street,city,state,country,post_code) VALUES ('8 Roxbury Road','Melbourne','Victoria','Australia',8045);
-insert into store (street,city,state,country,post_code) VALUES ('2763 Stang Crossing','Adelaide Mail Centre','South Australia','Australia',5874);
-insert into store (street,city,state,country,post_code) VALUES ('374 Ohio Road','Melbourne','Victoria','Australia',8045);
-insert into store (street,city,state,country,post_code) VALUES ('990 Redwing Center','Australia Square','New South Wales','Australia',1213);
-insert into store (street,city,state,country,post_code) VALUES ('50 Lakeland Hill','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('47 Mccormick Point','Adelaide Mail Centre','South Australia','Australia',5874);
-insert into store (street,city,state,country,post_code) VALUES ('124 Randy Drive','Eastern Suburbs Mc','New South Wales','Australia',1391);
-insert into store (street,city,state,country,post_code) VALUES ('3 5th Park','Adelaide Mail Centre','South Australia','Australia',5874);
-insert into store (street,city,state,country,post_code) VALUES ('6391 Springview Plaza','Melbourne','Victoria','Australia',8045);
-insert into store (street,city,state,country,post_code) VALUES ('014 Paget Terrace','Sydney','New South Wales','Australia',1181);
-insert into store (street,city,state,country,post_code) VALUES ('06057 Manufacturers Circle','Brisbane','Queensland','Australia',9010);
-insert into store (street,city,state,country,post_code) VALUES ('33 Prairie Rose Alley','Sydney','New South Wales','Australia',1206);
-insert into store (street,city,state,country,post_code) VALUES ('3360 Rieder Pass','Hobart','Tasmania','Australia',7803);
-insert into store (street,city,state,country,post_code) VALUES ('0 Hazelcrest Hill','Eastern Suburbs Mc','New South Wales','Australia',1391);
-insert into store (street,city,state,country,post_code) VALUES ('482 Pearson Street','Adelaide Mail Centre','South Australia','Australia',5899);
-insert into store (street,city,state,country,post_code) VALUES ('1 Holmberg Terrace','Sydney','New South Wales','Australia',1120);
-insert into store (street,city,state,country,post_code) VALUES ('238 Eggendart Lane','Brisbane','Queensland','Australia',9010);
-insert into store (street,city,state,country,post_code) VALUES ('7 Longview Trail','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('8163 Ohio Place','Adelaide Mail Centre','South Australia','Australia',5869);
-insert into store (street,city,state,country,post_code) VALUES ('08342 Schiller Crossing','Australia Square','New South Wales','Australia',1213);
-insert into store (street,city,state,country,post_code) VALUES ('92 Westend Crossing','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('3677 Fieldstone Terrace','Eastern Suburbs Mc','New South Wales','Australia',1325);
-insert into store (street,city,state,country,post_code) VALUES ('05 Springs Avenue','Sydney','New South Wales','Australia',1191);
-insert into store (street,city,state,country,post_code) VALUES ('339 Division Hill','Launceston','Tasmania','Australia',7916);
-insert into store (street,city,state,country,post_code) VALUES ('67 Cody Terrace','Adelaide Mail Centre','South Australia','Australia',5889);
-insert into store (street,city,state,country,post_code) VALUES ('7423 Sullivan Hill','Sydney','New South Wales','Australia',1033);
-insert into store (street,city,state,country,post_code) VALUES ('72 Debs Way','Sydney','New South Wales','Australia',1009);
-insert into store (street,city,state,country,post_code) VALUES ('1901 Grover Plaza','Australia Square','New South Wales','Australia',1213);
-insert into store (street,city,state,country,post_code) VALUES ('336 Leroy Pass','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('730 Victoria Crossing','Sydney','New South Wales','Australia',1033);
-insert into store (street,city,state,country,post_code) VALUES ('36 Corben Terrace','Eastern Suburbs Mc','New South Wales','Australia',1325);
-insert into store (street,city,state,country,post_code) VALUES ('078 Delaware Way','Sydney','New South Wales','Australia',1009);
-insert into store (street,city,state,country,post_code) VALUES ('24 Columbus Hill','Hobart','Tasmania','Australia',7808);
-insert into store (street,city,state,country,post_code) VALUES ('8070 American Ash Parkway','Sydney','New South Wales','Australia',1033);
-insert into store (street,city,state,country,post_code) VALUES ('047 Main Parkway','Perth','Western Australia','Australia',6817);
-insert into store (street,city,state,country,post_code) VALUES ('48 Florence Point','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('83612 Graceland Junction','Eastern Suburbs Mc','New South Wales','Australia',1391);
-insert into store (street,city,state,country,post_code) VALUES ('9 Reinke Crossing','Launceston','Tasmania','Australia',7916);
-insert into store (street,city,state,country,post_code) VALUES ('291 Butterfield Way','Melbourne','Victoria','Australia',8383);
-insert into store (street,city,state,country,post_code) VALUES ('86 Swallow Way','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('48822 Linden Terrace','Sydney','New South Wales','Australia',1196);
-insert into store (street,city,state,country,post_code) VALUES ('1181 Farragut Plaza','Sydney','New South Wales','Australia',1206);
-insert into store (street,city,state,country,post_code) VALUES ('17 Arizona Lane','Perth','Western Australia','Australia',6817);
-insert into store (street,city,state,country,post_code) VALUES ('36 Blackbird Road','Eastern Suburbs Mc','New South Wales','Australia',1315);
-insert into store (street,city,state,country,post_code) VALUES ('20 Amoth Crossing','Launceston','Tasmania','Australia',7916);
-insert into store (street,city,state,country,post_code) VALUES ('052 Russell Court','Adelaide','South Australia','Australia',5839);
-insert into store (street,city,state,country,post_code) VALUES ('053 Northport Place','Northern Suburbs Mc','New South Wales','Australia',1694);
-insert into store (street,city,state,country,post_code) VALUES ('67775 Marcy Pass','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('225 Anthes Road','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('840 Annamark Circle','Sydney South','New South Wales','Australia',1235);
-insert into store (street,city,state,country,post_code) VALUES ('35 Dexter Parkway','Eastern Suburbs Mc','New South Wales','Australia',1315);
-insert into store (street,city,state,country,post_code) VALUES ('31 Shasta Avenue','Sydney South','New South Wales','Australia',1235);
-insert into store (street,city,state,country,post_code) VALUES ('4 Mitchell Center','Northern Suburbs Mc','New South Wales','Australia',1694);
-insert into store (street,city,state,country,post_code) VALUES ('2435 Delaware Circle','Eastern Suburbs Mc','New South Wales','Australia',1315);
-insert into store (street,city,state,country,post_code) VALUES ('38 Menomonie Court','Northern Suburbs Mc','New South Wales','Australia',1694);
-insert into store (street,city,state,country,post_code) VALUES ('2305 Spohn Road','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('7 Mayfield Drive','Sydney','New South Wales','Australia',1191);
-insert into store (street,city,state,country,post_code) VALUES ('2 Thompson Court','Perth','Western Australia','Australia',6843);
-insert into store (street,city,state,country,post_code) VALUES ('51155 Meadow Ridge Trail','Hobart','Tasmania','Australia',7803);
-insert into store (street,city,state,country,post_code) VALUES ('54971 Browning Park','Northern Suburbs Mc','New South Wales','Australia',1694);
-insert into store (street,city,state,country,post_code) VALUES ('2026 Cherokee Trail','Sydney','New South Wales','Australia',1033);
-insert into store (street,city,state,country,post_code) VALUES ('450 Quincy Parkway','Adelaide Mail Centre','South Australia','Australia',5874);
-insert into store (street,city,state,country,post_code) VALUES ('080 Welch Terrace','Eastern Suburbs Mc','New South Wales','Australia',1315);
-insert into store (street,city,state,country,post_code) VALUES ('86 Arrowood Center','Sydney','New South Wales','Australia',1171);
-insert into store (street,city,state,country,post_code) VALUES ('5 Knutson Avenue','Strawberry Hills','New South Wales','Australia',1424);
-insert into store (street,city,state,country,post_code) VALUES ('528 Harper Place','Australia Square','New South Wales','Australia',1213);
-insert into store (street,city,state,country,post_code) VALUES ('5 Farmco Crossing','Sydney','New South Wales','Australia',1196);
-insert into store (street,city,state,country,post_code) VALUES ('64470 Shelley Parkway','Hobart','Tasmania','Australia',7808);
-insert into store (street,city,state,country,post_code) VALUES ('80538 Crest Line Center','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('17898 Kropf Crossing','Launceston','Tasmania','Australia',7916);
-insert into store (street,city,state,country,post_code) VALUES ('2577 Scoville Circle','Strawberry Hills','New South Wales','Australia',1424);
-insert into store (street,city,state,country,post_code) VALUES ('12705 Rockefeller Hill','Sydney','New South Wales','Australia',1206);
-insert into store (street,city,state,country,post_code) VALUES ('2212 Bay Lane','Adelaide','South Australia','Australia',5839);
-insert into store (street,city,state,country,post_code) VALUES ('23 Ramsey Trail','Sydney','New South Wales','Australia',1009);
-insert into store (street,city,state,country,post_code) VALUES ('32 Jackson Avenue','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('766 Manley Center','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('72229 Duke Road','Sydney','New South Wales','Australia',1181);
-insert into store (street,city,state,country,post_code) VALUES ('29 Westport Lane','Sydney','New South Wales','Australia',1033);
-insert into store (street,city,state,country,post_code) VALUES ('98 Mosinee Plaza','Strawberry Hills','New South Wales','Australia',1424);
-insert into store (street,city,state,country,post_code) VALUES ('5916 Schlimgen Park','Sydney','New South Wales','Australia',1161);
-insert into store (street,city,state,country,post_code) VALUES ('9 Union Parkway','Hobart','Tasmania','Australia',7808);
-insert into store (street,city,state,country,post_code) VALUES ('21 Russell Place','Sydney','New South Wales','Australia',1196);
-insert into store (street,city,state,country,post_code) VALUES ('8932 Glacier Hill Plaza','Northern Suburbs Mc','New South Wales','Australia',1694);
-insert into store (street,city,state,country,post_code) VALUES ('681 Gerald Lane','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('14603 Scott Alley','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('64 Tennyson Street','Sydney','New South Wales','Australia',1043);
-insert into store (street,city,state,country,post_code) VALUES ('281 Upham Crossing','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('09 Emmet Terrace','Launceston','Tasmania','Australia',7916);
-insert into store (street,city,state,country,post_code) VALUES ('243 Granby Hill','Sydney','New South Wales','Australia',1171);
-insert into store (street,city,state,country,post_code) VALUES ('07834 Shopko Drive','Perth','Western Australia','Australia',6843);
-insert into store (street,city,state,country,post_code) VALUES ('59 Spohn Park','Sydney','New South Wales','Australia',1161);
-insert into store (street,city,state,country,post_code) VALUES ('7 Anzinger Point','Northern Suburbs Mc','New South Wales','Australia',1694);
-insert into store (street,city,state,country,post_code) VALUES ('893 Tennessee Junction','Sydney South','New South Wales','Australia',1235);
-insert into store (street,city,state,country,post_code) VALUES ('1484 Sachs Circle','Sydney','New South Wales','Australia',1009);
-insert into store (street,city,state,country,post_code) VALUES ('603 Monterey Plaza','Sydney','New South Wales','Australia',1181);
-insert into store (street,city,state,country,post_code) VALUES ('05 Sunfield Hill','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('572 Melby Court','Perth','Western Australia','Australia',6817);
-insert into store (street,city,state,country,post_code) VALUES ('154 Manitowish Drive','Northern Suburbs Mc','New South Wales','Australia',1694);
-insert into store (street,city,state,country,post_code) VALUES ('9 7th Park','Sydney South','New South Wales','Australia',1235);
-insert into store (street,city,state,country,post_code) VALUES ('86188 Spohn Park','Sydney','New South Wales','Australia',1191);
-insert into store (street,city,state,country,post_code) VALUES ('2506 Luster Road','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('89161 Tony Circle','Sydney','New South Wales','Australia',1206);
-insert into store (street,city,state,country,post_code) VALUES ('8 Declaration Point','Perth','Western Australia','Australia',6817);
-insert into store (street,city,state,country,post_code) VALUES ('1676 Jana Circle','Sydney','New South Wales','Australia',1196);
-insert into store (street,city,state,country,post_code) VALUES ('70 Artisan Circle','Sydney','New South Wales','Australia',1196);
-insert into store (street,city,state,country,post_code) VALUES ('9 Twin Pines Parkway','Sydney','New South Wales','Australia',1028);
-insert into store (street,city,state,country,post_code) VALUES ('67469 Pennsylvania Trail','Brisbane','Queensland','Australia',9010);
-insert into store (street,city,state,country,post_code) VALUES ('11785 Grover Hill','Brisbane','Queensland','Australia',9010);
-insert into store (street,city,state,country,post_code) VALUES ('41507 Clyde Gallagher Avenue','Hobart','Tasmania','Australia',7803);
-insert into store (street,city,state,country,post_code) VALUES ('9 Cardinal Pass','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('9 Fremont Terrace','Eastern Suburbs Mc','New South Wales','Australia',1315);
-insert into store (street,city,state,country,post_code) VALUES ('34080 Elmside Plaza','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('753 Harper Terrace','Sydney','New South Wales','Australia',1009);
-insert into store (street,city,state,country,post_code) VALUES ('964 Sauthoff Plaza','Adelaide Mail Centre','South Australia','Australia',5899);
-insert into store (street,city,state,country,post_code) VALUES ('25 Holy Cross Terrace','Adelaide Mail Centre','South Australia','Australia',5889);
-insert into store (street,city,state,country,post_code) VALUES ('38315 Eliot Drive','Adelaide Mail Centre','South Australia','Australia',5869);
-insert into store (street,city,state,country,post_code) VALUES ('4 Schmedeman Alley','Sydney','New South Wales','Australia',1191);
-insert into store (street,city,state,country,post_code) VALUES ('6720 Toban Parkway','Sydney','New South Wales','Australia',1120);
-insert into store (street,city,state,country,post_code) VALUES ('347 Independence Center','Eastern Suburbs Mc','New South Wales','Australia',1325);
-insert into store (street,city,state,country,post_code) VALUES ('0682 Little Fleur Alley','Eastern Suburbs Mc','New South Wales','Australia',1315);
-insert into store (street,city,state,country,post_code) VALUES ('5 Barby Hill','Melbourne','Victoria','Australia',8045);
-insert into store (street,city,state,country,post_code) VALUES ('3670 Burrows Circle','Sydney','New South Wales','Australia',1120);
-insert into store (street,city,state,country,post_code) VALUES ('3908 Bunting Terrace','Adelaide Mail Centre','South Australia','Australia',5874);
-insert into store (street,city,state,country,post_code) VALUES ('0242 Sherman Junction','Perth','Western Australia','Australia',6817);
-insert into store (street,city,state,country,post_code) VALUES ('92 Hoepker Drive','Sydney','New South Wales','Australia',1161);
-insert into store (street,city,state,country,post_code) VALUES ('7863 Maple Wood Circle','Sydney','New South Wales','Australia',1181);
-insert into store (street,city,state,country,post_code) VALUES ('71 Maple Wood Alley','Adelaide Mail Centre','South Australia','Australia',5869);
-insert into store (street,city,state,country,post_code) VALUES ('7 Mccormick Street','Eastern Suburbs Mc','New South Wales','Australia',1391);
-insert into store (street,city,state,country,post_code) VALUES ('07 Prairie Rose Avenue','Australia Square','New South Wales','Australia',1213);
-insert into store (street,city,state,country,post_code) VALUES ('7097 Pine View Junction','Sydney','New South Wales','Australia',1043);
-insert into store (street,city,state,country,post_code) VALUES ('05 Tennyson Park','Perth','Western Australia','Australia',6817);
-insert into store (street,city,state,country,post_code) VALUES ('52 Esch Drive','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('62588 Crownhardt Street','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('51 Glacier Hill Court','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('12525 Manitowish Circle','Melbourne','Victoria','Australia',8045);
-insert into store (street,city,state,country,post_code) VALUES ('4242 Meadow Valley Avenue','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('864 Scofield Junction','Sydney','New South Wales','Australia',1171);
-insert into store (street,city,state,country,post_code) VALUES ('88 Esch Road','Hobart','Tasmania','Australia',7803);
-insert into store (street,city,state,country,post_code) VALUES ('2 South Plaza','Perth','Western Australia','Australia',6843);
-insert into store (street,city,state,country,post_code) VALUES ('30 Crowley Place','Sydney','New South Wales','Australia',1161);
-insert into store (street,city,state,country,post_code) VALUES ('371 Bonner Parkway','Northern Suburbs Mc','New South Wales','Australia',1694);
-insert into store (street,city,state,country,post_code) VALUES ('3 Thierer Parkway','Melbourne','Victoria','Australia',8045);
-insert into store (street,city,state,country,post_code) VALUES ('0 Havey Crossing','Sydney','New South Wales','Australia',1161);
-insert into store (street,city,state,country,post_code) VALUES ('64 Esch Road','Perth','Western Australia','Australia',6817);
-insert into store (street,city,state,country,post_code) VALUES ('8224 Homewood Center','Brisbane','Queensland','Australia',9010);
-insert into store (street,city,state,country,post_code) VALUES ('60 Atwood Center','Sydney','New South Wales','Australia',1181);
-insert into store (street,city,state,country,post_code) VALUES ('6857 Raven Terrace','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('5 Lakewood Gardens Way','Brisbane','Queensland','Australia',9010);
-insert into store (street,city,state,country,post_code) VALUES ('6565 Independence Hill','Brisbane','Queensland','Australia',9010);
-insert into store (street,city,state,country,post_code) VALUES ('6919 Lindbergh Terrace','Brisbane','Queensland','Australia',9010);
-insert into store (street,city,state,country,post_code) VALUES ('77 Riverside Center','Strawberry Hills','New South Wales','Australia',1424);
-insert into store (street,city,state,country,post_code) VALUES ('061 Maywood Terrace','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('13197 Bultman Trail','Adelaide Mail Centre','South Australia','Australia',5869);
-insert into store (street,city,state,country,post_code) VALUES ('10338 Butternut Road','Perth','Western Australia','Australia',6843);
-insert into store (street,city,state,country,post_code) VALUES ('78277 Lyons Street','Brisbane','Queensland','Australia',9010);
-insert into store (street,city,state,country,post_code) VALUES ('690 Katie Place','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('94729 Lotheville Junction','Sydney South','New South Wales','Australia',1235);
-insert into store (street,city,state,country,post_code) VALUES ('49197 Hanover Alley','Hobart','Tasmania','Australia',7808);
-insert into store (street,city,state,country,post_code) VALUES ('10106 Waywood Hill','Sydney','New South Wales','Australia',1191);
-insert into store (street,city,state,country,post_code) VALUES ('84 Westport Hill','Hobart','Tasmania','Australia',7803);
-insert into store (street,city,state,country,post_code) VALUES ('5069 Union Point','Sydney','New South Wales','Australia',1191);
-insert into store (street,city,state,country,post_code) VALUES ('5 Logan Alley','Sydney','New South Wales','Australia',1009);
-insert into store (street,city,state,country,post_code) VALUES ('09 Oak Park','Sydney','New South Wales','Australia',1196);
-insert into store (street,city,state,country,post_code) VALUES ('4515 Rusk Street','Sydney','New South Wales','Australia',1009);
-insert into store (street,city,state,country,post_code) VALUES ('250 Moulton Crossing','Adelaide','South Australia','Australia',5839);
-insert into store (street,city,state,country,post_code) VALUES ('94022 Sauthoff Plaza','Hobart','Tasmania','Australia',7803);
-insert into store (street,city,state,country,post_code) VALUES ('518 Stone Corner Circle','Sydney','New South Wales','Australia',1161);
-insert into store (street,city,state,country,post_code) VALUES ('32 Ridgeview Parkway','Sydney South','New South Wales','Australia',1235);
-insert into store (street,city,state,country,post_code) VALUES ('2207 Center Street','Sydney','New South Wales','Australia',1009);
-insert into store (street,city,state,country,post_code) VALUES ('3 Sachs Drive','Perth','Western Australia','Australia',6817);
-insert into store (street,city,state,country,post_code) VALUES ('91 Pleasure Road','Eastern Suburbs Mc','New South Wales','Australia',1325);
-insert into store (street,city,state,country,post_code) VALUES ('80 Tony Hill','Eastern Suburbs Mc','New South Wales','Australia',1391);
-insert into store (street,city,state,country,post_code) VALUES ('82 Alpine Court','Sydney','New South Wales','Australia',1120);
-insert into store (street,city,state,country,post_code) VALUES ('2 Hoffman Center','Sydney','New South Wales','Australia',1206);
-insert into store (street,city,state,country,post_code) VALUES ('912 Arrowood Alley','Adelaide Mail Centre','South Australia','Australia',5889);
-insert into store (street,city,state,country,post_code) VALUES ('74612 Ohio Terrace','Adelaide Mail Centre','South Australia','Australia',5874);
-insert into store (street,city,state,country,post_code) VALUES ('6349 Longview Place','Adelaide Mail Centre','South Australia','Australia',5874);
-insert into store (street,city,state,country,post_code) VALUES ('85762 Nevada Road','Adelaide','South Australia','Australia',5839);
-insert into store (street,city,state,country,post_code) VALUES ('2 Carioca Way','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('0 Kim Pass','Eastern Suburbs Mc','New South Wales','Australia',1325);
-insert into store (street,city,state,country,post_code) VALUES ('64 Hooker Court','Strawberry Hills','New South Wales','Australia',1424);
-insert into store (street,city,state,country,post_code) VALUES ('2692 Eliot Terrace','Eastern Suburbs Mc','New South Wales','Australia',1391);
-insert into store (street,city,state,country,post_code) VALUES ('807 Melrose Way','Sydney','New South Wales','Australia',1191);
-insert into store (street,city,state,country,post_code) VALUES ('83465 Blue Bill Park Trail','Sydney','New South Wales','Australia',1043);
-insert into store (street,city,state,country,post_code) VALUES ('04358 Utah Parkway','Hobart','Tasmania','Australia',7808);
-insert into store (street,city,state,country,post_code) VALUES ('25 Hermina Junction','Adelaide Mail Centre','South Australia','Australia',5889);
-insert into store (street,city,state,country,post_code) VALUES ('61 Thierer Alley','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('6107 East Crossing','Perth','Western Australia','Australia',6817);
-insert into store (street,city,state,country,post_code) VALUES ('31319 Erie Hill','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('7 Old Shore Junction','Sydney','New South Wales','Australia',1009);
-insert into store (street,city,state,country,post_code) VALUES ('4 Monica Plaza','Sydney','New South Wales','Australia',1181);
-insert into store (street,city,state,country,post_code) VALUES ('23 Browning Plaza','Adelaide Mail Centre','South Australia','Australia',5899);
-insert into store (street,city,state,country,post_code) VALUES ('8 Butternut Trail','Perth','Western Australia','Australia',6843);
-insert into store (street,city,state,country,post_code) VALUES ('8814 Ridgeview Road','Sydney','New South Wales','Australia',1161);
-insert into store (street,city,state,country,post_code) VALUES ('82820 Helena Hill','Melbourne','Victoria','Australia',8045);
-insert into store (street,city,state,country,post_code) VALUES ('8061 Debs Center','Eastern Suburbs Mc','New South Wales','Australia',1315);
-insert into store (street,city,state,country,post_code) VALUES ('8600 Hooker Plaza','Sydney','New South Wales','Australia',1033);
-insert into store (street,city,state,country,post_code) VALUES ('1 Pierstorff Terrace','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('25 Warbler Crossing','Adelaide','South Australia','Australia',5839);
-insert into store (street,city,state,country,post_code) VALUES ('9645 Myrtle Road','Launceston','Tasmania','Australia',7916);
-insert into store (street,city,state,country,post_code) VALUES ('0491 Kings Drive','Eastern Suburbs Mc','New South Wales','Australia',1325);
-insert into store (street,city,state,country,post_code) VALUES ('3729 Dexter Crossing','Adelaide Mail Centre','South Australia','Australia',5899);
-insert into store (street,city,state,country,post_code) VALUES ('14449 Fairfield Lane','Hobart','Tasmania','Australia',7808);
-insert into store (street,city,state,country,post_code) VALUES ('34 Washington Center','Launceston','Tasmania','Australia',7916);
-insert into store (street,city,state,country,post_code) VALUES ('298 Gerald Center','Eastern Suburbs Mc','New South Wales','Australia',1325);
-insert into store (street,city,state,country,post_code) VALUES ('66540 Golden Leaf Plaza','Sydney','New South Wales','Australia',1120);
-insert into store (street,city,state,country,post_code) VALUES ('4 Victoria Trail','Sydney','New South Wales','Australia',1181);
-insert into store (street,city,state,country,post_code) VALUES ('41 Buhler Parkway','Sydney South','New South Wales','Australia',1235);
-insert into store (street,city,state,country,post_code) VALUES ('85 Marquette Pass','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('92963 High Crossing Plaza','Eastern Suburbs Mc','New South Wales','Australia',1315);
-insert into store (street,city,state,country,post_code) VALUES ('0394 Hoffman Terrace','Sydney','New South Wales','Australia',1196);
-insert into store (street,city,state,country,post_code) VALUES ('06 Reinke Crossing','Sydney','New South Wales','Australia',1171);
-insert into store (street,city,state,country,post_code) VALUES ('8217 Maple Wood Circle','Sydney','New South Wales','Australia',1140);
-insert into store (street,city,state,country,post_code) VALUES ('87898 Holmberg Park','Sydney','New South Wales','Australia',1109);
-insert into store (street,city,state,country,post_code) VALUES ('71251 Anzinger Pass','Sydney','New South Wales','Australia',1028);
-insert into store (street,city,state,country,post_code) VALUES ('89 Mallory Court','Sydney','New South Wales','Australia',1033);
-insert into store (street,city,state,country,post_code) VALUES ('06 Talisman Park','Perth','Western Australia','Australia',6817);
-insert into store (street,city,state,country,post_code) VALUES ('241 Prentice Street','Sydney','New South Wales','Australia',1196);
-insert into store (street,city,state,country,post_code) VALUES ('702 Upham Alley','Sydney','New South Wales','Australia',1043);
-insert into store (street,city,state,country,post_code) VALUES ('41219 Memorial Center','Sydney','New South Wales','Australia',1161);
-insert into store (street,city,state,country,post_code) VALUES ('25 Dennis Avenue','Adelaide Mail Centre','South Australia','Australia',5874);
-insert into store (street,city,state,country,post_code) VALUES ('232 Oakridge Junction','Melbourne','Victoria','Australia',8383);
-insert into store (street,city,state,country,post_code) VALUES ('9 Burrows Lane','Melbourne','Victoria','Australia',8045);
-insert into store (street,city,state,country,post_code) VALUES ('60644 Cascade Pass','Sydney','New South Wales','Australia',1033);
-insert into store (street,city,state,country,post_code) VALUES ('98 Alpine Circle','Hobart','Tasmania','Australia',7803);
-insert into store (street,city,state,country,post_code) VALUES ('8 Mcbride Circle','Adelaide Mail Centre','South Australia','Australia',5889);
-insert into store (street,city,state,country,post_code) VALUES ('9 American Ash Road','Sydney','New South Wales','Australia',1161);
-insert into store (street,city,state,country,post_code) VALUES ('282 Fairfield Park','Hobart','Tasmania','Australia',7808);
-insert into store (street,city,state,country,post_code) VALUES ('529 Stephen Center','Eastern Suburbs Mc','New South Wales','Australia',1391);
-insert into store (street,city,state,country,post_code) VALUES ('664 Mayer Court','Sydney','New South Wales','Australia',1206);
-insert into store (street,city,state,country,post_code) VALUES ('2297 Commercial Terrace','Sydney','New South Wales','Australia',1033);
-insert into store (street,city,state,country,post_code) VALUES ('6 Katie Drive','Adelaide Mail Centre','South Australia','Australia',5874);
-insert into store (street,city,state,country,post_code) VALUES ('9 Roxbury Park','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('819 Buell Court','Australia Square','New South Wales','Australia',1213);
-insert into store (street,city,state,country,post_code) VALUES ('8 Autumn Leaf Circle','Northern Suburbs Mc','New South Wales','Australia',1694);
-insert into store (street,city,state,country,post_code) VALUES ('3080 Butterfield Pass','Perth','Western Australia','Australia',6817);
-insert into store (street,city,state,country,post_code) VALUES ('19802 Talmadge Place','Strawberry Hills','New South Wales','Australia',1424);
-insert into store (street,city,state,country,post_code) VALUES ('81246 Shoshone Junction','Sydney','New South Wales','Australia',1196);
-insert into store (street,city,state,country,post_code) VALUES ('16539 Dovetail Crossing','Sydney','New South Wales','Australia',1033);
-insert into store (street,city,state,country,post_code) VALUES ('0 Hooker Plaza','Sydney','New South Wales','Australia',1134);
-insert into store (street,city,state,country,post_code) VALUES ('311 Nova Court','Adelaide Mail Centre','South Australia','Australia',5874);
-insert into store (street,city,state,country,post_code) VALUES ('8080 Straubel Pass','Perth','Western Australia','Australia',6843);
-insert into store (street,city,state,country,post_code) VALUES ('0555 Declaration Parkway','Adelaide Mail Centre','South Australia','Australia',5869);
-insert into store (street,city,state,country,post_code) VALUES ('61565 Kings Hill','Adelaide Mail Centre','South Australia','Australia',5889);
-insert into store (street,city,state,country,post_code) VALUES ('09645 Kingsford Way','Perth','Western Australia','Australia',6843);
-insert into store (street,city,state,country,post_code) VALUES ('3 Esker Parkway','Adelaide Mail Centre','South Australia','Australia',5874);
-insert into store (street,city,state,country,post_code) VALUES ('2957 Hovde Point','Adelaide Mail Centre','South Australia','Australia',5874);
-insert into store (street,city,state,country,post_code) VALUES ('806 Lunder Plaza','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('7919 Westend Hill','Brisbane','Queensland','Australia',9010);
-insert into store (street,city,state,country,post_code) VALUES ('553 Banding Street','Sydney South','New South Wales','Australia',1235);
-insert into store (street,city,state,country,post_code) VALUES ('8 Eliot Way','Adelaide Mail Centre','South Australia','Australia',5869);
-insert into store (street,city,state,country,post_code) VALUES ('0747 Mendota Hill','Adelaide Mail Centre','South Australia','Australia',5889);
-insert into store (street,city,state,country,post_code) VALUES ('607 Mendota Crossing','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('7 Menomonie Street','Perth','Western Australia','Australia',6843);
-insert into store (street,city,state,country,post_code) VALUES ('768 Sauthoff Street','Adelaide Mail Centre','South Australia','Australia',5869);
-insert into store (street,city,state,country,post_code) VALUES ('87 Kenwood Terrace','Melbourne','Victoria','Australia',8383);
-insert into store (street,city,state,country,post_code) VALUES ('971 Pond Point','Sydney','New South Wales','Australia',1028);
-insert into store (street,city,state,country,post_code) VALUES ('6 Sage Place','Sydney','New South Wales','Australia',1181);
-insert into store (street,city,state,country,post_code) VALUES ('78 Fieldstone Place','Sydney','New South Wales','Australia',1171);
-insert into store (street,city,state,country,post_code) VALUES ('9 Mallory Trail','Sydney','New South Wales','Australia',1120);
-insert into store (street,city,state,country,post_code) VALUES ('5 Independence Point','Eastern Suburbs Mc','New South Wales','Australia',1325);
-insert into store (street,city,state,country,post_code) VALUES ('108 Graceland Place','Northern Suburbs Mc','New South Wales','Australia',1694);
-insert into store (street,city,state,country,post_code) VALUES ('87277 Manitowish Road','Eastern Suburbs Mc','New South Wales','Australia',1325);
-insert into store (street,city,state,country,post_code) VALUES ('093 Redwing Road','Launceston','Tasmania','Australia',7916);
-insert into store (street,city,state,country,post_code) VALUES ('7954 Sutherland Crossing','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('77 Kings Junction','Adelaide Mail Centre','South Australia','Australia',5889);
-insert into store (street,city,state,country,post_code) VALUES ('843 Tony Terrace','Sydney','New South Wales','Australia',1206);
-insert into store (street,city,state,country,post_code) VALUES ('703 Florence Lane','Sydney','New South Wales','Australia',1130);
-insert into store (street,city,state,country,post_code) VALUES ('29 Farwell Park','Sydney','New South Wales','Australia',1196);
-insert into store (street,city,state,country,post_code) VALUES ('05085 Bonner Court','Adelaide Mail Centre','South Australia','Australia',5899);
-insert into store (street,city,state,country,post_code) VALUES ('8 Transport Park','Adelaide Mail Centre','South Australia','Australia',5869);
-insert into store (street,city,state,country,post_code) VALUES ('8 Del Sol Junction','Melbourne','Victoria','Australia',8383);
-insert into store (street,city,state,country,post_code) VALUES ('67 Center Parkway','Sydney','New South Wales','Australia',1009);
-insert into store (street,city,state,country,post_code) VALUES ('3874 Hovde Drive','Adelaide Mail Centre','South Australia','Australia',5889);
-insert into store (street,city,state,country,post_code) VALUES ('09 American Avenue','Melbourne','Victoria','Australia',8383);
-insert into store (street,city,state,country,post_code) VALUES ('2524 Muir Crossing','Adelaide Mail Centre','South Australia','Australia',5869);
-insert into store (street,city,state,country,post_code) VALUES ('9370 Melrose Pass','Launceston','Tasmania','Australia',7904);
-insert into store (street,city,state,country,post_code) VALUES ('468 Bultman Way','Adelaide','South Australia','Australia',5839);
-insert into store (street,city,state,country,post_code) VALUES ('7 Rutledge Street','Sydney','New South Wales','Australia',1009);
-insert into store (street,city,state,country,post_code) VALUES ('35 2nd Center','Adelaide Mail Centre','South Australia','Australia',5889);
-insert into store (street,city,state,country,post_code) VALUES ('6220 Del Mar Junction','Sydney','New South Wales','Australia',1196);
-insert into store (street,city,state,country,post_code) VALUES ('94 Kedzie Point','Eastern Suburbs Mc','New South Wales','Australia',1391);
-insert into store (street,city,state,country,post_code) VALUES ('1876 Corben Circle','Sydney South','New South Wales','Australia',1235);
+INSERT INTO store (name,latitude, longitude, address, city, state, country, postal_code)
+VALUES ('Quatz',-33.93274,151.188577,'04170 Cody Way','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Skimia',-33.8688197,151.2092955,'109 Fairview Alley','Sydney South','New South Wales','Australia',1235),
+('Oba',-33.7974423,151.2502275,'02 Goodland Park','Sydney','New South Wales','Australia',1161),
+('Centidel',-33.7974423,151.2502275,'832 Moose Street','Sydney','New South Wales','Australia',1191),
+('Voomm',-37.8136276,144.9630576,'88216 Ridge Oak Hill','Melbourne','Victoria','Australia',8383),
+('Midel',-33.8882671,151.2078465,'26 Marquette Center','Strawberry Hills','New South Wales','Australia',1424),
+('Vidoo',-33.7974423,151.2502275,'2137 Union Center','Sydney','New South Wales','Australia',1196),
+('Jayo',-33.8651294,151.2078882,'73640 Vahlen Terrace','Australia Square','New South Wales','Australia',1213),
+('Zoonder',-38.043127,145.297768,'54 Eastwood Alley','Eastern Suburbs Mc','New South Wales','Australia',1315),
+('Trudeo',-37.7236851,144.9633285,'8 Marcy Trail','Sydney','New South Wales','Australia',1009),
+('Feedbug',-38.043127,145.297768,'67394 Canary Street','Eastern Suburbs Mc','New South Wales','Australia',1315),
+('Jayo',-34.990888,138.574391,'2 Maywood Road','Adelaide Mail Centre','South Australia','Australia',5869),
+('Meevee',-34.990888,138.574391,'5 Coleman Circle','Adelaide Mail Centre','South Australia','Australia',5899),
+('Lajo',-31.9505269,115.8604572,'62 Manley Crossing','Perth','Western Australia','Australia',6817),
+('InnoZ',-34.990888,138.574391,'5822 Corry Parkway','Adelaide Mail Centre','South Australia','Australia',5889),
+('Photobug',-41.4332215,147.1440875,'9 Toban Place','Launceston','Tasmania','Australia',7916),
+('Skyndu',-33.863927,151.201887,'06 Pierstorff Court','Sydney','New South Wales','Australia',1171),
+('Tambee',-33.7974423,151.2502275,'70142 Quincy Place','Sydney','New South Wales','Australia',1181),
+('Oyondu',-37.8136276,144.9630576,'69 Trailsway Lane','Melbourne','Victoria','Australia',8045),
+('Edgepulse',-33.93274,151.188577,'6 Arrowood Place','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Katz',-33.7974423,151.2502275,'290 Mifflin Trail','Sydney','New South Wales','Australia',1134),
+('Dynazzy',-27.9424308,153.3970962,'2082 Charing Cross Plaza','Sydney','New South Wales','Australia',1140),
+('Zooxo',-33.93274,151.188577,'77 Union Junction','Eastern Suburbs Mc','New South Wales','Australia',1325),
+('Rhynoodle',-37.713929,144.962411,'9 Anthes Junction','Sydney','New South Wales','Australia',1120),
+('Trudoo',-38.043127,145.297768,'63534 Armistice Drive','Eastern Suburbs Mc','New South Wales','Australia',1315),
+('Meembee',-33.7974423,151.2502275,'4566 Dovetail Parkway','Sydney','New South Wales','Australia',1161),
+('Digitube',-38.043127,145.297768,'70299 Hallows Lane','Eastern Suburbs Mc','New South Wales','Australia',1315),
+('Gabtune',-33.7974423,151.2502275,'6644 Waubesa Trail','Sydney','New South Wales','Australia',1161),
+('Chatterbridge',-33.7974423,151.2502275,'5518 Ludington Avenue','Sydney','New South Wales','Australia',1191),
+('Kazu',-27.9424308,153.3970962,'16 Summerview Street','Sydney','New South Wales','Australia',1140),
+('Youspan',-37.713929,144.962411,'69824 Trailsway Parkway','Sydney','New South Wales','Australia',1120),
+('Camido',-33.8989712,151.2149792,'85697 Fremont Center','Sydney','New South Wales','Australia',1130),
+('Divavu',-37.8136276,144.9630576,'4 Bluejay Park','Melbourne','Victoria','Australia',8383),
+('Edgetag',-33.8688197,151.2092955,'19 Bartillon Place','Sydney South','New South Wales','Australia',1235),
+('Dabtype',-33.8688197,151.2092955,'15 Kennedy Pass','Sydney','New South Wales','Australia',1033),
+('LiveZ',-33.7974423,151.2502275,'68 Eastlawn Drive','Sydney','New South Wales','Australia',1134),
+('Plambee',-42.8821377,147.3271949,'5 Trailsway Circle','Hobart','Tasmania','Australia',7803),
+('Linkbridge',-33.8882671,151.2078465,'8480 Forest Dale Center','Strawberry Hills','New South Wales','Australia',1424),
+('Wordware',-42.8821377,147.3271949,'54887 Manley Center','Hobart','Tasmania','Australia',7808),
+('Voolith',-37.7071402,144.9611223,'521 Bluejay Hill','Sydney','New South Wales','Australia',1206),
+('Avamba',-42.8821377,147.3271949,'4526 Thompson Crossing','Hobart','Tasmania','Australia',7808),
+('Bubblemix',-34.990888,138.574391,'205 Lawn Terrace','Adelaide Mail Centre','South Australia','Australia',5874),
+('Devpoint',-33.8688197,151.2092955,'2904 3rd Circle','Sydney','New South Wales','Australia',1033),
+('Rooxo',-34.8352742,138.596204,'21 East Court','Northern Suburbs Mc','New South Wales','Australia',1694),
+('Eazzy',-33.8688197,151.2092955,'4719 Fairview Drive','Sydney South','New South Wales','Australia',1235),
+('Jabberstorm',-41.4332215,147.1440875,'15803 Westerfield Parkway','Launceston','Tasmania','Australia',7916),
+('Gigashots',-37.8136276,144.9630576,'62714 Dexter Crossing','Melbourne','Victoria','Australia',8383),
+('Flashpoint',-41.4332215,147.1440875,'44 Trailsway Lane','Launceston','Tasmania','Australia',7916),
+('Roomm',-34.9284989,138.6007456,'502 Sherman Hill','Adelaide','South Australia','Australia',5839),
+('Eabox',-34.990888,138.574391,'20 Saint Paul Drive','Adelaide Mail Centre','South Australia','Australia',5889),
+('Kwimbee',-33.93274,151.188577,'07720 Boyd Road','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Roodel',-33.8688197,151.2092955,'4 Westend Terrace','Sydney South','New South Wales','Australia',1235),
+('Quire',-33.8688197,151.2092955,'694 Sunnyside Drive','Sydney South','New South Wales','Australia',1235),
+('Skivee',-33.7974423,151.2502275,'3986 Gina Way','Sydney','New South Wales','Australia',1191),
+('Wikibox',-37.8136276,144.9630576,'626 Waxwing Center','Melbourne','Victoria','Australia',8383),
+('Roomm',-41.4332215,147.1440875,'28329 Bay Trail','Launceston','Tasmania','Australia',7904),
+('Shuffletag',-33.8688197,151.2092955,'9 Lakewood Gardens Terrace','Sydney South','New South Wales','Australia',1235),
+('Skivee',-42.8821377,147.3271949,'54520 Reinke Road','Hobart','Tasmania','Australia',7808),
+('Yoveo',-33.7974423,151.2502275,'58 Village Hill','Sydney','New South Wales','Australia',1161),
+('Lazz',-33.8882671,151.2078465,'98165 Green Avenue','Strawberry Hills','New South Wales','Australia',1424),
+('Cogibox',-33.8688197,151.2092955,'80 Paget Road','Sydney South','New South Wales','Australia',1235),
+('Skimia',-33.7974423,151.2502275,'551 High Crossing Park','Sydney','New South Wales','Australia',1161),
+('Digitube',-37.8136276,144.9630576,'6616 Transport Park','Melbourne','Victoria','Australia',8045),
+('Youtags',-34.9284989,138.6007456,'320 Autumn Leaf Crossing','Adelaide','South Australia','Australia',5839),
+('Dynabox',-33.8688197,151.2092955,'79 Loftsgordon Terrace','Sydney South','New South Wales','Australia',1235),
+('Fadeo',-33.7974423,151.2502275,'5 Transport Parkway','Sydney','New South Wales','Australia',1161),
+('Zoomlounge',-34.990888,138.574391,'08681 Stoughton Street','Adelaide Mail Centre','South Australia','Australia',5874),
+('Kare',-33.8989712,151.2149792,'116 East Road','Sydney','New South Wales','Australia',1130),
+('Dablist',-33.8882671,151.2078465,'4207 Manitowish Circle','Strawberry Hills','New South Wales','Australia',1424),
+('Cogidoo',-33.863927,151.201887,'32 Cardinal Point','Sydney','New South Wales','Australia',1171),
+('Kwinu',-37.7071402,144.9611223,'12 Lawn Junction','Sydney','New South Wales','Australia',1206),
+('Riffpedia',-33.8688197,151.2092955,'06833 Victoria Alley','Sydney South','New South Wales','Australia',1235),
+('Oyoba',-34.9284989,138.6007456,'713 Harbort Point','Adelaide','South Australia','Australia',5839),
+('Topdrive',-42.8821377,147.3271949,'4 Elka Point','Hobart','Tasmania','Australia',7808),
+('Gigabox',-37.7236851,144.9633285,'746 Elmside Place','Sydney','New South Wales','Australia',1009),
+('Tavu',-37.7204693,144.9629556,'4 Texas Place','Sydney','New South Wales','Australia',1109),
+('Meezzy',-27.9424308,153.3970962,'1 Beilfuss Way','Sydney','New South Wales','Australia',1140),
+('Nlounge',-38.043127,145.297768,'01573 Meadow Ridge Point','Eastern Suburbs Mc','New South Wales','Australia',1315),
+('Thoughtbridge',-33.8688197,151.2092955,'30052 Michigan Park','Sydney South','New South Wales','Australia',1235),
+('Muxo',-33.8688197,151.2092955,'92368 Kingsford Hill','Sydney South','New South Wales','Australia',1235),
+('Yombu',-42.8821377,147.3271949,'4635 Oakridge Terrace','Hobart','Tasmania','Australia',7808),
+('Linkbridge',-33.8651294,151.2078882,'66541 Muir Center','Australia Square','New South Wales','Australia',1213),
+('Linkbridge',-37.8136276,144.9630576,'4102 Anzinger Park','Melbourne','Victoria','Australia',8383),
+('Youfeed',-34.990888,138.574391,'5 Farwell Junction','Adelaide Mail Centre','South Australia','Australia',5869),
+('Dablist',-33.93274,151.188577,'0815 Mcbride Crossing','Eastern Suburbs Mc','New South Wales','Australia',1325),
+('Cogidoo',-27.9424308,153.3970962,'3475 Prentice Hill','Sydney','New South Wales','Australia',1140),
+('Topicblab',-33.93274,151.188577,'6 Division Hill','Eastern Suburbs Mc','New South Wales','Australia',1325),
+('Linktype',-34.990888,138.574391,'79 Coolidge Circle','Adelaide Mail Centre','South Australia','Australia',5874),
+('Einti',-34.9284989,138.6007456,'42 Valley Edge Point','Adelaide','South Australia','Australia',5839),
+('Kaymbo',-34.990888,138.574391,'80814 8th Parkway','Adelaide Mail Centre','South Australia','Australia',5874),
+('Jayo',-33.8989712,151.2149792,'1 Dakota Place','Sydney','New South Wales','Australia',1130),
+('Realpoint',-34.9284989,138.6007456,'8018 Crowley Lane','Adelaide','South Australia','Australia',5839),
+('Topiczoom',-37.8136276,144.9630576,'96919 Elka Place','Melbourne','Victoria','Australia',8383),
+('Lazzy',-37.7236851,144.9633285,'695 Talisman Court','Sydney','New South Wales','Australia',1009),
+('Babblestorm',-33.8989712,151.2149792,'2979 Carpenter Point','Sydney','New South Wales','Australia',1130),
+('Fivebridge',-33.7974423,151.2502275,'836 Truax Terrace','Sydney','New South Wales','Australia',1191),
+('Zoombox',-33.7974423,151.2502275,'1908 Mcbride Point','Sydney','New South Wales','Australia',1191),
+('Yambee',-27.4697707,153.0251235,'0 Tennessee Center','Brisbane','Queensland','Australia',9010),
+('Skyvu',-37.8136276,144.9630576,'64 Haas Plaza','Melbourne','Victoria','Australia',8045),
+('Photolist',-33.7974423,151.2502275,'34 Summit Plaza','Sydney','New South Wales','Australia',1161),
+('Leexo',-37.713929,144.962411,'2 Sutteridge Avenue','Sydney','New South Wales','Australia',1120),
+('Linktype',-33.7974423,151.2502275,'49619 Onsgard Place','Sydney','New South Wales','Australia',1196),
+('Photofeed',-33.8651294,151.2078882,'680 Loftsgordon Terrace','Australia Square','New South Wales','Australia',1213),
+('Wikizz',-42.8821377,147.3271949,'70156 Vermont Parkway','Hobart','Tasmania','Australia',7808),
+('Myworks',-41.4332215,147.1440875,'304 Di Loreto Center','Launceston','Tasmania','Australia',7904),
+('Skibox',-41.4332215,147.1440875,'645 Mosinee Center','Launceston','Tasmania','Australia',7904),
+('Skinix',-33.8882671,151.2078465,'8 Gateway Hill','Strawberry Hills','New South Wales','Australia',1424),
+('Divavu',-31.9478653,115.8693718,'81 Dunning Junction','Perth','Western Australia','Australia',6843),
+('Feedspan',-37.8136276,144.9630576,'8380 Manley Terrace','Melbourne','Victoria','Australia',8383),
+('Tagchat',-33.7974423,151.2502275,'754 Westerfield Park','Sydney','New South Wales','Australia',1134),
+('Katz',-41.4332215,147.1440875,'1 Jana Pass','Launceston','Tasmania','Australia',7904),
+('Devcast',-38.043127,145.297768,'2 Fisk Alley','Eastern Suburbs Mc','New South Wales','Australia',1315),
+('Babbleopia',-31.9478653,115.8693718,'049 Oakridge Center','Perth','Western Australia','Australia',6843),
+('Vinder',-33.7974423,151.2502275,'80978 Tony Center','Sydney','New South Wales','Australia',1181),
+('Browseblab',-37.713929,144.962411,'5 Farmco Crossing','Sydney','New South Wales','Australia',1120),
+('Mudo',-34.9284989,138.6007456,'304 Utah Circle','Adelaide','South Australia','Australia',5839),
+('Yacero',-34.8352742,138.596204,'060 Schlimgen Circle','Northern Suburbs Mc','New South Wales','Australia',1694),
+('Mynte',-31.9478653,115.8693718,'70417 Tennyson Point','Perth','Western Australia','Australia',6843),
+('Mita',-33.7974423,151.2502275,'71963 Fremont Avenue','Sydney','New South Wales','Australia',1196),
+('Zazio',-33.8651294,151.2078882,'1336 Jay Avenue','Australia Square','New South Wales','Australia',1213),
+('Realfire',-34.990888,138.574391,'3268 Mendota Place','Adelaide Mail Centre','South Australia','Australia',5874),
+('Wikido',-42.8821377,147.3271949,'37062 Esch Crossing','Hobart','Tasmania','Australia',7808),
+('Youbridge',-27.4697707,153.0251235,'57 Everett Crossing','Brisbane','Queensland','Australia',9010),
+('Myworks',-37.8136276,144.9630576,'04 Shasta Alley','Melbourne','Victoria','Australia',8045),
+('Browseblab',-42.8821377,147.3271949,'8 Valley Edge Hill','Hobart','Tasmania','Australia',7803),
+('Oyoba',-37.7236851,144.9633285,'5 Carberry Point','Sydney','New South Wales','Australia',1009),
+('Devshare',-41.4332215,147.1440875,'75262 Comanche Avenue','Launceston','Tasmania','Australia',7904),
+('Vinder',-42.8821377,147.3271949,'679 Kedzie Plaza','Hobart','Tasmania','Australia',7808),
+('Meembee',-34.990888,138.574391,'7 Lunder Hill','Adelaide Mail Centre','South Australia','Australia',5889),
+('Divavu',-41.4332215,147.1440875,'74212 Fallview Drive','Launceston','Tasmania','Australia',7904),
+('Mynte',-37.8136276,144.9630576,'21 Morrow Plaza','Melbourne','Victoria','Australia',8383),
+('Tagcat',-41.4332215,147.1440875,'999 Oriole Place','Launceston','Tasmania','Australia',7916),
+('Feedfish',-42.8821377,147.3271949,'09 Packers Terrace','Hobart','Tasmania','Australia',7808),
+('Cogidoo',-37.7204693,144.9629556,'71 Leroy Junction','Sydney','New South Wales','Australia',1109),
+('Thoughtblab',-27.4697707,153.0251235,'10743 Kipling Alley','Brisbane','Queensland','Australia',9010),
+('Meevee',-33.93274,151.188577,'6 Quincy Trail','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Brainlounge',-42.8821377,147.3271949,'5 Loeprich Court','Hobart','Tasmania','Australia',7808),
+('Tagcat',-34.990888,138.574391,'356 Bay Lane','Adelaide Mail Centre','South Australia','Australia',5874),
+('Gigashots',-38.043127,145.297768,'46 Lighthouse Bay Circle','Eastern Suburbs Mc','New South Wales','Australia',1315),
+('Muxo',-33.7974423,151.2502275,'405 Texas Point','Sydney','New South Wales','Australia',1191),
+('Skiba',-34.990888,138.574391,'4 Kinsman Place','Adelaide Mail Centre','South Australia','Australia',5899),
+('Trunyx',-34.990888,138.574391,'69235 Doe Crossing Avenue','Adelaide Mail Centre','South Australia','Australia',5889),
+('Eidel',-27.4697707,153.0251235,'64397 Grim Point','Brisbane','Queensland','Australia',9010),
+('Divape',-33.8688197,151.2092955,'33556 Trailsway Junction','Sydney','New South Wales','Australia',1033),
+('Shuffledrive',-31.9505269,115.8604572,'27414 Service Trail','Perth','Western Australia','Australia',6817),
+('Linkbridge',-41.4332215,147.1440875,'63 Myrtle Court','Launceston','Tasmania','Australia',7916),
+('Buzzbean',-42.8821377,147.3271949,'930 Mcguire Road','Hobart','Tasmania','Australia',7808),
+('Jetwire',-27.9424308,153.3970962,'73 Eastlawn Park','Sydney','New South Wales','Australia',1140),
+('Yakidoo',-37.713929,144.962411,'06 Gulseth Point','Sydney','New South Wales','Australia',1120),
+('Eimbee',-37.8136276,144.9630576,'147 Summerview Alley','Melbourne','Victoria','Australia',8383),
+('Realbuzz',-33.863927,151.201887,'214 Derek Lane','Sydney','New South Wales','Australia',1171),
+('Voolith',-33.8651294,151.2078882,'005 2nd Road','Australia Square','New South Wales','Australia',1213),
+('Browseblab',-34.990888,138.574391,'14 Merry Court','Adelaide Mail Centre','South Australia','Australia',5874),
+('Quimba',-37.713929,144.962411,'16417 Reindahl Road','Sydney','New South Wales','Australia',1120),
+('Twinder',-31.9505269,115.8604572,'239 Cardinal Plaza','Perth','Western Australia','Australia',6817),
+('Edgeify',-34.990888,138.574391,'088 Vera Center','Adelaide Mail Centre','South Australia','Australia',5889),
+('Centizu',-37.7204693,144.9629556,'725 Stang Road','Sydney','New South Wales','Australia',1109),
+('Riffpath',-31.9478653,115.8693718,'1 Fremont Parkway','Perth','Western Australia','Australia',6843),
+('Buzzster',-34.0349557,151.0998291,'0 Carberry Avenue','Sydney','New South Wales','Australia',1028),
+('Devshare',-34.990888,138.574391,'0 Lindbergh Parkway','Adelaide Mail Centre','South Australia','Australia',5899),
+('Meedoo',-37.8136276,144.9630576,'3 Fordem Point','Melbourne','Victoria','Australia',8045),
+('Twitterlist',-34.990888,138.574391,'9907 Kipling Center','Adelaide Mail Centre','South Australia','Australia',5874),
+('Livetube',-33.7974423,151.2502275,'0 Columbus Plaza','Sydney','New South Wales','Australia',1181),
+('Twimbo',-37.7071402,144.9611223,'8337 1st Alley','Sydney','New South Wales','Australia',1206),
+('Jaloo',-33.8882671,151.2078465,'45171 Springview Terrace','Strawberry Hills','New South Wales','Australia',1424),
+('Realblab',-38.043127,145.297768,'839 Transport Avenue','Eastern Suburbs Mc','New South Wales','Australia',1315),
+('Yamia',-33.8688197,151.2092955,'7 Thierer Place','Sydney','New South Wales','Australia',1043),
+('Abatz',-41.4332215,147.1440875,'677 Park Meadow Lane','Launceston','Tasmania','Australia',7916),
+('Zoomcast',-41.4332215,147.1440875,'32991 Westport Plaza','Launceston','Tasmania','Australia',7916),
+('Gigaclub',-33.8882671,151.2078465,'135 Claremont Hill','Strawberry Hills','New South Wales','Australia',1424),
+('Einti',-33.93274,151.188577,'459 Mockingbird Lane','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Mynte',-34.990888,138.574391,'0561 Westend Avenue','Adelaide Mail Centre','South Australia','Australia',5869),
+('Camimbo',-37.8136276,144.9630576,'797 Leroy Place','Melbourne','Victoria','Australia',8045),
+('Cogibox',-33.863927,151.201887,'4 Claremont Center','Sydney','New South Wales','Australia',1171),
+('Omba',-34.9284989,138.6007456,'66 Hoard Place','Adelaide','South Australia','Australia',5839),
+('Skalith',-34.990888,138.574391,'8 Grayhawk Trail','Adelaide Mail Centre','South Australia','Australia',5889),
+('Viva',-31.9478653,115.8693718,'35 Bowman Center','Perth','Western Australia','Australia',6843),
+('Edgewire',-37.8136276,144.9630576,'5676 Hintze Crossing','Melbourne','Victoria','Australia',8045),
+('Camimbo',-33.8688197,151.2092955,'1626 Stephen Place','Sydney South','New South Wales','Australia',1235),
+('Zoombeat',-33.7974423,151.2502275,'0203 Surrey Plaza','Sydney','New South Wales','Australia',1161),
+('Realcube',-33.7974423,151.2502275,'21 Dixon Trail','Sydney','New South Wales','Australia',1161),
+('Rhyzio',-31.9478653,115.8693718,'90 Parkside Point','Perth','Western Australia','Australia',6843),
+('Mita',-34.990888,138.574391,'8121 Lakewood Pass','Adelaide Mail Centre','South Australia','Australia',5899),
+('Abatz',-37.8136276,144.9630576,'242 Meadow Ridge Plaza','Melbourne','Victoria','Australia',8045),
+('Photospace',-42.8821377,147.3271949,'71006 Warbler Junction','Hobart','Tasmania','Australia',7803),
+('Rhynoodle',-41.4332215,147.1440875,'21269 Larry Hill','Launceston','Tasmania','Australia',7916),
+('Devbug',-34.990888,138.574391,'97220 Birchwood Terrace','Adelaide Mail Centre','South Australia','Australia',5874),
+('Brightdog',-33.93274,151.188577,'0 Blue Bill Park Circle','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Tavu',-33.93274,151.188577,'7 Myrtle Street','Eastern Suburbs Mc','New South Wales','Australia',1325),
+('Eabox',-33.8688197,151.2092955,'4416 Ryan Court','Sydney South','New South Wales','Australia',1235),
+('Linkbridge',-33.863927,151.201887,'54 Pond Plaza','Sydney','New South Wales','Australia',1171),
+('Gigashots',-34.9284989,138.6007456,'1351 Golf Course Terrace','Adelaide','South Australia','Australia',5839),
+('Twitterbeat',-41.4332215,147.1440875,'4 Cardinal Center','Launceston','Tasmania','Australia',7904),
+('Oyoyo',-31.9505269,115.8604572,'0240 Morningstar Court','Perth','Western Australia','Australia',6817),
+('Skyba',-42.8821377,147.3271949,'0409 Pond Hill','Hobart','Tasmania','Australia',7803),
+('Ailane',-33.7974423,151.2502275,'01617 Erie Circle','Sydney','New South Wales','Australia',1191),
+('Wordpedia',-33.93274,151.188577,'53 Barby Drive','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Mynte',-27.4697707,153.0251235,'9 Moland Street','Brisbane','Queensland','Australia',9010),
+('Divanoodle',-34.8352742,138.596204,'395 Hauk Place','Northern Suburbs Mc','New South Wales','Australia',1694),
+('Youspan',-42.8821377,147.3271949,'03 David Pass','Hobart','Tasmania','Australia',7803),
+('Kamba',-42.8821377,147.3271949,'0663 Southridge Park','Hobart','Tasmania','Australia',7803),
+('Zooxo',-27.4697707,153.0251235,'280 Schmedeman Circle','Brisbane','Queensland','Australia',9010),
+('Fivechat',-33.8688197,151.2092955,'8504 Surrey Circle','Sydney','New South Wales','Australia',1043),
+('Blogtags',-34.990888,138.574391,'3 Morningstar Center','Adelaide Mail Centre','South Australia','Australia',5899),
+('Skyble',-33.7974423,151.2502275,'977 Bartillon Circle','Sydney','New South Wales','Australia',1161),
+('Photofeed',-37.7204693,144.9629556,'85425 Warbler Street','Sydney','New South Wales','Australia',1109),
+('Skyba',-38.043127,145.297768,'218 Waywood Junction','Eastern Suburbs Mc','New South Wales','Australia',1315),
+('Talane',-38.043127,145.297768,'04388 Forster Crossing','Eastern Suburbs Mc','New South Wales','Australia',1315),
+('Photojam',-41.4332215,147.1440875,'2396 Melvin Terrace','Launceston','Tasmania','Australia',7904),
+('Roodel',-33.7974423,151.2502275,'0 Gina Street','Sydney','New South Wales','Australia',1134),
+('Aivee',-37.8136276,144.9630576,'7 Anniversary Way','Melbourne','Victoria','Australia',8045),
+('Youspan',-37.7071402,144.9611223,'9979 Kennedy Way','Sydney','New South Wales','Australia',1206),
+('Quatz',-41.4332215,147.1440875,'929 Milwaukee Trail','Launceston','Tasmania','Australia',7916),
+('Babbleblab',-37.7071402,144.9611223,'125 Esker Street','Sydney','New South Wales','Australia',1206),
+('Flashset',-37.7071402,144.9611223,'0298 Service Parkway','Sydney','New South Wales','Australia',1206),
+('Wikizz',-34.9284989,138.6007456,'4 Vera Alley','Adelaide','South Australia','Australia',5839),
+('Gabtune',-31.9478653,115.8693718,'40755 Tennyson Lane','Perth','Western Australia','Australia',6843),
+('Mydeo',-37.8136276,144.9630576,'0253 Arkansas Road','Melbourne','Victoria','Australia',8383),
+('Skimia',-34.990888,138.574391,'81 Clarendon Trail','Adelaide Mail Centre','South Australia','Australia',5874),
+('Jaxworks',-37.713929,144.962411,'160 Pawling Parkway','Sydney','New South Wales','Australia',1120),
+('Yambee',-33.93274,151.188577,'2065 Dovetail Circle','Eastern Suburbs Mc','New South Wales','Australia',1325),
+('Chatterbridge',-37.7204693,144.9629556,'1 Old Shore Junction','Sydney','New South Wales','Australia',1109),
+('Feednation',-27.4697707,153.0251235,'39667 Spohn Crossing','Brisbane','Queensland','Australia',9010),
+('Eadel',-34.990888,138.574391,'5 Rowland Street','Adelaide Mail Centre','South Australia','Australia',5874),
+('Mybuzz',-33.7974423,151.2502275,'59124 Anniversary Trail','Sydney','New South Wales','Australia',1191),
+('Riffpedia',-33.8989712,151.2149792,'9 Kinsman Hill','Sydney','New South Wales','Australia',1130),
+('Youtags',-37.8136276,144.9630576,'387 Petterle Junction','Melbourne','Victoria','Australia',8383),
+('Npath',-34.990888,138.574391,'84889 Hoffman Street','Adelaide Mail Centre','South Australia','Australia',5869),
+('Omba',-37.7071402,144.9611223,'54 Messerschmidt Alley','Sydney','New South Wales','Australia',1206),
+('Trunyx',-42.8821377,147.3271949,'2713 Lukken Circle','Hobart','Tasmania','Australia',7803),
+('Fanoodle',-33.93274,151.188577,'14 Mcbride Avenue','Eastern Suburbs Mc','New South Wales','Australia',1325),
+('Shuffledrive',-33.7974423,151.2502275,'592 Hoepker Center','Sydney','New South Wales','Australia',1196),
+('Kwideo',-37.8136276,144.9630576,'573 Mosinee Lane','Melbourne','Victoria','Australia',8045),
+('Kwilith',-33.7974423,151.2502275,'34680 Forest Dale Terrace','Sydney','New South Wales','Australia',1181),
+('Jabbercube',-27.4697707,153.0251235,'63 Bashford Trail','Brisbane','Queensland','Australia',9010),
+('Quinu',-41.4332215,147.1440875,'96313 Marquette Court','Launceston','Tasmania','Australia',7916),
+('Myworks',-33.93274,151.188577,'0223 Coolidge Center','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Trunyx',-34.9284989,138.6007456,'55 Debs Plaza','Adelaide','South Australia','Australia',5839),
+('Dynazzy',-42.8821377,147.3271949,'27 Hazelcrest Alley','Hobart','Tasmania','Australia',7803),
+('Photojam',-33.93274,151.188577,'369 Meadow Vale Trail','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Youopia',-34.990888,138.574391,'1129 Becker Place','Adelaide Mail Centre','South Australia','Australia',5889),
+('Feednation',-33.863927,151.201887,'235 Maple Place','Sydney','New South Wales','Australia',1171),
+('Yodoo',-33.93274,151.188577,'194 Comanche Junction','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Roodel',-31.9505269,115.8604572,'42 Superior Trail','Perth','Western Australia','Australia',6817),
+('Agivu',-37.713929,144.962411,'2 Karstens Place','Sydney','New South Wales','Australia',1120),
+('Photojam',-33.8688197,151.2092955,'6 Cardinal Center','Sydney','New South Wales','Australia',1033),
+('Kwilith',-34.990888,138.574391,'23700 Cascade Crossing','Adelaide Mail Centre','South Australia','Australia',5899),
+('Flipstorm',-33.93274,151.188577,'2 Dawn Crossing','Eastern Suburbs Mc','New South Wales','Australia',1325),
+('Npath',-37.713929,144.962411,'9 Raven Center','Sydney','New South Wales','Australia',1120),
+('Quaxo',-37.8136276,144.9630576,'5322 Hooker Center','Melbourne','Victoria','Australia',8045),
+('Buzzbean',-34.990888,138.574391,'70015 Fair Oaks Circle','Adelaide Mail Centre','South Australia','Australia',5869),
+('Ozu',-37.7204693,144.9629556,'53 Magdeline Junction','Sydney','New South Wales','Australia',1109),
+('Zava',-33.7974423,151.2502275,'24123 Sommers Crossing','Sydney','New South Wales','Australia',1191),
+('Demizz',-34.990888,138.574391,'45 Sachtjen Way','Adelaide Mail Centre','South Australia','Australia',5869),
+('Demizz',-31.9478653,115.8693718,'6952 Farragut Place','Perth','Western Australia','Australia',6843),
+('Trilia',-42.8821377,147.3271949,'773 Prairieview Crossing','Hobart','Tasmania','Australia',7808),
+('Tagpad',-37.7204693,144.9629556,'3440 Division Center','Sydney','New South Wales','Australia',1109),
+('Avamm',-33.7974423,151.2502275,'5 Magdeline Terrace','Sydney','New South Wales','Australia',1196),
+('Kwinu',-33.93274,151.188577,'84 Dennis Junction','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Flashdog',-33.7974423,151.2502275,'827 Anhalt Court','Sydney','New South Wales','Australia',1134),
+('Fliptune',-33.8882671,151.2078465,'78 Walton Plaza','Strawberry Hills','New South Wales','Australia',1424),
+('Oyoyo',-42.8821377,147.3271949,'9 Mifflin Court','Hobart','Tasmania','Australia',7803),
+('Livefish',-33.863927,151.201887,'3779 Northwestern Place','Sydney','New South Wales','Australia',1171),
+('Wordify',-34.9284989,138.6007456,'58898 Paget Crossing','Adelaide','South Australia','Australia',5839),
+('Roomm',-33.7974423,151.2502275,'983 Bayside Hill','Sydney','New South Wales','Australia',1181),
+('Trunyx',-38.043127,145.297768,'5 Sycamore Point','Eastern Suburbs Mc','New South Wales','Australia',1315),
+('Skyba',-34.990888,138.574391,'49738 Doe Crossing Park','Adelaide Mail Centre','South Australia','Australia',5874),
+('Pixonyx',-37.7236851,144.9633285,'709 Prairieview Street','Sydney','New South Wales','Australia',1009),
+('Youbridge',-33.863927,151.201887,'53 Holmberg Court','Sydney','New South Wales','Australia',1171),
+('Tagchat',-33.8651294,151.2078882,'27655 Arkansas Center','Australia Square','New South Wales','Australia',1213),
+('Tagfeed',-33.7974423,151.2502275,'32 Lukken Way','Sydney','New South Wales','Australia',1181),
+('Pixoboo',-27.4697707,153.0251235,'90393 Ronald Regan Park','Brisbane','Queensland','Australia',9010),
+('Kwideo',-34.0349557,151.0998291,'122 Ronald Regan Point','Sydney','New South Wales','Australia',1028),
+('Camimbo',-34.9284989,138.6007456,'1335 American Road','Adelaide','South Australia','Australia',5839),
+('Avamba',-34.8352742,138.596204,'20735 Main Point','Northern Suburbs Mc','New South Wales','Australia',1694),
+('Avaveo',-33.7974423,151.2502275,'5119 Bunker Hill Circle','Sydney','New South Wales','Australia',1161),
+('Zava',-27.9424308,153.3970962,'7922 Jackson Crossing','Sydney','New South Wales','Australia',1140),
+('Dabvine',-33.7974423,151.2502275,'21 Cherokee Park','Sydney','New South Wales','Australia',1181),
+('Topiclounge',-33.863927,151.201887,'65172 Nevada Alley','Sydney','New South Wales','Australia',1171),
+('Edgeify',-37.7204693,144.9629556,'9836 Tomscot Alley','Sydney','New South Wales','Australia',1109),
+('Centizu',-33.93274,151.188577,'642 Colorado Road','Eastern Suburbs Mc','New South Wales','Australia',1325),
+('Digitube',-33.8688197,151.2092955,'733 Mosinee Drive','Sydney','New South Wales','Australia',1033),
+('Jabbersphere',-33.93274,151.188577,'82 Sundown Plaza','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Zoomlounge',-33.7974423,151.2502275,'456 Forest Dale Center','Sydney','New South Wales','Australia',1161),
+('Topicware',-34.990888,138.574391,'50657 South Drive','Adelaide Mail Centre','South Australia','Australia',5899),
+('Innojam',-33.863927,151.201887,'10 Longview Road','Sydney','New South Wales','Australia',1171),
+('Quimm',-34.0349557,151.0998291,'3 Dwight Terrace','Sydney','New South Wales','Australia',1028),
+('Kazio',-42.8821377,147.3271949,'38 Prentice Hill','Hobart','Tasmania','Australia',7808),
+('Devbug',-33.8882671,151.2078465,'6115 Mccormick Street','Strawberry Hills','New South Wales','Australia',1424),
+('Kazu',-37.8136276,144.9630576,'288 Vahlen Court','Melbourne','Victoria','Australia',8383),
+('Kaymbo',-33.7974423,151.2502275,'49 Lunder Plaza','Sydney','New South Wales','Australia',1191),
+('Ailane',-33.8882671,151.2078465,'8923 Cody Park','Strawberry Hills','New South Wales','Australia',1424),
+('Linkbridge',-33.8989712,151.2149792,'89 Mccormick Avenue','Sydney','New South Wales','Australia',1130),
+('Browseblab',-33.8688197,151.2092955,'0 Bashford Point','Sydney','New South Wales','Australia',1043),
+('Quatz',-31.9478653,115.8693718,'5352 Chinook Crossing','Perth','Western Australia','Australia',6843),
+('Wordtune',-37.8136276,144.9630576,'93769 Green Ridge Pass','Melbourne','Victoria','Australia',8045),
+('Zava',-38.043127,145.297768,'1 Bluejay Hill','Eastern Suburbs Mc','New South Wales','Australia',1315),
+('Meeveo',-33.8882671,151.2078465,'4 Armistice Circle','Strawberry Hills','New South Wales','Australia',1424),
+('Jabberstorm',-34.990888,138.574391,'2198 Nova Road','Adelaide Mail Centre','South Australia','Australia',5874),
+('Linklinks',-37.7236851,144.9633285,'59 Briar Crest Crossing','Sydney','New South Wales','Australia',1009),
+('Linklinks',-31.9505269,115.8604572,'13 Maple Trail','Perth','Western Australia','Australia',6817),
+('Yamia',-33.7974423,151.2502275,'57363 Toban Lane','Sydney','New South Wales','Australia',1181),
+('Photolist',-33.8989712,151.2149792,'93687 6th Lane','Sydney','New South Wales','Australia',1130),
+('Wikizz',-41.4332215,147.1440875,'226 Aberg Parkway','Launceston','Tasmania','Australia',7904),
+('Devpulse',-31.9505269,115.8604572,'22018 Manitowish Place','Perth','Western Australia','Australia',6817),
+('InnoZ',-33.7974423,151.2502275,'5 Memorial Street','Sydney','New South Wales','Australia',1181),
+('Jaxspan',-41.4332215,147.1440875,'073 Moulton Crossing','Launceston','Tasmania','Australia',7904),
+('JumpXS',-33.8651294,151.2078882,'7665 Havey Plaza','Australia Square','New South Wales','Australia',1213),
+('Tazz',-33.93274,151.188577,'88522 Utah Trail','Eastern Suburbs Mc','New South Wales','Australia',1325),
+('Jayo',-33.8651294,151.2078882,'5 Springs Hill','Australia Square','New South Wales','Australia',1213),
+('Edgepulse',-42.8821377,147.3271949,'9147 Anthes Point','Hobart','Tasmania','Australia',7808),
+('Jayo',-34.990888,138.574391,'906 Grim Pass','Adelaide Mail Centre','South Australia','Australia',5899),
+('Voonder',-37.8136276,144.9630576,'420 Tennyson Lane','Melbourne','Victoria','Australia',8045),
+('Eazzy',-37.8136276,144.9630576,'26937 Welch Drive','Melbourne','Victoria','Australia',8045),
+('Jabbercube',-37.7236851,144.9633285,'6 Veith Way','Sydney','New South Wales','Australia',1009),
+('Jabbercube',-41.4332215,147.1440875,'69655 Schmedeman Parkway','Launceston','Tasmania','Australia',7916),
+('Zoonder',-34.990888,138.574391,'8 Summer Ridge Avenue','Adelaide Mail Centre','South Australia','Australia',5889),
+('Riffpath',-27.9424308,153.3970962,'350 Tennessee Lane','Sydney','New South Wales','Australia',1140),
+('Rhycero',-33.93274,151.188577,'34701 Magdeline Street','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Tanoodle',-31.9478653,115.8693718,'93 Moose Pass','Perth','Western Australia','Australia',6843),
+('Realbridge',-34.990888,138.574391,'606 4th Place','Adelaide Mail Centre','South Australia','Australia',5874),
+('Babbleblab',-37.7071402,144.9611223,'6274 Mariners Cove Place','Sydney','New South Wales','Australia',1206),
+('Browseblab',-38.043127,145.297768,'61 Rusk Trail','Eastern Suburbs Mc','New South Wales','Australia',1315),
+('Meemm',-34.9284989,138.6007456,'92 Del Sol Junction','Adelaide','South Australia','Australia',5839),
+('Quatz',-33.7974423,151.2502275,'279 Burrows Parkway','Sydney','New South Wales','Australia',1196),
+('Digitube',-33.7974423,151.2502275,'3 Northview Point','Sydney','New South Wales','Australia',1181),
+('Zooveo',-33.93274,151.188577,'05039 Beilfuss Parkway','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Wordify',-37.8136276,144.9630576,'3071 Service Court','Melbourne','Victoria','Australia',8383),
+('Plambee',-33.8688197,151.2092955,'4426 Nevada Pass','Sydney South','New South Wales','Australia',1235),
+('Zazio',-33.8688197,151.2092955,'92614 Northview Court','Sydney','New South Wales','Australia',1043),
+('Avavee',-41.4332215,147.1440875,'4747 Ronald Regan Circle','Launceston','Tasmania','Australia',7904),
+('Geba',-33.93274,151.188577,'6959 Park Meadow Road','Eastern Suburbs Mc','New South Wales','Australia',1325),
+('Ailane',-33.7974423,151.2502275,'71102 Hanover Parkway','Sydney','New South Wales','Australia',1134),
+('Gigashots',-42.8821377,147.3271949,'6 Dixon Court','Hobart','Tasmania','Australia',7808),
+('Thoughtstorm',-31.9505269,115.8604572,'46 Basil Center','Perth','Western Australia','Australia',6817),
+('Jaxworks',-41.4332215,147.1440875,'04238 Rockefeller Drive','Launceston','Tasmania','Australia',7904),
+('Twinder',-27.4697707,153.0251235,'3680 Jackson Terrace','Brisbane','Queensland','Australia',9010),
+('Photobug',-33.7974423,151.2502275,'617 Colorado Crossing','Sydney','New South Wales','Australia',1191),
+('Leexo',-37.8136276,144.9630576,'859 Corben Junction','Melbourne','Victoria','Australia',8045),
+('Twinder',-37.8136276,144.9630576,'6 Portage Plaza','Melbourne','Victoria','Australia',8383),
+('Jamia',-33.7974423,151.2502275,'4 Russell Terrace','Sydney','New South Wales','Australia',1134),
+('Meevee',-33.93274,151.188577,'64 Weeping Birch Pass','Eastern Suburbs Mc','New South Wales','Australia',1325),
+('Gigazoom',-34.990888,138.574391,'24901 Surrey Road','Adelaide Mail Centre','South Australia','Australia',5869),
+('Myworks',-31.9505269,115.8604572,'81 Browning Avenue','Perth','Western Australia','Australia',6817),
+('Zooxo',-27.9424308,153.3970962,'544 Northridge Park','Sydney','New South Wales','Australia',1140),
+('Camido',-38.043127,145.297768,'015 Anhalt Terrace','Eastern Suburbs Mc','New South Wales','Australia',1315),
+('Camimbo',-33.863927,151.201887,'1 Riverside Way','Sydney','New South Wales','Australia',1171),
+('Tagpad',-33.7974423,151.2502275,'185 Chive Alley','Sydney','New South Wales','Australia',1161),
+('Yambee',-41.4332215,147.1440875,'940 Del Sol Street','Launceston','Tasmania','Australia',7916),
+('Meedoo',-33.8688197,151.2092955,'89 Pennsylvania Parkway','Sydney South','New South Wales','Australia',1235),
+('Cogibox',-37.8136276,144.9630576,'6468 Prairieview Point','Melbourne','Victoria','Australia',8045),
+('Skiba',-34.990888,138.574391,'6361 Carpenter Street','Adelaide Mail Centre','South Australia','Australia',5899),
+('Rhybox',-27.4697707,153.0251235,'8 Jenna Junction','Brisbane','Queensland','Australia',9010),
+('Yombu',-34.0349557,151.0998291,'2925 Lakeland Way','Sydney','New South Wales','Australia',1028),
+('Rhycero',-34.990888,138.574391,'83 Westend Drive','Adelaide Mail Centre','South Australia','Australia',5874),
+('Fatz',-33.8688197,151.2092955,'245 Vernon Avenue','Sydney','New South Wales','Australia',1033),
+('Eazzy',-34.9284989,138.6007456,'52 Utah Parkway','Adelaide','South Australia','Australia',5839),
+('Agivu',-34.990888,138.574391,'412 Lawn Lane','Adelaide Mail Centre','South Australia','Australia',5899),
+('Meevee',-27.9424308,153.3970962,'25 Moulton Avenue','Sydney','New South Wales','Australia',1140),
+('Rhynoodle',-33.7974423,151.2502275,'17 Northland Alley','Sydney','New South Wales','Australia',1161),
+('Thoughtstorm',-27.9424308,153.3970962,'0706 Shelley Parkway','Sydney','New South Wales','Australia',1140),
+('Jabbersphere',-33.7974423,151.2502275,'60 Sage Alley','Sydney','New South Wales','Australia',1161),
+('Eidel',-38.043127,145.297768,'7655 Welch Plaza','Eastern Suburbs Mc','New South Wales','Australia',1315),
+('Livefish',-34.990888,138.574391,'8 Holmberg Trail','Adelaide Mail Centre','South Australia','Australia',5889),
+('Edgewire',-33.8688197,151.2092955,'82591 Sachtjen Hill','Sydney South','New South Wales','Australia',1235),
+('Nlounge',-33.7974423,151.2502275,'7 Menomonie Lane','Sydney','New South Wales','Australia',1191),
+('Skipfire',-38.043127,145.297768,'16 Fairview Center','Eastern Suburbs Mc','New South Wales','Australia',1315),
+('Edgeclub',-31.9505269,115.8604572,'9 Briar Crest Place','Perth','Western Australia','Australia',6817),
+('Zazio',-34.990888,138.574391,'408 Manufacturers Center','Adelaide Mail Centre','South Australia','Australia',5869),
+('Pixonyx',-33.7974423,151.2502275,'25 Dorton Avenue','Sydney','New South Wales','Australia',1161),
+('Thoughtsphere',-31.9478653,115.8693718,'8336 Sutteridge Court','Perth','Western Australia','Australia',6843),
+('Youbridge',-38.043127,145.297768,'50245 Vera Parkway','Eastern Suburbs Mc','New South Wales','Australia',1315),
+('Eare',-42.8821377,147.3271949,'2 Jackson Crossing','Hobart','Tasmania','Australia',7808),
+('Zooveo',-33.7974423,151.2502275,'82 Mccormick Parkway','Sydney','New South Wales','Australia',1191),
+('Zoombox',-33.7974423,151.2502275,'0187 Bowman Park','Sydney','New South Wales','Australia',1196),
+('Teklist',-34.9284989,138.6007456,'0 Tomscot Alley','Adelaide','South Australia','Australia',5839),
+('Kwinu',-34.990888,138.574391,'9 Drewry Drive','Adelaide Mail Centre','South Australia','Australia',5889),
+('Skyndu',-33.7974423,151.2502275,'75459 Macpherson Plaza','Sydney','New South Wales','Australia',1161),
+('Jetwire',-33.8688197,151.2092955,'9036 Briar Crest Place','Sydney','New South Wales','Australia',1033),
+('Oyoloo',-37.7236851,144.9633285,'0433 Anniversary Terrace','Sydney','New South Wales','Australia',1009),
+('Voolia',-33.863927,151.201887,'1 Stephen Pass','Sydney','New South Wales','Australia',1171),
+('Thoughtblab',-33.7974423,151.2502275,'13 Waubesa Terrace','Sydney','New South Wales','Australia',1191),
+('Ainyx',-33.863927,151.201887,'4123 Caliangt Trail','Sydney','New South Wales','Australia',1171),
+('Eare',-34.990888,138.574391,'10415 Rutledge Lane','Adelaide Mail Centre','South Australia','Australia',5869),
+('Meeveo',-33.8688197,151.2092955,'116 Luster Place','Sydney','New South Wales','Australia',1033),
+('Miboo',-33.8651294,151.2078882,'9635 Brentwood Place','Australia Square','New South Wales','Australia',1213),
+('Trupe',-34.990888,138.574391,'98 Hoard Trail','Adelaide Mail Centre','South Australia','Australia',5889),
+('Wordware',-33.8688197,151.2092955,'9593 Surrey Place','Sydney','New South Wales','Australia',1033),
+('Vidoo',-33.8882671,151.2078465,'3 Harbort Junction','Strawberry Hills','New South Wales','Australia',1424),
+('Youfeed',-33.93274,151.188577,'8733 Garrison Court','Eastern Suburbs Mc','New South Wales','Australia',1325),
+('Avavee',-34.9284989,138.6007456,'66824 Muir Trail','Adelaide','South Australia','Australia',5839),
+('Latz',-38.043127,145.297768,'042 Walton Junction','Eastern Suburbs Mc','New South Wales','Australia',1315),
+('Kimia',-31.9505269,115.8604572,'62 Rigney Park','Perth','Western Australia','Australia',6817),
+('Einti',-33.93274,151.188577,'6479 Lawn Circle','Eastern Suburbs Mc','New South Wales','Australia',1325),
+('Tagopia',-33.8688197,151.2092955,'60 Cordelia Junction','Sydney South','New South Wales','Australia',1235),
+('Topiczoom',-38.043127,145.297768,'0 Havey Center','Eastern Suburbs Mc','New South Wales','Australia',1315),
+('Oyope',-33.7974423,151.2502275,'2 Cherokee Plaza','Sydney','New South Wales','Australia',1191),
+('Realcube',-37.713929,144.962411,'718 Moland Parkway','Sydney','New South Wales','Australia',1120),
+('Jabberbean',-27.4697707,153.0251235,'16955 Pepper Wood Junction','Brisbane','Queensland','Australia',9010),
+('Quinu',-33.8688197,151.2092955,'45 Garrison Trail','Sydney South','New South Wales','Australia',1235),
+('Midel',-33.93274,151.188577,'6 Texas Drive','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Blogtags',-34.990888,138.574391,'711 Dixon Road','Adelaide Mail Centre','South Australia','Australia',5889),
+('Twimm',-33.8882671,151.2078465,'13 Tony Road','Strawberry Hills','New South Wales','Australia',1424),
+('Kwimbee',-34.0349557,151.0998291,'14 Helena Court','Sydney','New South Wales','Australia',1028),
+('Skyvu',-37.7204693,144.9629556,'235 Anderson Junction','Sydney','New South Wales','Australia',1109),
+('Rhyloo',-34.990888,138.574391,'3099 Schurz Court','Adelaide Mail Centre','South Australia','Australia',5889),
+('Quinu',-33.7974423,151.2502275,'900 Helena Road','Sydney','New South Wales','Australia',1181),
+('Browseblab',-34.990888,138.574391,'59701 Sloan Circle','Adelaide Mail Centre','South Australia','Australia',5889),
+('Gabtype',-27.9424308,153.3970962,'7 Tomscot Parkway','Sydney','New South Wales','Australia',1140),
+('Youbridge',-33.93274,151.188577,'7070 Bartillon Court','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Wordify',-37.7204693,144.9629556,'3 Main Hill','Sydney','New South Wales','Australia',1109),
+('Quamba',-33.7974423,151.2502275,'0 Delladonna Terrace','Sydney','New South Wales','Australia',1161),
+('Innojam',-34.990888,138.574391,'5155 Goodland Road','Adelaide Mail Centre','South Australia','Australia',5874),
+('Flashspan',-33.8882671,151.2078465,'78889 Bluejay Terrace','Strawberry Hills','New South Wales','Australia',1424),
+('Jaxnation',-31.9505269,115.8604572,'7 Oak Drive','Perth','Western Australia','Australia',6817),
+('Photojam',-37.7071402,144.9611223,'8668 Melvin Terrace','Sydney','New South Wales','Australia',1206),
+('Babbleset',-42.8821377,147.3271949,'701 Hauk Alley','Hobart','Tasmania','Australia',7808),
+('Gevee',-37.7204693,144.9629556,'1428 1st Park','Sydney','New South Wales','Australia',1109),
+('Ntag',-38.043127,145.297768,'9 Maple Circle','Eastern Suburbs Mc','New South Wales','Australia',1315),
+('Fatz',-33.7974423,151.2502275,'5253 Old Gate Point','Sydney','New South Wales','Australia',1196),
+('Camido',-37.8136276,144.9630576,'99395 Kings Parkway','Melbourne','Victoria','Australia',8045),
+('Voolith',-34.9284989,138.6007456,'96946 Pine View Avenue','Adelaide','South Australia','Australia',5839),
+('Feedfish',-37.8136276,144.9630576,'951 Menomonie Place','Melbourne','Victoria','Australia',8383),
+('Gigazoom',-33.8688197,151.2092955,'50382 Elka Road','Sydney','New South Wales','Australia',1043),
+('Oyondu',-37.7236851,144.9633285,'3696 Emmet Parkway','Sydney','New South Wales','Australia',1009),
+('Photobug',-31.9505269,115.8604572,'4 Cascade Avenue','Perth','Western Australia','Australia',6817),
+('Thoughtmix',-37.8136276,144.9630576,'74 Summer Ridge Hill','Melbourne','Victoria','Australia',8383),
+('Dynabox',-27.4697707,153.0251235,'7 Bunting Avenue','Brisbane','Queensland','Australia',9010),
+('Jetwire',-33.93274,151.188577,'262 Butternut Parkway','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Aivee',-37.7204693,144.9629556,'25303 Heath Hill','Sydney','New South Wales','Australia',1109),
+('Topicware',-34.990888,138.574391,'4842 2nd Point','Adelaide Mail Centre','South Australia','Australia',5889),
+('Quamba',-37.713929,144.962411,'93855 Lerdahl Lane','Sydney','New South Wales','Australia',1120),
+('Livetube',-34.990888,138.574391,'3 Scott Crossing','Adelaide Mail Centre','South Australia','Australia',5899),
+('Jaxspan',-34.990888,138.574391,'1 Reinke Center','Adelaide Mail Centre','South Australia','Australia',5869),
+('Yakitri',-31.9478653,115.8693718,'7 Clyde Gallagher Hill','Perth','Western Australia','Australia',6843),
+('Skipstorm',-33.8688197,151.2092955,'58 Vera Terrace','Sydney','New South Wales','Australia',1043),
+('Zoovu',-34.990888,138.574391,'0379 Jay Pass','Adelaide Mail Centre','South Australia','Australia',5869),
+('Dynazzy',-37.8136276,144.9630576,'03 6th Parkway','Melbourne','Victoria','Australia',8383),
+('Wikizz',-37.7204693,144.9629556,'4 Victoria Lane','Sydney','New South Wales','Australia',1109),
+('Twitterbridge',-34.0349557,151.0998291,'195 Southridge Point','Sydney','New South Wales','Australia',1028),
+('Realbridge',-42.8821377,147.3271949,'57 Forest Dale Court','Hobart','Tasmania','Australia',7803),
+('Digitube',-34.990888,138.574391,'931 Kinsman Trail','Adelaide Mail Centre','South Australia','Australia',5889),
+('Voomm',-34.990888,138.574391,'53 Mallory Court','Adelaide Mail Centre','South Australia','Australia',5899),
+('Mita',-37.7204693,144.9629556,'68648 Kensington Plaza','Sydney','New South Wales','Australia',1109),
+('Oyoloo',-42.8821377,147.3271949,'51 Blackbird Lane','Hobart','Tasmania','Australia',7808),
+('Youfeed',-34.8352742,138.596204,'2 Goodland Hill','Northern Suburbs Mc','New South Wales','Australia',1694),
+('Realblab',-33.8688197,151.2092955,'5 Corscot Place','Sydney','New South Wales','Australia',1033),
+('Innotype',-33.8688197,151.2092955,'91408 Harbort Parkway','Sydney','New South Wales','Australia',1043),
+('Yakijo',-27.4697707,153.0251235,'3728 Kipling Lane','Brisbane','Queensland','Australia',9010),
+('Avamm',-34.990888,138.574391,'1743 Emmet Terrace','Adelaide Mail Centre','South Australia','Australia',5889),
+('Fivebridge',-33.93274,151.188577,'05248 Northview Avenue','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Leenti',-33.8989712,151.2149792,'6 Schmedeman Place','Sydney','New South Wales','Australia',1130),
+('Topicshots',-42.8821377,147.3271949,'46858 Mesta Road','Hobart','Tasmania','Australia',7803),
+('Realpoint',-33.8688197,151.2092955,'659 Browning Center','Sydney','New South Wales','Australia',1033),
+('Lazzy',-34.9284989,138.6007456,'497 4th Court','Adelaide','South Australia','Australia',5839),
+('Brainsphere',-37.7236851,144.9633285,'47 Charing Cross Terrace','Sydney','New South Wales','Australia',1009),
+('Quamba',-42.8821377,147.3271949,'19 Forest Dale Street','Hobart','Tasmania','Australia',7803),
+('Voonyx',-27.9424308,153.3970962,'98056 Toban Pass','Sydney','New South Wales','Australia',1140),
+('Kwideo',-33.7974423,151.2502275,'5738 Buell Parkway','Sydney','New South Wales','Australia',1161),
+('Pixope',-37.7204693,144.9629556,'8487 David Hill','Sydney','New South Wales','Australia',1109),
+('Photobean',-33.7974423,151.2502275,'70773 Sutteridge Park','Sydney','New South Wales','Australia',1161),
+('Shufflebeat',-33.8688197,151.2092955,'6967 Fuller Park','Sydney South','New South Wales','Australia',1235),
+('Yombu',-33.8882671,151.2078465,'646 Cascade Hill','Strawberry Hills','New South Wales','Australia',1424),
+('Skippad',-34.990888,138.574391,'02370 4th Road','Adelaide Mail Centre','South Australia','Australia',5874),
+('Divavu',-27.9424308,153.3970962,'885 Utah Parkway','Sydney','New South Wales','Australia',1140),
+('Photospace',-33.7974423,151.2502275,'3 Northview Place','Sydney','New South Wales','Australia',1161),
+('Lazzy',-34.990888,138.574391,'299 Melvin Road','Adelaide Mail Centre','South Australia','Australia',5874),
+('Jabbertype',-33.7974423,151.2502275,'45913 3rd Road','Sydney','New South Wales','Australia',1134),
+('Brightbean',-33.7974423,151.2502275,'2573 Bunker Hill Crossing','Sydney','New South Wales','Australia',1161),
+('Kaymbo',-37.8136276,144.9630576,'0 Troy Junction','Melbourne','Victoria','Australia',8383),
+('Bubbletube',-37.8136276,144.9630576,'1 Twin Pines Drive','Melbourne','Victoria','Australia',8045),
+('Youfeed',-27.4697707,153.0251235,'14790 Oak Drive','Brisbane','Queensland','Australia',9010),
+('Vinte',-34.990888,138.574391,'05 Nelson Lane','Adelaide Mail Centre','South Australia','Australia',5889),
+('Skidoo',-33.7974423,151.2502275,'5703 Lillian Avenue','Sydney','New South Wales','Australia',1161),
+('Cogibox',-33.7974423,151.2502275,'595 Novick Place','Sydney','New South Wales','Australia',1191),
+('Edgepulse',-34.990888,138.574391,'82347 Lindbergh Terrace','Adelaide Mail Centre','South Australia','Australia',5874),
+('Divanoodle',-33.8688197,151.2092955,'71 Summer Ridge Pass','Sydney','New South Wales','Australia',1043),
+('Jaxworks',-33.7974423,151.2502275,'50 Pine View Road','Sydney','New South Wales','Australia',1181),
+('Photobug',-42.8821377,147.3271949,'61518 Parkside Drive','Hobart','Tasmania','Australia',7808),
+('Jaxnation',-37.7204693,144.9629556,'2733 Thierer Trail','Sydney','New South Wales','Australia',1109),
+('Babbleset',-34.8352742,138.596204,'1 Dorton Drive','Northern Suburbs Mc','New South Wales','Australia',1694),
+('Realbridge',-42.8821377,147.3271949,'7 Westend Point','Hobart','Tasmania','Australia',7803),
+('Browsetype',-37.7204693,144.9629556,'8 Buell Court','Sydney','New South Wales','Australia',1109),
+('Zoomdog',-27.4697707,153.0251235,'06517 Northwestern Center','Brisbane','Queensland','Australia',9010),
+('Topicware',-37.7236851,144.9633285,'836 Duke Terrace','Sydney','New South Wales','Australia',1009),
+('Twitterworks',-31.9478653,115.8693718,'3194 Donald Point','Perth','Western Australia','Australia',6843),
+('Jaxnation',-33.93274,151.188577,'4 Union Center','Eastern Suburbs Mc','New South Wales','Australia',1325),
+('Quimm',-33.7974423,151.2502275,'3 Derek Plaza','Sydney','New South Wales','Australia',1181),
+('Eabox',-41.4332215,147.1440875,'38 Heffernan Center','Launceston','Tasmania','Australia',7904),
+('Brainsphere',-33.7974423,151.2502275,'3 Holy Cross Street','Sydney','New South Wales','Australia',1191),
+('Skiptube',-27.4697707,153.0251235,'88851 Schlimgen Crossing','Brisbane','Queensland','Australia',9010),
+('Oyondu',-37.8136276,144.9630576,'252 Quincy Parkway','Melbourne','Victoria','Australia',8383),
+('Miboo',-33.863927,151.201887,'39 Kingsford Point','Sydney','New South Wales','Australia',1171),
+('Dabshots',-33.8651294,151.2078882,'138 Independence Pass','Australia Square','New South Wales','Australia',1213),
+('Digitube',-33.8688197,151.2092955,'38 Lyons Pass','Sydney South','New South Wales','Australia',1235),
+('Yakitri',-33.7974423,151.2502275,'36 Morningstar Park','Sydney','New South Wales','Australia',1191),
+('Avaveo',-34.990888,138.574391,'2 Eastwood Lane','Adelaide Mail Centre','South Australia','Australia',5899),
+('Jabberstorm',-34.8352742,138.596204,'5 Nobel Court','Northern Suburbs Mc','New South Wales','Australia',1694),
+('Realcube',-33.7974423,151.2502275,'84959 Fair Oaks Road','Sydney','New South Wales','Australia',1134),
+('Jabbertype',-34.990888,138.574391,'95026 Golden Leaf Road','Adelaide Mail Centre','South Australia','Australia',5874),
+('Skinix',-27.9424308,153.3970962,'31 Springs Road','Sydney','New South Wales','Australia',1140),
+('Ntag',-31.9478653,115.8693718,'9 Weeping Birch Junction','Perth','Western Australia','Australia',6843),
+('Riffpedia',-34.8352742,138.596204,'8864 Stephen Street','Northern Suburbs Mc','New South Wales','Australia',1694),
+('Thoughtstorm',-37.7204693,144.9629556,'4153 Express Circle','Sydney','New South Wales','Australia',1109),
+('Mudo',-33.7974423,151.2502275,'6 Dottie Point','Sydney','New South Wales','Australia',1161),
+('Quamba',-31.9478653,115.8693718,'310 Shoshone Point','Perth','Western Australia','Australia',6843),
+('Demizz',-41.4332215,147.1440875,'973 Old Shore Terrace','Launceston','Tasmania','Australia',7916),
+('Devpoint',-33.8882671,151.2078465,'03917 Melby Avenue','Strawberry Hills','New South Wales','Australia',1424),
+('Quire',-27.9424308,153.3970962,'1254 Ridgeway Court','Sydney','New South Wales','Australia',1140),
+('Browsebug',-34.990888,138.574391,'6903 Truax Way','Adelaide Mail Centre','South Australia','Australia',5899),
+('Wordpedia',-42.8821377,147.3271949,'834 Katie Hill','Hobart','Tasmania','Australia',7808),
+('Pixoboo',-37.7236851,144.9633285,'325 Melrose Avenue','Sydney','New South Wales','Australia',1009),
+('Devshare',-37.7236851,144.9633285,'2247 Nancy Alley','Sydney','New South Wales','Australia',1009),
+('Innotype',-33.863927,151.201887,'5051 Charing Cross Road','Sydney','New South Wales','Australia',1171),
+('Babbleopia',-37.7071402,144.9611223,'3 Scoville Crossing','Sydney','New South Wales','Australia',1206),
+('Flashspan',-33.8688197,151.2092955,'943 Scofield Circle','Sydney','New South Wales','Australia',1033),
+('Quatz',-33.7974423,151.2502275,'44599 Carberry Crossing','Sydney','New South Wales','Australia',1191),
+('Meemm',-33.8688197,151.2092955,'5113 Rockefeller Park','Sydney','New South Wales','Australia',1043),
+('Flipopia',-34.990888,138.574391,'72 Cordelia Crossing','Adelaide Mail Centre','South Australia','Australia',5889),
+('Kazio',-33.8651294,151.2078882,'7 Katie Parkway','Australia Square','New South Wales','Australia',1213),
+('Eazzy',-34.990888,138.574391,'608 High Crossing Trail','Adelaide Mail Centre','South Australia','Australia',5899),
+('Twitterwire',-33.7974423,151.2502275,'63 Lerdahl Pass','Sydney','New South Wales','Australia',1196),
+('Roomm',-33.7974423,151.2502275,'89660 Fordem Way','Sydney','New South Wales','Australia',1134),
+('Mudo',-34.8352742,138.596204,'9 Oak Way','Northern Suburbs Mc','New South Wales','Australia',1694),
+('Ooba',-34.990888,138.574391,'95207 Muir Crossing','Adelaide Mail Centre','South Australia','Australia',5889),
+('Rhyloo',-37.7204693,144.9629556,'0108 Washington Lane','Sydney','New South Wales','Australia',1109),
+('Mydeo',-27.4697707,153.0251235,'6 1st Junction','Brisbane','Queensland','Australia',9010),
+('Skinix',-37.7071402,144.9611223,'0 Bartelt Center','Sydney','New South Wales','Australia',1206),
+('Meevee',-33.93274,151.188577,'80 Debra Point','Eastern Suburbs Mc','New South Wales','Australia',1325),
+('Tazzy',-33.8688197,151.2092955,'5910 Derek Court','Sydney South','New South Wales','Australia',1235),
+('Eazzy',-33.8651294,151.2078882,'701 Independence Court','Australia Square','New South Wales','Australia',1213),
+('Meembee',-42.8821377,147.3271949,'5946 Vermont Park','Hobart','Tasmania','Australia',7803),
+('Meeveo',-31.9478653,115.8693718,'99859 Lawn Place','Perth','Western Australia','Australia',6843),
+('Rhynoodle',-37.8136276,144.9630576,'342 Kim Terrace','Melbourne','Victoria','Australia',8045),
+('Skivee',-31.9505269,115.8604572,'161 Armistice Junction','Perth','Western Australia','Australia',6817),
+('Topicblab',-33.8688197,151.2092955,'75992 Pankratz Point','Sydney South','New South Wales','Australia',1235),
+('Linklinks',-34.990888,138.574391,'5 Hallows Pass','Adelaide Mail Centre','South Australia','Australia',5889),
+('Mynte',-31.9505269,115.8604572,'13314 Becker Center','Perth','Western Australia','Australia',6817),
+('Kazu',-27.9424308,153.3970962,'36 Bunker Hill Court','Sydney','New South Wales','Australia',1140),
+('Brainlounge',-31.9478653,115.8693718,'26917 Red Cloud Alley','Perth','Western Australia','Australia',6843),
+('Oloo',-31.9505269,115.8604572,'26273 Birchwood Terrace','Perth','Western Australia','Australia',6817),
+('Skilith',-41.4332215,147.1440875,'9 Swallow Drive','Launceston','Tasmania','Australia',7916),
+('Photobug',-38.043127,145.297768,'20 Blue Bill Park Hill','Eastern Suburbs Mc','New South Wales','Australia',1315),
+('Yata',-33.7974423,151.2502275,'1 Orin Drive','Sydney','New South Wales','Australia',1161),
+('Blogtag',-33.93274,151.188577,'75044 Nobel Park','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Dabvine',-33.8882671,151.2078465,'75 Lighthouse Bay Alley','Strawberry Hills','New South Wales','Australia',1424),
+('Katz',-37.7236851,144.9633285,'19806 Green Ridge Park','Sydney','New South Wales','Australia',1009),
+('Livepath',-33.7974423,151.2502275,'2 Gerald Trail','Sydney','New South Wales','Australia',1134),
+('Wikizz',-42.8821377,147.3271949,'44 Barnett Center','Hobart','Tasmania','Australia',7803),
+('Mycat',-42.8821377,147.3271949,'47 Schlimgen Street','Hobart','Tasmania','Australia',7808),
+('Geba',-41.4332215,147.1440875,'597 Dixon Terrace','Launceston','Tasmania','Australia',7916),
+('Mita',-42.8821377,147.3271949,'61 Lindbergh Way','Hobart','Tasmania','Australia',7803),
+('Gabcube',-33.7974423,151.2502275,'69167 Acker Parkway','Sydney','New South Wales','Australia',1134),
+('Topiczoom',-33.7974423,151.2502275,'9 Darwin Pass','Sydney','New South Wales','Australia',1181),
+('Skaboo',-33.7974423,151.2502275,'40 Iowa Lane','Sydney','New South Wales','Australia',1196),
+('Linkbuzz',-33.8688197,151.2092955,'8667 Grasskamp Hill','Sydney South','New South Wales','Australia',1235),
+('Yadel',-33.7974423,151.2502275,'368 Carberry Junction','Sydney','New South Wales','Australia',1134),
+('Meembee',-33.863927,151.201887,'14566 Dawn Way','Sydney','New South Wales','Australia',1171),
+('Meevee',-42.8821377,147.3271949,'1 Laurel Center','Hobart','Tasmania','Australia',7803),
+('Livepath',-34.990888,138.574391,'26 Pine View Pass','Adelaide Mail Centre','South Australia','Australia',5874),
+('Blogtag',-33.7974423,151.2502275,'2 Coolidge Park','Sydney','New South Wales','Australia',1196),
+('Aimbo',-34.990888,138.574391,'7113 8th Court','Adelaide Mail Centre','South Australia','Australia',5869),
+('Rhyzio',-37.7071402,144.9611223,'8 Warbler Point','Sydney','New South Wales','Australia',1206),
+('Oozz',-31.9505269,115.8604572,'72194 Mayer Lane','Perth','Western Australia','Australia',6817),
+('Ntags',-31.9505269,115.8604572,'391 Southridge Park','Perth','Western Australia','Australia',6817),
+('Yambee',-34.8352742,138.596204,'2431 Brown Circle','Northern Suburbs Mc','New South Wales','Australia',1694),
+('Devshare',-37.7204693,144.9629556,'6092 Mallory Street','Sydney','New South Wales','Australia',1109),
+('Tagtune',-33.8882671,151.2078465,'89 Melrose Way','Strawberry Hills','New South Wales','Australia',1424),
+('Zoonder',-34.990888,138.574391,'4299 Pearson Crossing','Adelaide Mail Centre','South Australia','Australia',5889),
+('Browsetype',-34.990888,138.574391,'36083 Stuart Crossing','Adelaide Mail Centre','South Australia','Australia',5874),
+('Pixope',-42.8821377,147.3271949,'41 Vera Park','Hobart','Tasmania','Australia',7808),
+('Bluezoom',-42.8821377,147.3271949,'66 Gale Lane','Hobart','Tasmania','Australia',7808),
+('Wordware',-31.9478653,115.8693718,'76 Roth Crossing','Perth','Western Australia','Australia',6843),
+('Flashpoint',-33.7974423,151.2502275,'85 Doe Crossing Trail','Sydney','New South Wales','Australia',1181),
+('Leenti',-33.7974423,151.2502275,'43 8th Center','Sydney','New South Wales','Australia',1161),
+('Buzzster',-31.9505269,115.8604572,'0 Towne Court','Perth','Western Australia','Australia',6817),
+('Gabcube',-34.9284989,138.6007456,'5382 Anderson Place','Adelaide','South Australia','Australia',5839),
+('Babbleblab',-41.4332215,147.1440875,'305 Stang Junction','Launceston','Tasmania','Australia',7904),
+('Skaboo',-33.8989712,151.2149792,'44 Straubel Alley','Sydney','New South Wales','Australia',1130),
+('Divavu',-33.863927,151.201887,'93 Red Cloud Avenue','Sydney','New South Wales','Australia',1171),
+('Gigashots',-33.93274,151.188577,'82400 Carberry Point','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Bubblebox',-33.7974423,151.2502275,'58 Chinook Hill','Sydney','New South Wales','Australia',1161),
+('Aimbo',-27.4697707,153.0251235,'908 Lien Place','Brisbane','Queensland','Australia',9010),
+('Fanoodle',-33.863927,151.201887,'345 Londonderry Way','Sydney','New South Wales','Australia',1171),
+('Eayo',-42.8821377,147.3271949,'1383 Superior Center','Hobart','Tasmania','Australia',7808),
+('Brightbean',-33.8651294,151.2078882,'9 Rutledge Park','Australia Square','New South Wales','Australia',1213),
+('Camimbo',-33.863927,151.201887,'39 Evergreen Way','Sydney','New South Wales','Australia',1171),
+('Lajo',-34.990888,138.574391,'25788 Holy Cross Crossing','Adelaide Mail Centre','South Australia','Australia',5889),
+('Topiclounge',-33.8882671,151.2078465,'10 Eliot Crossing','Strawberry Hills','New South Wales','Australia',1424),
+('Jazzy',-41.4332215,147.1440875,'48 Rusk Lane','Launceston','Tasmania','Australia',7916),
+('Blogtags',-34.990888,138.574391,'895 Havey Alley','Adelaide Mail Centre','South Australia','Australia',5899),
+('Meeveo',-33.7974423,151.2502275,'669 Schiller Drive','Sydney','New South Wales','Australia',1181),
+('Devify',-33.8651294,151.2078882,'24 Coleman Drive','Australia Square','New South Wales','Australia',1213),
+('Yotz',-34.8352742,138.596204,'8691 Meadow Ridge Hill','Northern Suburbs Mc','New South Wales','Australia',1694),
+('Devshare',-34.990888,138.574391,'9 Namekagon Circle','Adelaide Mail Centre','South Australia','Australia',5889),
+('Cogilith',-31.9505269,115.8604572,'58719 Luster Road','Perth','Western Australia','Australia',6817),
+('Voomm',-42.8821377,147.3271949,'096 Golf Course Road','Hobart','Tasmania','Australia',7808),
+('Topicstorm',-34.990888,138.574391,'00316 Autumn Leaf Alley','Adelaide Mail Centre','South Australia','Australia',5889),
+('Centidel',-37.8136276,144.9630576,'29 Sheridan Hill','Melbourne','Victoria','Australia',8045),
+('Viva',-33.8989712,151.2149792,'99 Monterey Plaza','Sydney','New South Wales','Australia',1130),
+('Kanoodle',-33.8688197,151.2092955,'4853 Mcguire Parkway','Sydney','New South Wales','Australia',1033),
+('Blognation',-37.713929,144.962411,'6173 Grasskamp Place','Sydney','New South Wales','Australia',1120),
+('Browseblab',-37.7071402,144.9611223,'032 Esch Lane','Sydney','New South Wales','Australia',1206),
+('Devbug',-34.990888,138.574391,'18 Mcbride Court','Adelaide Mail Centre','South Australia','Australia',5899),
+('Digitube',-37.8136276,144.9630576,'5 Jackson Plaza','Melbourne','Victoria','Australia',8045),
+('Skinder',-31.9478653,115.8693718,'1064 Mcguire Terrace','Perth','Western Australia','Australia',6843),
+('Yombu',-34.8352742,138.596204,'06 Donald Drive','Northern Suburbs Mc','New South Wales','Australia',1694),
+('Youbridge',-34.9284989,138.6007456,'0 Florence Center','Adelaide','South Australia','Australia',5839),
+('Latz',-33.8989712,151.2149792,'076 Dayton Road','Sydney','New South Wales','Australia',1130),
+('Izio',-33.7974423,151.2502275,'5873 Logan Pass','Sydney','New South Wales','Australia',1161),
+('Twitternation',-33.93274,151.188577,'274 Goodland Pass','Eastern Suburbs Mc','New South Wales','Australia',1325),
+('Oyoba',-33.93274,151.188577,'109 North Circle','Eastern Suburbs Mc','New South Wales','Australia',1325),
+('Abatz',-33.93274,151.188577,'257 Lillian Hill','Eastern Suburbs Mc','New South Wales','Australia',1325),
+('Skyvu',-34.990888,138.574391,'12 Laurel Way','Adelaide Mail Centre','South Australia','Australia',5899),
+('Thoughtstorm',-33.7974423,151.2502275,'56 Donald Road','Sydney','New South Wales','Australia',1134),
+('Bubbletube',-42.8821377,147.3271949,'468 Hanover Trail','Hobart','Tasmania','Australia',7808),
+('Skilith',-27.9424308,153.3970962,'9 Ronald Regan Park','Sydney','New South Wales','Australia',1140),
+('Muxo',-33.863927,151.201887,'15 Hovde Way','Sydney','New South Wales','Australia',1171),
+('Oozz',-34.990888,138.574391,'6 Blue Bill Park Alley','Adelaide Mail Centre','South Australia','Australia',5899),
+('Yakitri',-41.4332215,147.1440875,'0531 8th Terrace','Launceston','Tasmania','Australia',7904),
+('Tambee',-33.863927,151.201887,'1 Vera Drive','Sydney','New South Wales','Australia',1171),
+('Skippad',-42.8821377,147.3271949,'81728 Marquette Alley','Hobart','Tasmania','Australia',7803),
+('Twiyo',-37.713929,144.962411,'26462 Hoepker Avenue','Sydney','New South Wales','Australia',1120),
+('Katz',-34.9284989,138.6007456,'62778 Melody Hill','Adelaide','South Australia','Australia',5839),
+('Mydeo',-41.4332215,147.1440875,'69397 Blue Bill Park Drive','Launceston','Tasmania','Australia',7904),
+('Thoughtworks',-33.7974423,151.2502275,'3 Corry Alley','Sydney','New South Wales','Australia',1191),
+('Youopia',-42.8821377,147.3271949,'29280 Riverside Hill','Hobart','Tasmania','Australia',7803),
+('Youopia',-37.8136276,144.9630576,'77674 La Follette Junction','Melbourne','Victoria','Australia',8383),
+('Shuffletag',-37.8136276,144.9630576,'81358 Summer Ridge Drive','Melbourne','Victoria','Australia',8383),
+('Thoughtstorm',-33.8688197,151.2092955,'4 Cody Crossing','Sydney South','New South Wales','Australia',1235),
+('Jayo',-34.990888,138.574391,'470 Meadow Ridge Junction','Adelaide Mail Centre','South Australia','Australia',5899),
+('Skinte',-31.9505269,115.8604572,'9470 Melvin Way','Perth','Western Australia','Australia',6817),
+('Topiclounge',-33.7974423,151.2502275,'1 Becker Drive','Sydney','New South Wales','Australia',1161),
+('Gevee',-34.9284989,138.6007456,'3 Waubesa Road','Adelaide','South Australia','Australia',5839),
+('Kazio',-33.863927,151.201887,'16999 Schmedeman Place','Sydney','New South Wales','Australia',1171),
+('InnoZ',-33.8651294,151.2078882,'6 Boyd Point','Australia Square','New South Wales','Australia',1213),
+('Devpoint',-34.990888,138.574391,'3269 Mallory Center','Adelaide Mail Centre','South Australia','Australia',5899),
+('Zoonder',-33.8651294,151.2078882,'81 Dottie Drive','Australia Square','New South Wales','Australia',1213),
+('LiveZ',-34.0349557,151.0998291,'47 Nevada Road','Sydney','New South Wales','Australia',1028),
+('Twitterlist',-41.4332215,147.1440875,'3 Raven Alley','Launceston','Tasmania','Australia',7916),
+('Jabberbean',-27.9424308,153.3970962,'2914 Hovde Crossing','Sydney','New South Wales','Australia',1140),
+('Kazio',-41.4332215,147.1440875,'16 Debs Alley','Launceston','Tasmania','Australia',7904),
+('Tambee',-37.8136276,144.9630576,'67826 Little Fleur Street','Melbourne','Victoria','Australia',8383),
+('Skipstorm',-33.8688197,151.2092955,'0423 Old Gate Park','Sydney','New South Wales','Australia',1033),
+('Miboo',-33.8688197,151.2092955,'6647 Lyons Avenue','Sydney','New South Wales','Australia',1043),
+('Skyble',-33.93274,151.188577,'3 Almo Park','Eastern Suburbs Mc','New South Wales','Australia',1325),
+('Quamba',-33.7974423,151.2502275,'9112 Fuller Terrace','Sydney','New South Wales','Australia',1196),
+('Tagtune',-33.8688197,151.2092955,'479 Packers Trail','Sydney South','New South Wales','Australia',1235),
+('Bubbletube',-33.7974423,151.2502275,'6131 Scoville Junction','Sydney','New South Wales','Australia',1161),
+('Aibox',-33.7974423,151.2502275,'98252 Kropf Place','Sydney','New South Wales','Australia',1191),
+('Plambee',-33.8651294,151.2078882,'81 Bellgrove Road','Australia Square','New South Wales','Australia',1213),
+('Zooveo',-33.8688197,151.2092955,'5 Ilene Park','Sydney','New South Wales','Australia',1043),
+('Jetpulse',-33.7974423,151.2502275,'77694 Longview Drive','Sydney','New South Wales','Australia',1181),
+('Divape',-33.7974423,151.2502275,'15879 Graceland Pass','Sydney','New South Wales','Australia',1134),
+('Fanoodle',-41.4332215,147.1440875,'61439 Harbort Way','Launceston','Tasmania','Australia',7904),
+('Divape',-33.7974423,151.2502275,'72 Clarendon Trail','Sydney','New South Wales','Australia',1134),
+('Yacero',-41.4332215,147.1440875,'1086 Texas Point','Launceston','Tasmania','Australia',7916),
+('Avavee',-33.8882671,151.2078465,'543 Harbort Pass','Strawberry Hills','New South Wales','Australia',1424),
+('Realpoint',-31.9505269,115.8604572,'75 Fallview Hill','Perth','Western Australia','Australia',6817),
+('Kazu',-41.4332215,147.1440875,'9 Morning Crossing','Launceston','Tasmania','Australia',7904),
+('Youtags',-37.8136276,144.9630576,'542 Golf Course Court','Melbourne','Victoria','Australia',8383),
+('Tanoodle',-33.863927,151.201887,'782 Kropf Junction','Sydney','New South Wales','Australia',1171),
+('Ntags',-42.8821377,147.3271949,'723 Doe Crossing Alley','Hobart','Tasmania','Australia',7803),
+('Dabfeed',-33.8688197,151.2092955,'2529 Johnson Place','Sydney','New South Wales','Australia',1033),
+('Digitube',-34.990888,138.574391,'86 Eagle Crest Lane','Adelaide Mail Centre','South Australia','Australia',5899),
+('Thoughtsphere',-34.9284989,138.6007456,'82515 Reindahl Center','Adelaide','South Australia','Australia',5839),
+('Zava',-37.7236851,144.9633285,'41544 Red Cloud Pass','Sydney','New South Wales','Australia',1009),
+('Quamba',-37.7236851,144.9633285,'6 Rowland Drive','Sydney','New South Wales','Australia',1009),
+('Yombu',-34.990888,138.574391,'59137 Kingsford Park','Adelaide Mail Centre','South Australia','Australia',5869),
+('Linktype',-33.8688197,151.2092955,'1200 Jenifer Street','Sydney','New South Wales','Australia',1033),
+('Pixope',-33.8651294,151.2078882,'3288 Helena Place','Australia Square','New South Wales','Australia',1213),
+('Trilith',-34.8352742,138.596204,'3188 Ryan Parkway','Northern Suburbs Mc','New South Wales','Australia',1694),
+('Realblab',-33.93274,151.188577,'942 Scott Road','Eastern Suburbs Mc','New South Wales','Australia',1325),
+('Dazzlesphere',-41.4332215,147.1440875,'12 Menomonie Crossing','Launceston','Tasmania','Australia',7904),
+('Riffpedia',-33.8688197,151.2092955,'4501 Ridgeview Center','Sydney','New South Wales','Australia',1043),
+('Jaxspan',-33.7974423,151.2502275,'6 Spohn Plaza','Sydney','New South Wales','Australia',1191),
+('Tanoodle',-34.9284989,138.6007456,'420 Rieder Trail','Adelaide','South Australia','Australia',5839),
+('Kanoodle',-27.9424308,153.3970962,'45 Mesta Place','Sydney','New South Wales','Australia',1140),
+('Thoughtmix',-27.9424308,153.3970962,'94767 Sutteridge Street','Sydney','New South Wales','Australia',1140),
+('Ntags',-31.9478653,115.8693718,'4 Pleasure Road','Perth','Western Australia','Australia',6843),
+('Skynoodle',-34.9284989,138.6007456,'1407 Independence Drive','Adelaide','South Australia','Australia',5839),
+('Tavu',-33.8688197,151.2092955,'4414 Messerschmidt Plaza','Sydney','New South Wales','Australia',1033),
+('Kamba',-33.8651294,151.2078882,'09504 Judy Crossing','Australia Square','New South Wales','Australia',1213),
+('Skimia',-37.7204693,144.9629556,'4329 Graceland Court','Sydney','New South Wales','Australia',1109),
+('Mydeo',-33.8989712,151.2149792,'11751 Gale Hill','Sydney','New South Wales','Australia',1130),
+('Gabtype',-34.990888,138.574391,'009 Thackeray Road','Adelaide Mail Centre','South Australia','Australia',5899),
+('Wikizz',-34.990888,138.574391,'4 Talmadge Junction','Adelaide Mail Centre','South Australia','Australia',5874),
+('Jetpulse',-33.7974423,151.2502275,'10 Bunting Alley','Sydney','New South Wales','Australia',1161),
+('Twitterbeat',-34.990888,138.574391,'7240 Sunfield Point','Adelaide Mail Centre','South Australia','Australia',5869),
+('Dynabox',-37.7071402,144.9611223,'8625 Nelson Way','Sydney','New South Wales','Australia',1206),
+('Yodoo',-38.043127,145.297768,'00 Forest Point','Eastern Suburbs Mc','New South Wales','Australia',1315),
+('Flashspan',-33.7974423,151.2502275,'14 Londonderry Place','Sydney','New South Wales','Australia',1181),
+('Pixoboo',-33.863927,151.201887,'32243 Annamark Pass','Sydney','New South Wales','Australia',1171),
+('Meezzy',-33.7974423,151.2502275,'047 Eastlawn Place','Sydney','New South Wales','Australia',1161),
+('Jaloo',-42.8821377,147.3271949,'3780 Hanover Pass','Hobart','Tasmania','Australia',7808),
+('Eadel',-33.93274,151.188577,'84700 Reinke Point','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Wikivu',-33.93274,151.188577,'3 Del Mar Court','Eastern Suburbs Mc','New South Wales','Australia',1325),
+('Feedspan',-34.990888,138.574391,'08264 Warbler Plaza','Adelaide Mail Centre','South Australia','Australia',5899),
+('Brightdog',-27.4697707,153.0251235,'6 Hayes Lane','Brisbane','Queensland','Australia',9010),
+('Jetpulse',-33.93274,151.188577,'258 Annamark Plaza','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Realmix',-31.9478653,115.8693718,'3556 Gale Road','Perth','Western Australia','Australia',6843),
+('Chatterbridge',-37.7071402,144.9611223,'47428 Michigan Street','Sydney','New South Wales','Australia',1206),
+('Roomm',-37.8136276,144.9630576,'5005 Muir Lane','Melbourne','Victoria','Australia',8383),
+('Fadeo',-41.4332215,147.1440875,'9 Kensington Terrace','Launceston','Tasmania','Australia',7916),
+('Ozu',-33.8989712,151.2149792,'26377 Melody Hill','Sydney','New South Wales','Australia',1130),
+('Meetz',-34.990888,138.574391,'38 Village Park','Adelaide Mail Centre','South Australia','Australia',5869),
+('Eidel',-37.7071402,144.9611223,'60100 Northland Trail','Sydney','New South Wales','Australia',1206),
+('Centimia',-33.7974423,151.2502275,'67536 Kim Crossing','Sydney','New South Wales','Australia',1196),
+('Zoomlounge',-37.7204693,144.9629556,'2 Tennessee Hill','Sydney','New South Wales','Australia',1109),
+('Linklinks',-33.8882671,151.2078465,'074 Beilfuss Parkway','Strawberry Hills','New South Wales','Australia',1424),
+('Yacero',-37.8136276,144.9630576,'63687 Independence Circle','Melbourne','Victoria','Australia',8383),
+('Shuffledrive',-34.990888,138.574391,'41260 Norway Maple Alley','Adelaide Mail Centre','South Australia','Australia',5899),
+('Photofeed',-42.8821377,147.3271949,'2574 Green Ridge Trail','Hobart','Tasmania','Australia',7803),
+('Janyx',-33.93274,151.188577,'94913 Sloan Plaza','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Skilith',-31.9478653,115.8693718,'490 Dorton Crossing','Perth','Western Australia','Australia',6843),
+('Skiba',-33.863927,151.201887,'89595 Algoma Hill','Sydney','New South Wales','Australia',1171),
+('Youfeed',-33.8688197,151.2092955,'95 International Alley','Sydney South','New South Wales','Australia',1235),
+('Fivebridge',-37.713929,144.962411,'05 Stuart Road','Sydney','New South Wales','Australia',1120),
+('Topicware',-33.8651294,151.2078882,'651 Cody Road','Australia Square','New South Wales','Australia',1213),
+('Browseblab',-33.8651294,151.2078882,'10 David Hill','Australia Square','New South Wales','Australia',1213),
+('Mybuzz',-33.8651294,151.2078882,'2147 Petterle Point','Australia Square','New South Wales','Australia',1213),
+('Jaxbean',-38.043127,145.297768,'488 Milwaukee Road','Eastern Suburbs Mc','New South Wales','Australia',1315),
+('Gigaclub',-41.4332215,147.1440875,'0 Northridge Terrace','Launceston','Tasmania','Australia',7916),
+('Vipe',-41.4332215,147.1440875,'06433 Ridgeway Circle','Launceston','Tasmania','Australia',7916),
+('Eire',-33.7974423,151.2502275,'9602 Macpherson Crossing','Sydney','New South Wales','Australia',1161),
+('Eimbee',-41.4332215,147.1440875,'410 Sommers Parkway','Launceston','Tasmania','Australia',7916),
+('Skynoodle',-33.8651294,151.2078882,'181 Larry Plaza','Australia Square','New South Wales','Australia',1213),
+('Brightbean',-37.7236851,144.9633285,'42049 Nova Place','Sydney','New South Wales','Australia',1009),
+('Jabbersphere',-33.7974423,151.2502275,'7124 Forest Run Park','Sydney','New South Wales','Australia',1191),
+('Lazzy',-34.990888,138.574391,'711 Loeprich Alley','Adelaide Mail Centre','South Australia','Australia',5874),
+('Quinu',-41.4332215,147.1440875,'14870 Ohio Trail','Launceston','Tasmania','Australia',7916),
+('Oloo',-41.4332215,147.1440875,'8 Valley Edge Plaza','Launceston','Tasmania','Australia',7904),
+('Centimia',-33.8989712,151.2149792,'30 Fallview Circle','Sydney','New South Wales','Australia',1130),
+('Thoughtsphere',-34.0349557,151.0998291,'3 Oak Plaza','Sydney','New South Wales','Australia',1028),
+('Rhynoodle',-33.8651294,151.2078882,'96 Blackbird Place','Australia Square','New South Wales','Australia',1213),
+('Wordtune',-42.8821377,147.3271949,'97 Maple Park','Hobart','Tasmania','Australia',7808),
+('Ooba',-33.93274,151.188577,'3201 Hansons Trail','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Abatz',-33.7974423,151.2502275,'06 Shasta Street','Sydney','New South Wales','Australia',1161),
+('Twitterworks',-33.93274,151.188577,'5 Thierer Lane','Eastern Suburbs Mc','New South Wales','Australia',1325),
+('Flipstorm',-41.4332215,147.1440875,'43 Eliot Lane','Launceston','Tasmania','Australia',7916),
+('Quatz',-42.8821377,147.3271949,'89422 Daystar Place','Hobart','Tasmania','Australia',7803),
+('Zoombeat',-41.4332215,147.1440875,'4 Ridgeview Alley','Launceston','Tasmania','Australia',7904),
+('Yoveo',-37.7204693,144.9629556,'6622 Quincy Point','Sydney','New South Wales','Australia',1109),
+('Zazio',-33.7974423,151.2502275,'315 Pankratz Junction','Sydney','New South Wales','Australia',1181),
+('Tagtune',-31.9478653,115.8693718,'1 Sommers Avenue','Perth','Western Australia','Australia',6843),
+('Voomm',-34.8352742,138.596204,'733 Coleman Way','Northern Suburbs Mc','New South Wales','Australia',1694),
+('Tavu',-31.9505269,115.8604572,'2 Green Ridge Lane','Perth','Western Australia','Australia',6817),
+('Jabbertype',-37.7236851,144.9633285,'863 Crest Line Trail','Sydney','New South Wales','Australia',1009),
+('Lazzy',-38.043127,145.297768,'93 Dakota Place','Eastern Suburbs Mc','New South Wales','Australia',1315),
+('Meejo',-33.7974423,151.2502275,'2 Parkside Terrace','Sydney','New South Wales','Australia',1134),
+('Eabox',-42.8821377,147.3271949,'32792 Glendale Point','Hobart','Tasmania','Australia',7803),
+('Flashset',-33.7974423,151.2502275,'1 Donald Hill','Sydney','New South Wales','Australia',1196),
+('Wikizz',-33.7974423,151.2502275,'2081 Hoepker Way','Sydney','New South Wales','Australia',1134),
+('Twimm',-31.9505269,115.8604572,'4 Logan Street','Perth','Western Australia','Australia',6817),
+('Pixope',-33.8882671,151.2078465,'63396 Hollow Ridge Junction','Strawberry Hills','New South Wales','Australia',1424),
+('Quinu',-33.7974423,151.2502275,'932 Southridge Park','Sydney','New South Wales','Australia',1181),
+('Flipopia',-33.8688197,151.2092955,'361 Buell Parkway','Sydney South','New South Wales','Australia',1235),
+('InnoZ',-37.7071402,144.9611223,'03742 Killdeer Junction','Sydney','New South Wales','Australia',1206),
+('Skyble',-33.8882671,151.2078465,'45588 Carberry Center','Strawberry Hills','New South Wales','Australia',1424),
+('Kwinu',-34.990888,138.574391,'76476 Morningstar Terrace','Adelaide Mail Centre','South Australia','Australia',5889),
+('Zazio',-33.8882671,151.2078465,'77 Merrick Alley','Strawberry Hills','New South Wales','Australia',1424),
+('InnoZ',-33.7974423,151.2502275,'0755 Independence Park','Sydney','New South Wales','Australia',1181),
+('Roodel',-42.8821377,147.3271949,'95 Larry Street','Hobart','Tasmania','Australia',7803),
+('Brainlounge',-33.7974423,151.2502275,'2591 Autumn Leaf Street','Sydney','New South Wales','Australia',1196),
+('Abata',-33.863927,151.201887,'544 Lien Hill','Sydney','New South Wales','Australia',1171),
+('Skynoodle',-34.8352742,138.596204,'56 Lawn Terrace','Northern Suburbs Mc','New South Wales','Australia',1694),
+('Yombu',-34.990888,138.574391,'7381 Maywood Way','Adelaide Mail Centre','South Australia','Australia',5899),
+('Skynoodle',-34.8352742,138.596204,'2 Becker Trail','Northern Suburbs Mc','New South Wales','Australia',1694),
+('Skaboo',-27.4697707,153.0251235,'10977 Evergreen Center','Brisbane','Queensland','Australia',9010),
+('Kwilith',-34.990888,138.574391,'383 Londonderry Place','Adelaide Mail Centre','South Australia','Australia',5889),
+('Skipfire',-37.8136276,144.9630576,'507 South Trail','Melbourne','Victoria','Australia',8383),
+('Yamia',-37.713929,144.962411,'5116 Redwing Terrace','Sydney','New South Wales','Australia',1120),
+('Vidoo',-34.990888,138.574391,'62659 Maple Drive','Adelaide Mail Centre','South Australia','Australia',5889),
+('Jaxnation',-42.8821377,147.3271949,'947 Grasskamp Avenue','Hobart','Tasmania','Australia',7808),
+('Digitube',-34.9284989,138.6007456,'58 Londonderry Center','Adelaide','South Australia','Australia',5839),
+('Divavu',-37.8136276,144.9630576,'93770 Harbort Pass','Melbourne','Victoria','Australia',8045),
+('Livetube',-37.7236851,144.9633285,'68179 Macpherson Pass','Sydney','New South Wales','Australia',1009),
+('Yozio',-34.990888,138.574391,'09895 Vermont Drive','Adelaide Mail Centre','South Australia','Australia',5869),
+('Trupe',-33.8989712,151.2149792,'17 Sunfield Street','Sydney','New South Wales','Australia',1130),
+('Meejo',-34.990888,138.574391,'81688 Glacier Hill Trail','Adelaide Mail Centre','South Australia','Australia',5874),
+('Kayveo',-34.0349557,151.0998291,'92 Jenna Pass','Sydney','New South Wales','Australia',1028),
+('Riffpath',-33.8688197,151.2092955,'92 Washington Center','Sydney South','New South Wales','Australia',1235),
+('Buzzster',-41.4332215,147.1440875,'95 Briar Crest Pass','Launceston','Tasmania','Australia',7916),
+('Thoughtstorm',-33.7974423,151.2502275,'1786 Doe Crossing Drive','Sydney','New South Wales','Australia',1191),
+('Skynoodle',-37.7236851,144.9633285,'89 Green Terrace','Sydney','New South Wales','Australia',1009),
+('Wordtune',-33.8651294,151.2078882,'83007 Bluestem Lane','Australia Square','New South Wales','Australia',1213),
+('Geba',-37.713929,144.962411,'70593 Leroy Pass','Sydney','New South Wales','Australia',1120),
+('Digitube',-37.7236851,144.9633285,'206 Colorado Parkway','Sydney','New South Wales','Australia',1009),
+('Ntags',-37.8136276,144.9630576,'19 Iowa Center','Melbourne','Victoria','Australia',8045),
+('Fivebridge',-42.8821377,147.3271949,'69 Morrow Court','Hobart','Tasmania','Australia',7808),
+('Fatz',-37.7071402,144.9611223,'341 Melrose Road','Sydney','New South Wales','Australia',1206),
+('Jaxspan',-38.043127,145.297768,'052 Warrior Alley','Eastern Suburbs Mc','New South Wales','Australia',1315),
+('Quimm',-31.9505269,115.8604572,'91 Spaight Lane','Perth','Western Australia','Australia',6817),
+('Quire',-33.7974423,151.2502275,'16100 Homewood Hill','Sydney','New South Wales','Australia',1191),
+('Jabbertype',-33.93274,151.188577,'11053 Emmet Avenue','Eastern Suburbs Mc','New South Wales','Australia',1325),
+('Bubbletube',-34.990888,138.574391,'16297 Memorial Trail','Adelaide Mail Centre','South Australia','Australia',5874),
+('Oodoo',-33.8688197,151.2092955,'1223 Southridge Avenue','Sydney','New South Wales','Australia',1033),
+('Viva',-34.0349557,151.0998291,'80 Cardinal Road','Sydney','New South Wales','Australia',1028),
+('Skalith',-37.7071402,144.9611223,'10 Pepper Wood Junction','Sydney','New South Wales','Australia',1206),
+('Tazzy',-37.8136276,144.9630576,'6 Meadow Valley Pass','Melbourne','Victoria','Australia',8383),
+('Babbleblab',-33.8882671,151.2078465,'31 Oak Valley Center','Strawberry Hills','New South Wales','Australia',1424),
+('Flashdog',-33.7974423,151.2502275,'9048 Hayes Court','Sydney','New South Wales','Australia',1161),
+('Trudoo',-33.8688197,151.2092955,'381 3rd Pass','Sydney','New South Wales','Australia',1043),
+('Blogtag',-33.8882671,151.2078465,'2596 Pond Parkway','Strawberry Hills','New South Wales','Australia',1424),
+('Kazu',-42.8821377,147.3271949,'1 Russell Plaza','Hobart','Tasmania','Australia',7803),
+('Feedspan',-31.9478653,115.8693718,'0 Sachs Court','Perth','Western Australia','Australia',6843),
+('Wordware',-41.4332215,147.1440875,'744 Maple Court','Launceston','Tasmania','Australia',7916),
+('Rhycero',-33.8688197,151.2092955,'66 Coolidge Court','Sydney','New South Wales','Australia',1043),
+('Devbug',-27.4697707,153.0251235,'8783 Schlimgen Terrace','Brisbane','Queensland','Australia',9010),
+('Mudo',-33.8651294,151.2078882,'9722 Green Trail','Australia Square','New South Wales','Australia',1213),
+('Zoomzone',-34.0349557,151.0998291,'13521 Scoville Street','Sydney','New South Wales','Australia',1028),
+('Voolith',-33.7974423,151.2502275,'374 Lakewood Gardens Center','Sydney','New South Wales','Australia',1161),
+('Quinu',-31.9478653,115.8693718,'159 Debra Point','Perth','Western Australia','Australia',6843),
+('Quatz',-37.713929,144.962411,'2576 Westridge Terrace','Sydney','New South Wales','Australia',1120),
+('Meevee',-37.7071402,144.9611223,'4362 School Road','Sydney','New South Wales','Australia',1206),
+('Muxo',-38.043127,145.297768,'11134 Di Loreto Way','Eastern Suburbs Mc','New South Wales','Australia',1315),
+('Topicstorm',-33.7974423,151.2502275,'0 Muir Trail','Sydney','New South Wales','Australia',1134),
+('Dabfeed',-34.990888,138.574391,'5 Meadow Valley Circle','Adelaide Mail Centre','South Australia','Australia',5869),
+('Oodoo',-33.93274,151.188577,'70513 Rieder Avenue','Eastern Suburbs Mc','New South Wales','Australia',1325),
+('JumpXS',-27.9424308,153.3970962,'893 Scoville Center','Sydney','New South Wales','Australia',1140),
+('Cogidoo',-33.863927,151.201887,'48 Reinke Parkway','Sydney','New South Wales','Australia',1171),
+('Janyx',-34.8352742,138.596204,'2974 Truax Alley','Northern Suburbs Mc','New South Wales','Australia',1694),
+('Kwimbee',-37.713929,144.962411,'617 Sheridan Trail','Sydney','New South Wales','Australia',1120),
+('Divanoodle',-41.4332215,147.1440875,'179 Killdeer Center','Launceston','Tasmania','Australia',7904),
+('Yakitri',-38.043127,145.297768,'909 Novick Point','Eastern Suburbs Mc','New South Wales','Australia',1315),
+('Fivespan',-37.8136276,144.9630576,'77473 Artisan Street','Melbourne','Victoria','Australia',8045),
+('Riffpath',-33.93274,151.188577,'15320 Charing Cross Way','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Fatz',-33.7974423,151.2502275,'58 Roth Trail','Sydney','New South Wales','Australia',1181),
+('Livetube',-33.8989712,151.2149792,'2 Judy Alley','Sydney','New South Wales','Australia',1130),
+('Skaboo',-27.9424308,153.3970962,'976 Moland Circle','Sydney','New South Wales','Australia',1140),
+('Skinte',-33.863927,151.201887,'44 Anderson Point','Sydney','New South Wales','Australia',1171),
+('Topdrive',-33.93274,151.188577,'32770 7th Pass','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Oyope',-31.9478653,115.8693718,'50868 Division Avenue','Perth','Western Australia','Australia',6843),
+('Oyoloo',-33.93274,151.188577,'664 Raven Junction','Eastern Suburbs Mc','New South Wales','Australia',1325),
+('Meevee',-33.7974423,151.2502275,'65560 Pankratz Hill','Sydney','New South Wales','Australia',1161),
+('Aimbo',-33.93274,151.188577,'9 Caliangt Drive','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('DabZ',-33.7974423,151.2502275,'36 Clemons Plaza','Sydney','New South Wales','Australia',1181),
+('Zoovu',-42.8821377,147.3271949,'6785 Shoshone Center','Hobart','Tasmania','Australia',7803),
+('Photospace',-33.8989712,151.2149792,'522 Kingsford Parkway','Sydney','New South Wales','Australia',1130),
+('Geba',-33.8882671,151.2078465,'128 Hovde Circle','Strawberry Hills','New South Wales','Australia',1424),
+('Skivee',-33.7974423,151.2502275,'6086 Blaine Pass','Sydney','New South Wales','Australia',1161),
+('Rhyloo',-34.0349557,151.0998291,'63 Laurel Park','Sydney','New South Wales','Australia',1028),
+('Muxo',-41.4332215,147.1440875,'1800 Arapahoe Crossing','Launceston','Tasmania','Australia',7916),
+('Zoozzy',-41.4332215,147.1440875,'79759 Buell Street','Launceston','Tasmania','Australia',7916),
+('Yakijo',-38.043127,145.297768,'6 Elmside Trail','Eastern Suburbs Mc','New South Wales','Australia',1315),
+('Youfeed',-37.8136276,144.9630576,'46 Crest Line Plaza','Melbourne','Victoria','Australia',8383),
+('Divape',-27.4697707,153.0251235,'8780 Havey Junction','Brisbane','Queensland','Australia',9010),
+('Browseblab',-27.9424308,153.3970962,'508 Havey Way','Sydney','New South Wales','Australia',1140),
+('Talane',-42.8821377,147.3271949,'1 Hudson Park','Hobart','Tasmania','Australia',7803),
+('Yamia',-27.4697707,153.0251235,'8669 Coolidge Road','Brisbane','Queensland','Australia',9010),
+('Skivee',-42.8821377,147.3271949,'04584 Fuller Drive','Hobart','Tasmania','Australia',7803),
+('Skynoodle',-33.8688197,151.2092955,'795 Elka Junction','Sydney South','New South Wales','Australia',1235),
+('Skinix',-37.7204693,144.9629556,'336 Annamark Center','Sydney','New South Wales','Australia',1109),
+('Skinte',-34.0349557,151.0998291,'305 Vermont Pass','Sydney','New South Wales','Australia',1028),
+('Mybuzz',-33.7974423,151.2502275,'68844 Glacier Hill Avenue','Sydney','New South Wales','Australia',1161),
+('Browsecat',-37.8136276,144.9630576,'4487 Ridgeway Parkway','Melbourne','Victoria','Australia',8045),
+('Thoughtstorm',-33.7974423,151.2502275,'4 Norway Maple Court','Sydney','New South Wales','Australia',1134),
+('Trudoo',-33.8688197,151.2092955,'4604 Milwaukee Way','Sydney','New South Wales','Australia',1033),
+('Kazu',-37.7236851,144.9633285,'3648 Anhalt Crossing','Sydney','New South Wales','Australia',1009),
+('Voonder',-37.713929,144.962411,'41 Florence Point','Sydney','New South Wales','Australia',1120),
+('Dynazzy',-33.7974423,151.2502275,'40982 Loftsgordon Drive','Sydney','New South Wales','Australia',1134),
+('Devcast',-41.4332215,147.1440875,'7 North Hill','Launceston','Tasmania','Australia',7916),
+('Pixonyx',-41.4332215,147.1440875,'6 Shopko Avenue','Launceston','Tasmania','Australia',7904),
+('Meemm',-37.7204693,144.9629556,'46907 Michigan Hill','Sydney','New South Wales','Australia',1109),
+('Quimm',-37.7236851,144.9633285,'7366 Utah Point','Sydney','New South Wales','Australia',1009),
+('Tagchat',-42.8821377,147.3271949,'3074 Glendale Circle','Hobart','Tasmania','Australia',7808),
+('Voonder',-33.7974423,151.2502275,'36925 Clarendon Place','Sydney','New South Wales','Australia',1191),
+('Kwideo',-33.8688197,151.2092955,'76 Eggendart Hill','Sydney South','New South Wales','Australia',1235),
+('Katz',-33.8882671,151.2078465,'153 Lerdahl Plaza','Strawberry Hills','New South Wales','Australia',1424),
+('Rhynyx',-34.8352742,138.596204,'465 Tony Lane','Northern Suburbs Mc','New South Wales','Australia',1694),
+('Topicstorm',-31.9505269,115.8604572,'2972 Straubel Hill','Perth','Western Australia','Australia',6817),
+('Dazzlesphere',-34.9284989,138.6007456,'79 Laurel Drive','Adelaide','South Australia','Australia',5839),
+('Wikizz',-31.9478653,115.8693718,'8 Esker Point','Perth','Western Australia','Australia',6843),
+('Thoughtbridge',-33.8688197,151.2092955,'944 Jenifer Pass','Sydney South','New South Wales','Australia',1235),
+('Tagfeed',-37.7071402,144.9611223,'510 Morning Junction','Sydney','New South Wales','Australia',1206),
+('Fliptune',-33.93274,151.188577,'45820 International Crossing','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Shuffledrive',-27.9424308,153.3970962,'25320 Lunder Circle','Sydney','New South Wales','Australia',1140),
+('Blogspan',-33.7974423,151.2502275,'5980 Shasta Street','Sydney','New South Wales','Australia',1134),
+('Zazio',-33.8882671,151.2078465,'83812 Steensland Way','Strawberry Hills','New South Wales','Australia',1424),
+('Realbridge',-31.9478653,115.8693718,'776 Lerdahl Way','Perth','Western Australia','Australia',6843),
+('Cogidoo',-34.9284989,138.6007456,'08 Victoria Lane','Adelaide','South Australia','Australia',5839),
+('Skalith',-34.0349557,151.0998291,'04332 Forest Terrace','Sydney','New South Wales','Australia',1028),
+('Feedspan',-34.8352742,138.596204,'3557 Tennyson Way','Northern Suburbs Mc','New South Wales','Australia',1694),
+('Twitterbridge',-33.7974423,151.2502275,'33309 Buhler Place','Sydney','New South Wales','Australia',1161),
+('Skimia',-33.93274,151.188577,'734 Meadow Ridge Drive','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Meejo',-33.8651294,151.2078882,'59 Kenwood Pass','Australia Square','New South Wales','Australia',1213),
+('Youspan',-37.8136276,144.9630576,'3763 Clemons Terrace','Melbourne','Victoria','Australia',8383),
+('Tagchat',-41.4332215,147.1440875,'29 Gulseth Center','Launceston','Tasmania','Australia',7916),
+('Feednation',-34.8352742,138.596204,'4 Sage Trail','Northern Suburbs Mc','New South Wales','Australia',1694),
+('Agimba',-33.8989712,151.2149792,'2276 Havey Alley','Sydney','New South Wales','Australia',1130),
+('Ailane',-33.93274,151.188577,'36 Dunning Alley','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Jabberbean',-37.7236851,144.9633285,'530 Barnett Street','Sydney','New South Wales','Australia',1009),
+('Yambee',-34.8352742,138.596204,'12 Eagle Crest Street','Northern Suburbs Mc','New South Wales','Australia',1694),
+('Fatz',-33.93274,151.188577,'3138 Dapin Point','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Plambee',-34.9284989,138.6007456,'04140 Eggendart Point','Adelaide','South Australia','Australia',5839),
+('Oloo',-33.7974423,151.2502275,'9 David Junction','Sydney','New South Wales','Australia',1181),
+('Shufflester',-33.8688197,151.2092955,'7 Artisan Terrace','Sydney','New South Wales','Australia',1043),
+('Zoozzy',-27.4697707,153.0251235,'0943 Melvin Avenue','Brisbane','Queensland','Australia',9010),
+('Jaxworks',-27.4697707,153.0251235,'95187 Amoth Terrace','Brisbane','Queensland','Australia',9010),
+('Browsedrive',-31.9505269,115.8604572,'2 Reinke Pass','Perth','Western Australia','Australia',6817),
+('Flashspan',-33.7974423,151.2502275,'03322 Lake View Avenue','Sydney','New South Wales','Australia',1181),
+('Centizu',-37.7071402,144.9611223,'3 Crownhardt Lane','Sydney','New South Wales','Australia',1206),
+('Dabvine',-42.8821377,147.3271949,'54 Tennyson Plaza','Hobart','Tasmania','Australia',7808),
+('Voolith',-34.0349557,151.0998291,'099 Summit Trail','Sydney','New South Wales','Australia',1028),
+('Shuffledrive',-33.8882671,151.2078465,'0652 Bashford Alley','Strawberry Hills','New South Wales','Australia',1424),
+('Flashpoint',-27.4697707,153.0251235,'9 Crescent Oaks Trail','Brisbane','Queensland','Australia',9010),
+('LiveZ',-27.4697707,153.0251235,'85429 Dakota Park','Brisbane','Queensland','Australia',9010),
+('Jetwire',-33.7974423,151.2502275,'4 Ronald Regan Road','Sydney','New South Wales','Australia',1191),
+('Agivu',-33.8651294,151.2078882,'6 Union Way','Australia Square','New South Wales','Australia',1213),
+('Flashset',-42.8821377,147.3271949,'5 Ridgeview Park','Hobart','Tasmania','Australia',7803),
+('Yakitri',-31.9478653,115.8693718,'5857 Stone Corner Junction','Perth','Western Australia','Australia',6843),
+('Quaxo',-37.7071402,144.9611223,'201 Weeping Birch Street','Sydney','New South Wales','Australia',1206),
+('Gabvine',-31.9478653,115.8693718,'5 Utah Center','Perth','Western Australia','Australia',6843),
+('Skinix',-42.8821377,147.3271949,'8631 Alpine Place','Hobart','Tasmania','Australia',7803),
+('Roomm',-42.8821377,147.3271949,'3 Tennyson Center','Hobart','Tasmania','Australia',7803),
+('Einti',-27.4697707,153.0251235,'73 Fulton Street','Brisbane','Queensland','Australia',9010),
+('Realbuzz',-33.7974423,151.2502275,'84 Old Shore Junction','Sydney','New South Wales','Australia',1161),
+('Oyonder',-34.9284989,138.6007456,'859 Carioca Trail','Adelaide','South Australia','Australia',5839),
+('Yadel',-33.8651294,151.2078882,'308 Talisman Lane','Australia Square','New South Wales','Australia',1213),
+('Janyx',-34.990888,138.574391,'41 Barnett Avenue','Adelaide Mail Centre','South Australia','Australia',5874),
+('Mydeo',-42.8821377,147.3271949,'3 Ridgeview Place','Hobart','Tasmania','Australia',7803),
+('Skinte',-34.990888,138.574391,'6194 Tennyson Center','Adelaide Mail Centre','South Australia','Australia',5889),
+('Voonix',-33.8882671,151.2078465,'3830 Lukken Way','Strawberry Hills','New South Wales','Australia',1424),
+('Skivee',-34.990888,138.574391,'665 Bartelt Trail','Adelaide Mail Centre','South Australia','Australia',5899),
+('Edgeclub',-34.990888,138.574391,'74 Porter Lane','Adelaide Mail Centre','South Australia','Australia',5889),
+('Wordware',-42.8821377,147.3271949,'6 Messerschmidt Drive','Hobart','Tasmania','Australia',7808),
+('Rooxo',-33.7974423,151.2502275,'969 Starling Road','Sydney','New South Wales','Australia',1191),
+('Jaxspan',-33.8688197,151.2092955,'31 Banding Pass','Sydney','New South Wales','Australia',1033),
+('Photobean',-41.4332215,147.1440875,'01 Clemons Parkway','Launceston','Tasmania','Australia',7904),
+('Jazzy',-33.7974423,151.2502275,'5 Old Gate Pass','Sydney','New South Wales','Australia',1196),
+('Realbridge',-31.9478653,115.8693718,'00 Algoma Plaza','Perth','Western Australia','Australia',6843),
+('Dynabox',-41.4332215,147.1440875,'7253 Meadow Ridge Pass','Launceston','Tasmania','Australia',7916),
+('Voomm',-34.9284989,138.6007456,'29 Spohn Hill','Adelaide','South Australia','Australia',5839),
+('Flashset',-34.8352742,138.596204,'031 Beilfuss Center','Northern Suburbs Mc','New South Wales','Australia',1694),
+('Divanoodle',-34.9284989,138.6007456,'104 Kropf Place','Adelaide','South Australia','Australia',5839),
+('Shufflester',-31.9505269,115.8604572,'0 Shelley Parkway','Perth','Western Australia','Australia',6817),
+('Eidel',-33.8688197,151.2092955,'378 Caliangt Center','Sydney','New South Wales','Australia',1033),
+('Twitterlist',-42.8821377,147.3271949,'39517 Erie Center','Hobart','Tasmania','Australia',7808),
+('Mudo',-42.8821377,147.3271949,'240 Roxbury Alley','Hobart','Tasmania','Australia',7808),
+('Jabbercube',-33.8688197,151.2092955,'38 Havey Place','Sydney','New South Wales','Australia',1033),
+('Mydeo',-34.9284989,138.6007456,'41 Ramsey Court','Adelaide','South Australia','Australia',5839),
+('Kanoodle',-33.7974423,151.2502275,'928 International Street','Sydney','New South Wales','Australia',1181),
+('Browsebug',-37.7236851,144.9633285,'52 Sherman Hill','Sydney','New South Wales','Australia',1009),
+('Thoughtstorm',-34.0349557,151.0998291,'36 Scott Point','Sydney','New South Wales','Australia',1028),
+('Kwinu',-33.8688197,151.2092955,'09 Summer Ridge Road','Sydney South','New South Wales','Australia',1235),
+('Skinix',-37.7071402,144.9611223,'9 Pawling Avenue','Sydney','New South Wales','Australia',1206),
+('Dynabox',-33.7974423,151.2502275,'85788 Graceland Point','Sydney','New South Wales','Australia',1181),
+('Kazu',-33.7974423,151.2502275,'17 Westport Park','Sydney','New South Wales','Australia',1196),
+('Voonyx',-34.0349557,151.0998291,'8 Lotheville Parkway','Sydney','New South Wales','Australia',1028),
+('Vitz',-31.9505269,115.8604572,'7 Ilene Alley','Perth','Western Australia','Australia',6817),
+('Wikido',-33.8989712,151.2149792,'040 Becker Terrace','Sydney','New South Wales','Australia',1130),
+('Oodoo',-33.7974423,151.2502275,'931 Nevada Lane','Sydney','New South Wales','Australia',1161),
+('Npath',-37.7236851,144.9633285,'3 Ridgeview Circle','Sydney','New South Wales','Australia',1009),
+('Dynava',-33.8651294,151.2078882,'13 Huxley Avenue','Australia Square','New South Wales','Australia',1213),
+('Browsezoom',-33.7974423,151.2502275,'18 Old Gate Trail','Sydney','New South Wales','Australia',1196),
+('Plambee',-37.7204693,144.9629556,'69480 Springs Crossing','Sydney','New South Wales','Australia',1109),
+('Aimbu',-42.8821377,147.3271949,'87663 Mcbride Junction','Hobart','Tasmania','Australia',7808),
+('Minyx',-37.7204693,144.9629556,'306 Clove Park','Sydney','New South Wales','Australia',1109),
+('Aimbo',-41.4332215,147.1440875,'0 Harbort Alley','Launceston','Tasmania','Australia',7904),
+('Jabbersphere',-33.8651294,151.2078882,'546 Mccormick Street','Australia Square','New South Wales','Australia',1213),
+('Twitterlist',-37.7204693,144.9629556,'941 Knutson Circle','Sydney','New South Wales','Australia',1109),
+('JumpXS',-33.8882671,151.2078465,'6 Forest Run Terrace','Strawberry Hills','New South Wales','Australia',1424),
+('Voomm',-34.9284989,138.6007456,'99591 Sycamore Trail','Adelaide','South Australia','Australia',5839),
+('Quinu',-33.7974423,151.2502275,'7 Norway Maple Road','Sydney','New South Wales','Australia',1196),
+('Flipbug',-33.863927,151.201887,'3123 Lunder Avenue','Sydney','New South Wales','Australia',1171),
+('Ozu',-37.7204693,144.9629556,'307 Cascade Park','Sydney','New South Wales','Australia',1109),
+('Trunyx',-33.8688197,151.2092955,'74 Stuart Crossing','Sydney South','New South Wales','Australia',1235),
+('Feedfish',-34.990888,138.574391,'3 3rd Drive','Adelaide Mail Centre','South Australia','Australia',5874),
+('Gabtype',-33.8688197,151.2092955,'729 Lake View Trail','Sydney','New South Wales','Australia',1033),
+('Pixonyx',-33.8688197,151.2092955,'7 Northfield Alley','Sydney','New South Wales','Australia',1043),
+('Snaptags',-33.8882671,151.2078465,'0 Bellgrove Plaza','Strawberry Hills','New South Wales','Australia',1424),
+('Flashpoint',-33.8989712,151.2149792,'20939 Algoma Crossing','Sydney','New South Wales','Australia',1130),
+('Zoovu',-27.4697707,153.0251235,'58 Hooker Trail','Brisbane','Queensland','Australia',9010),
+('Yodoo',-33.93274,151.188577,'90 South Place','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Trupe',-33.863927,151.201887,'88465 Maywood Parkway','Sydney','New South Wales','Australia',1171),
+('Photobug',-42.8821377,147.3271949,'74189 Del Sol Center','Hobart','Tasmania','Australia',7803),
+('Meetz',-33.93274,151.188577,'51 Swallow Alley','Eastern Suburbs Mc','New South Wales','Australia',1391),
+('Youspan',-33.8688197,151.2092955,'655 Pierstorff Point','Sydney South','New South Wales','Australia',1235),
+('Trudoo',-33.7974423,151.2502275,'312 Hollow Ridge Alley','Sydney','New South Wales','Australia',1161),
+('Devbug',-41.4332215,147.1440875,'63958 Bartillon Plaza','Launceston','Tasmania','Australia',7904),
+('Skimia',-34.9284989,138.6007456,'87284 Dryden Avenue','Adelaide','South Australia','Australia',5839),
+('Voolith',-38.043127,145.297768,'90 Del Sol Circle','Eastern Suburbs Mc','New South Wales','Australia',1315),
+('Wikibox',-33.7974423,151.2502275,'3689 Holmberg Circle','Sydney','New South Wales','Australia',1191),
+('Voolia',-33.7974423,151.2502275,'1 Sullivan Plaza','Sydney','New South Wales','Australia',1181),
+('Blogpad',-33.863927,151.201887,'18085 Di Loreto Avenue','Sydney','New South Wales','Australia',1171),
+('Npath',-33.8882671,151.2078465,'663 Charing Cross Hill','Strawberry Hills','New South Wales','Australia',1424),
+('Gabcube',-37.7071402,144.9611223,'71 Laurel Avenue','Sydney','New South Wales','Australia',1206),
+('Jaxspan',-27.4697707,153.0251235,'76 Novick Hill','Brisbane','Queensland','Australia',9010),
+('Dablist',-27.4697707,153.0251235,'5942 Surrey Plaza','Brisbane','Queensland','Australia',9010),
+('Chatterbridge',-33.7974423,151.2502275,'0 Meadow Vale Drive','Sydney','New South Wales','Australia',1196),
+('Oyope',-33.863927,151.201887,'00806 Haas Place','Sydney','New South Wales','Australia',1171),
+('Agimba',-37.713929,144.962411,'50386 Sullivan Terrace','Sydney','New South Wales','Australia',1120),
+('Agivu',-34.9284989,138.6007456,'27471 Mandrake Avenue','Adelaide','South Australia','Australia',5839),
+('Babbleblab',-33.863927,151.201887,'65034 Homewood Street','Sydney','New South Wales','Australia',1171),
+('Twitterworks',-41.4332215,147.1440875,'76273 Goodland Lane','Launceston','Tasmania','Australia',7904),
+('Dynazzy',-37.8136276,144.9630576,'46 High Crossing Crossing','Melbourne','Victoria','Australia',8045),
+('Twimm',-34.8352742,138.596204,'6 Pond Avenue','Northern Suburbs Mc','New South Wales','Australia',1694),
+('Zoomcast',-33.7974423,151.2502275,'252 8th Plaza','Sydney','New South Wales','Australia',1161),
+('Skynoodle',-33.93274,151.188577,'3 Valley Edge Point','Eastern Suburbs Mc','New South Wales','Australia',1325),
+('Dynabox',-37.7071402,144.9611223,'437 Rutledge Hill','Sydney','New South Wales','Australia',1206);
 
 insert into customer (first_name,last_name,email) VALUES ('Zorine','Hucquart','zhucquart0@g.co');
 insert into customer (first_name,last_name,email) VALUES ('Allard','Sheringham','asheringham1@accuweather.com');
