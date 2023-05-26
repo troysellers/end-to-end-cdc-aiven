@@ -83,6 +83,10 @@ func randomBusinessTime(prepop *bool) time.Time {
 		year = subDate.Year()
 		month = subDate.Month()
 		day = subDate.Day()
+	} else {
+		year = now.Year()
+		month = now.Month()
+		day = now.Day()
 	}
 	// Generate a random time between 9am and 5pm
 	hour := rand.Intn(8) + 9
