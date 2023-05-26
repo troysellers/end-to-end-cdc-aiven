@@ -26,3 +26,18 @@ select toYear(p.order_placed) as year ,i.name, sum(p.price) as total from defaul
 - sales by store 
 select sum(p.price), count(*), s.name from default.purchases p join `service_e2e-cdc-service-pg_defaultdb_public`.store s on p.store_id = s.id 
 group by s.name order by 1 desc
+
+- total sales today
+select i.name, sum(p.price), sum(p.total_quantity) 
+   from default.purchases p join `service_e2e-cdc-service-pg_defaultdb_public`.item i on p.item_id = i.id 
+   where toDayOfYear(order_placed) = toDayOfYear(today())
+group by i.name order by 1 desc
+
+- top 10 performing stores all time 
+select sum(p.price), count(*), s.name from default.purchases p join `service_e2e-cdc-service-pg_defaultdb_public`.store s on p.store_id = s.id 
+group by s.name order by 1 desc limit 10
+
+- top 10 performing stores today
+select sum(p.price), count(*), s.name from default.purchases p join `service_e2e-cdc-service-pg_defaultdb_public`.store s on p.store_id = s.id 
+where toDayOfYear(order_placed) = toDayOfYear(today())
+group by s.name order by 1 desc limit 10

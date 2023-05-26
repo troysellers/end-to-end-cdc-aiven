@@ -1,0 +1,783 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 1,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "datasource": {
+          "type": "vertamedia-clickhouse-datasource",
+          "uid": "8OndIKQ4k"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              }
+            },
+            "mappings": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "id": 16,
+        "options": {
+          "displayLabels": [
+            "name"
+          ],
+          "legend": {
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "pieType": "pie",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "/^sum\\(price\\)$/",
+            "values": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "vertamedia-clickhouse-datasource",
+              "uid": "8OndIKQ4k"
+            },
+            "dateTimeType": "DATETIME",
+            "extrapolate": true,
+            "format": "table",
+            "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+            "intervalFactor": 1,
+            "query": "select sum(p.price), count(*), i.name from default.purchases p join `service_e2e-cdc-service-pg_defaultdb_public`.item i on p.item_id = i.id \nwhere toDayOfYear(p.order_placed) = toDayOfYear(today())\ngroup by i.name order by 1 desc",
+            "rawQuery": "select sum(p.price), count(*), i.name from default.purchases p join `service_e2e-cdc-service-pg_defaultdb_public`.item i on p.item_id = i.id \nwhere toDayOfYear(p.order_placed) = toDayOfYear(today())\ngroup by i.name order by 1 desc",
+            "refId": "A",
+            "round": "0s",
+            "skip_comments": true
+          }
+        ],
+        "title": "Sales by Product Today",
+        "type": "piechart"
+      },
+      {
+        "datasource": {
+          "type": "vertamedia-clickhouse-datasource",
+          "uid": "8OndIKQ4k"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "fillOpacity": 80,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineWidth": 1,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        },
+        "id": 8,
+        "options": {
+          "barRadius": 0,
+          "barWidth": 0.97,
+          "groupWidth": 0.7,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "auto",
+          "showValue": "auto",
+          "stacking": "none",
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          },
+          "xField": "name",
+          "xTickLabelRotation": 0,
+          "xTickLabelSpacing": 0
+        },
+        "pluginVersion": "9.3.11",
+        "targets": [
+          {
+            "datasource": {
+              "type": "vertamedia-clickhouse-datasource",
+              "uid": "8OndIKQ4k"
+            },
+            "dateTimeType": "DATETIME",
+            "extrapolate": true,
+            "format": "time_series",
+            "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+            "intervalFactor": 1,
+            "query": "select i.name, sum(p.price), sum(p.total_quantity) \n   from default.purchases p join `service_e2e-cdc-service-pg_defaultdb_public`.item i on p.item_id = i.id \n   where toDayOfYear(order_placed) = toDayOfYear(today())\ngroup by i.name order by 1 desc",
+            "rawQuery": "select i.name, sum(p.price), sum(p.total_quantity) \n   from default.purchases p join `service_e2e-cdc-service-pg_defaultdb_public`.item i on p.item_id = i.id \n   where toDayOfYear(order_placed) = toDayOfYear(today())\ngroup by i.name order by 1 desc",
+            "refId": "A",
+            "round": "0s",
+            "skip_comments": true
+          }
+        ],
+        "title": "Total Sales today",
+        "type": "barchart"
+      },
+      {
+        "datasource": {
+          "type": "vertamedia-clickhouse-datasource",
+          "uid": "8OndIKQ4k"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 8
+        },
+        "id": 10,
+        "options": {
+          "basemap": {
+            "config": {},
+            "name": "Layer 0",
+            "type": "default"
+          },
+          "controls": {
+            "mouseWheelZoom": true,
+            "showAttribution": true,
+            "showDebug": false,
+            "showMeasure": false,
+            "showScale": false,
+            "showZoom": true
+          },
+          "layers": [
+            {
+              "config": {
+                "blur": 15,
+                "radius": 5,
+                "weight": {
+                  "fixed": 1,
+                  "max": 1,
+                  "min": 0
+                }
+              },
+              "location": {
+                "mode": "auto"
+              },
+              "name": "Layer 1",
+              "tooltip": true,
+              "type": "heatmap"
+            }
+          ],
+          "tooltip": {
+            "mode": "details"
+          },
+          "view": {
+            "allLayers": true,
+            "id": "australia",
+            "lat": -25,
+            "lon": 135,
+            "zoom": 4
+          }
+        },
+        "pluginVersion": "9.3.11",
+        "targets": [
+          {
+            "datasource": {
+              "type": "vertamedia-clickhouse-datasource",
+              "uid": "8OndIKQ4k"
+            },
+            "dateTimeType": "DATETIME",
+            "extrapolate": true,
+            "format": "table",
+            "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+            "intervalFactor": 1,
+            "query": "SELECT\n    s.name,\n    sum(p.price),\n    count(*),\n    s.latitude as lat,\n    s.longitude as lon\nFROM default.purchases p\n\nJOIN \n \n    `service_e2e-cdc-service-pg_defaultdb_public` \n    . \n    store \n    s ON  p.store_id=s.id\nwhere toDayOfYear(p.order_placed) = toDayOfYear(today())\nGROUP BY\n    s.name,\n    s.latitude,\n    s.longitude\nORDER BY 2 desc\n",
+            "rawQuery": "SELECT\n    s.name,\n    sum(p.price),\n    count(*),\n    s.latitude as lat,\n    s.longitude as lon\nFROM default.purchases p\n\nJOIN \n \n    `service_e2e-cdc-service-pg_defaultdb_public` \n    . \n    store \n    s ON  p.store_id=s.id\nwhere toDayOfYear(p.order_placed) = toDayOfYear(today())\nGROUP BY\n    s.name,\n    s.latitude,\n    s.longitude\nORDER BY 2 desc",
+            "refId": "A",
+            "round": "0s",
+            "skip_comments": true
+          }
+        ],
+        "title": "Sales today",
+        "type": "geomap"
+      },
+      {
+        "datasource": {
+          "type": "vertamedia-clickhouse-datasource",
+          "uid": "8OndIKQ4k"
+        },
+        "description": "Total Sales and count of items sold",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisGridShow": true,
+              "axisLabel": "",
+              "axisPlacement": "right",
+              "fillOpacity": 80,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineWidth": 1,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 8
+        },
+        "id": 2,
+        "options": {
+          "barRadius": 0,
+          "barWidth": 0.97,
+          "groupWidth": 0.7,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "auto",
+          "showValue": "always",
+          "stacking": "none",
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          },
+          "xField": "name",
+          "xTickLabelRotation": 45,
+          "xTickLabelSpacing": 0
+        },
+        "pluginVersion": "9.3.11",
+        "targets": [
+          {
+            "datasource": {
+              "type": "vertamedia-clickhouse-datasource",
+              "uid": "8OndIKQ4k"
+            },
+            "dateTimeType": "DATETIME",
+            "extrapolate": true,
+            "format": "time_series",
+            "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+            "hide": false,
+            "intervalFactor": 1,
+            "query": "select sum(p.price), count(*), i.name from default.purchases p join `service_e2e-cdc-service-pg_defaultdb_public`.item i on p.item_id = i.id \ngroup by i.name order by 1 desc",
+            "rawQuery": "select sum(p.price), count(*), i.name from default.purchases p join `service_e2e-cdc-service-pg_defaultdb_public`.item i on p.item_id = i.id \ngroup by i.name order by 1 desc",
+            "refId": "A",
+            "round": "0s",
+            "skip_comments": true
+          }
+        ],
+        "title": "Total Sales  by Product",
+        "type": "barchart"
+      },
+      {
+        "datasource": {
+          "type": "vertamedia-clickhouse-datasource",
+          "uid": "8OndIKQ4k"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "fillOpacity": 80,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineWidth": 1,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 16
+        },
+        "id": 6,
+        "options": {
+          "barRadius": 0,
+          "barWidth": 0.97,
+          "groupWidth": 0.7,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "auto",
+          "showValue": "auto",
+          "stacking": "none",
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          },
+          "xField": "Value",
+          "xTickLabelRotation": 0,
+          "xTickLabelSpacing": 0
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "vertamedia-clickhouse-datasource",
+              "uid": "8OndIKQ4k"
+            },
+            "dateTimeType": "DATETIME",
+            "extrapolate": true,
+            "format": "time_series",
+            "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+            "intervalFactor": 1,
+            "query": "select toMonth(p.order_placed) as monthNum, monthName(p.order_placed) as month, sum(p.price) from purchases p where toYear(p.order_placed) = 2023 group by month, monthNum order by monthNum",
+            "rawQuery": "select toMonth(p.order_placed) as monthNum, monthName(p.order_placed) as month, sum(p.price) from purchases p where toYear(p.order_placed) = 2023 group by month, monthNum order by monthNum",
+            "refId": "A",
+            "round": "0s",
+            "skip_comments": true
+          }
+        ],
+        "title": "Sales this year by Month",
+        "type": "barchart"
+      },
+      {
+        "datasource": {
+          "type": "vertamedia-clickhouse-datasource",
+          "uid": "8OndIKQ4k"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "fillOpacity": 80,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineWidth": 1,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 17
+        },
+        "id": 14,
+        "options": {
+          "barRadius": 0,
+          "barWidth": 0.97,
+          "groupWidth": 0.7,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "auto",
+          "showValue": "auto",
+          "stacking": "none",
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          },
+          "xField": "name",
+          "xTickLabelRotation": 0,
+          "xTickLabelSpacing": 0
+        },
+        "pluginVersion": "9.3.11",
+        "targets": [
+          {
+            "datasource": {
+              "type": "vertamedia-clickhouse-datasource",
+              "uid": "8OndIKQ4k"
+            },
+            "dateTimeType": "DATETIME",
+            "extrapolate": true,
+            "format": "table",
+            "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+            "intervalFactor": 1,
+            "query": "select sum(p.price), count(*), s.name from default.purchases p join `service_e2e-cdc-service-pg_defaultdb_public`.store s on p.store_id = s.id \nwhere toDayOfYear(order_placed) = toDayOfYear(today())\ngroup by s.name order by 1 desc limit 10",
+            "rawQuery": "select sum(p.price), count(*), s.name from default.purchases p join `service_e2e-cdc-service-pg_defaultdb_public`.store s on p.store_id = s.id \nwhere toDayOfYear(order_placed) = toDayOfYear(today())\ngroup by s.name order by 1 desc limit 10",
+            "refId": "A",
+            "round": "0s",
+            "skip_comments": true
+          }
+        ],
+        "title": "Top 10 Stores today",
+        "type": "barchart"
+      },
+      {
+        "datasource": {
+          "type": "vertamedia-clickhouse-datasource",
+          "uid": "8OndIKQ4k"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "fillOpacity": 80,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineWidth": 1,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 24
+        },
+        "id": 12,
+        "options": {
+          "barRadius": 0,
+          "barWidth": 0.97,
+          "groupWidth": 0.7,
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "orientation": "auto",
+          "showValue": "auto",
+          "stacking": "none",
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          },
+          "xField": "name",
+          "xTickLabelRotation": 0,
+          "xTickLabelSpacing": 0
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "vertamedia-clickhouse-datasource",
+              "uid": "8OndIKQ4k"
+            },
+            "dateTimeType": "DATETIME",
+            "extrapolate": true,
+            "format": "table",
+            "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+            "intervalFactor": 1,
+            "query": "select sum(p.price), count(*), s.name from default.purchases p join `service_e2e-cdc-service-pg_defaultdb_public`.store s on p.store_id = s.id \ngroup by s.name order by 1 desc limit 10",
+            "rawQuery": "select sum(p.price), count(*), s.name from default.purchases p join `service_e2e-cdc-service-pg_defaultdb_public`.store s on p.store_id = s.id \ngroup by s.name order by 1 desc limit 10",
+            "refId": "A",
+            "round": "0s",
+            "skip_comments": true
+          }
+        ],
+        "title": "Top 10 Stores of All Time",
+        "type": "barchart"
+      },
+      {
+        "datasource": {
+          "type": "vertamedia-clickhouse-datasource",
+          "uid": "8OndIKQ4k"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "currencyUSD"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 25
+        },
+        "id": 4,
+        "options": {
+          "orientation": "vertical",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "text": {}
+        },
+        "pluginVersion": "9.3.11",
+        "targets": [
+          {
+            "datasource": {
+              "type": "vertamedia-clickhouse-datasource",
+              "uid": "8OndIKQ4k"
+            },
+            "dateTimeType": "DATETIME",
+            "extrapolate": true,
+            "format": "time_series",
+            "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+            "intervalFactor": 1,
+            "query": "select sum(p.price), toYear(p.order_placed) as year from purchases p where year > 1970 group by year order by 1 desc",
+            "rawQuery": "select sum(p.price), toYear(p.order_placed) as year from purchases p where year > 1970 group by year order by 1 desc",
+            "refId": "A",
+            "round": "0s",
+            "skip_comments": true
+          }
+        ],
+        "title": "Total Sales by Year",
+        "type": "gauge"
+      }
+    ],
+    "schemaVersion": 37,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-2d",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Total Sales",
+    "uid": "-XqkKKQ4k",
+    "version": 5,
+    "weekStart": ""
+  }
