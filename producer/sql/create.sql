@@ -50,16 +50,48 @@ create table purchase (
 
 BEGIN;
 
-insert into item (name, description, price, cost) VALUES ('Long Black', 'Espresso and hot water in a large cup', 450, 100);
-insert into item (name, description, price, cost) VALUES ('Latte', 'Espresso, steamed milk and light foam served is a regular sized glass.', 500, 150);
-insert into item (name, description, price, cost) VALUES ('Double Shot', 'Two shots of espresso as an addon to drinks', 200, 45);
-insert into item (name, description, price, cost) VALUES ('Flat White', 'Espresso and steamed milk in a large mug or takeaway cup', 420, 120);
-insert into item (name, description, price, cost) VALUES ('Standard Tea', 'House black tea', 400, 85);
-insert into item (name, description, price, cost) VALUES ('Herbal Tea', 'Any herbal tea', 450, 100);
-insert into item (name, description, price, cost) VALUES ('Picolo Latte', 'Espresso and a dash of steamed milk in a short glass', 420, 90);
-insert into item (name, description, price, cost) VALUES ('Sparkling Water', 'Small bottle of sparkling water', 350, 70);
-insert into item (name, description, price, cost) VALUES ('Croissant', 'Delicious, flaky, buttery pastry...', 500, 120);
-insert into item (name, description, price, cost) VALUES ('Cappuccion', 'Espresso, steamed milk, foam and chocolate powder dusting', 450, 100);
+INSERT INTO item (name, description, price, cost)
+VALUES 
+('Espresso', 'Strong, full-bodied coffee', 2500, 1000),
+('Americano', 'Espresso diluted with hot water', 3000, 1200),
+('Latte', 'Espresso with steamed milk and milk foam', 3500, 1400),
+('Cappuccino', 'Equal parts of espresso, steamed milk and milk foam', 3500, 1400),
+('Macchiato', 'Espresso with a small amount of milk foam', 3000, 1200),
+('Mocha', 'Espresso with steamed milk and chocolate', 4000, 1600),
+('Green Tea', 'Healthy green tea', 2500, 1000),
+('Black Tea', 'Classic black tea', 2500, 1000),
+('Chai Latte', 'Spiced tea with milk', 3500, 1400),
+('Iced Coffee', 'Chilled coffee with ice', 3500, 1400),
+('Iced Tea', 'Chilled tea with ice', 3000, 1200),
+('Lemonade', 'Freshly squeezed lemonade', 3000, 1200),
+('Bagel', 'Freshly baked bagel', 3000, 1200),
+('Croissant', 'Buttery and flaky croissant', 3500, 1400),
+('Danish', 'Sweet pastry', 3500, 1400),
+('Blueberry Muffin', 'Blueberry filled muffin', 4000, 1600),
+('Chocolate Chip Cookie', 'Cookie filled with chocolate chips', 3000, 1200),
+('Brownie', 'Chocolate brownie', 4000, 1600),
+('Chicken Sandwich', 'Sandwich with chicken filling', 6000, 2400),
+('Ham Sandwich', 'Sandwich with ham filling', 6000, 2400),
+('Veggie Sandwich', 'Sandwich with vegetable filling', 5500, 2200),
+('Cheese Sandwich', 'Sandwich with cheese filling', 5500, 2200),
+('Greek Salad', 'Salad with Greek ingredients', 6000, 2400),
+('Caesar Salad', 'Classic Caesar Salad', 6000, 2400),
+('Fruit Salad', 'Salad with various fruits', 5500, 2200),
+('Chicken Soup', 'Soup made from chicken', 6000, 2400),
+('Tomato Soup', 'Soup made from tomatoes', 5500, 2200),
+('Mushroom Soup', 'Soup made from mushrooms', 5500, 2200),
+('Veggie Soup', 'Soup made from various vegetables', 5500, 2200),
+('Pumpkin Soup', 'Soup made from pumpkin', 5500, 2200),
+('Vanilla Ice Cream', 'Sweet vanilla ice cream', 4000, 1600),
+('Chocolate Ice Cream', 'Rich chocolate ice cream', 4000, 1600),
+('Strawberry Ice Cream', 'Sweet strawberry ice cream', 4000, 1600),
+('Smoothie', 'Fruit smoothie', 5000, 2000),
+('Juice', 'Freshly squeezed juice', 4500, 1800),
+('Biscuit', 'Sweet baked biscuit', 3000, 1200),
+('Scone', 'Classic British scone', 3500, 1400),
+('Banana Bread', 'Moist banana bread', 4000, 1600),
+('Quiche', 'Savoury pastry', 5000, 2000),
+('Pancake', 'Stack of pancakes with syrup', 5000, 2000);
 
 
 INSERT INTO store (name,latitude, longitude, address, city, state, country, postal_code)

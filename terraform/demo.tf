@@ -168,6 +168,7 @@ resource "aiven_kafka_connector" "kafka-pg-source-conn" {
     "value.converter.schemas.enable" = "false",
     "include.schema.changes" = "false",
     "transforms" = "extractState",
+    "publication.autocreate.mode": "filtered"
     "transforms.extractState.type" = "io.debezium.transforms.ExtractNewRecordState"
   }
 }
