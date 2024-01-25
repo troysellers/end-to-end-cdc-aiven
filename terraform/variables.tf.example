@@ -38,7 +38,7 @@ variable kc_plan {
 } 
 variable ch_plan {
 	type = string
-	default = "hobbyist"
+	default = "startup-16"
 	description = "The Aiven Clickhouse plan to create"
 } 
 variable m3_plan {
