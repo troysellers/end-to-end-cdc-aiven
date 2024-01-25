@@ -106,6 +106,7 @@ resource "aiven_kafka" "kafka-service" {
   kafka_user_config {
     kafka_connect   = true
     kafka_rest      = true
+    kafka_version   = "3.5"
     kafka_version   = var.kafka_version
     schema_registry = true
     kafka {
